@@ -8,14 +8,24 @@ const Contato: NextPage = () => {
 
     useEffect(() => {
 
-        (async () => {
-            await usersCollectionRef.onSnapshot(docs => {
-                docs.forEach(doc => {
-                    console.log(doc.data())
-                })
+        (async() => {
+            await firebase.firestore().collection('rooms')
+            .doc('EkiFWwXV4CtnMJK6havD')
+            .get()
+            .then(snapshot => {
+                console.log(snapshot.data()?.users)
+                console.log(snapshot.data()?.messages)
             })
-           
         })();
+
+        // (async () => {
+        //     await usersCollectionRef.onSnapshot(docs => {
+        //         docs.forEach(doc => {
+        //             console.log(doc.data())
+        //         })
+        //     })
+           
+        // })();
 
 
     },[])
