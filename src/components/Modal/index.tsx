@@ -8,7 +8,7 @@ import {
     ModalTitleInput,
     OnlineMembers,
     ModalLabel,
-    Input,
+    UsernameInput,
     AvatarGenreContainer,
     AvatarsContainer,
     EditButton,
@@ -24,21 +24,21 @@ import {
     Avatar,
     ButtonsContainer,
     AvatarsCredits,
+    AvatarsScroll,
 
 } from './styles';
 
 import { Button, ButtonText } from '../../styles/home';
-import { TbEdit } from 'react-icons/tb';
-import { GoCheck } from 'react-icons/go';
+import { FiEdit, FiCheck, FiUser } from 'react-icons/fi';
 import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
-import { myColor_100 } from '../../styles/variables';
+import { myColor_100, myColor_200 } from '../../styles/variables';
 import { maleAvatars, femaleAvatars } from '../AvatarsList';
 import { ModalContext } from '../../context/modal';
 
 
 const Modal: React.FC = () => {
 
-    const { setModalIsOpen } = useContext(ModalContext);
+    const { setModalIsOpen, modalType } = useContext(ModalContext);
 
     const [roomTitle, setRoomTitle] = useState<string>('Minha sala');
     const [titleInput, setTitleInput] = useState<string>(roomTitle);
@@ -48,6 +48,8 @@ const Modal: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [genre, setGenre] = useState<string>('female');
     const [avatar, setAvatar] = useState<string>('');
+
+    const [validUsername, setValidUsername] = useState<boolean>(true);
 
     useEffect(() => {
 
@@ -61,6 +63,30 @@ const Modal: React.FC = () => {
     useEffect(() => {
         setAvatar(`/images/avatars/${genre}/avatar1.png`)
     }, [genre]);
+
+    useEffect(() => {if(username.length > 0) checkUsername()}, [username]);
+
+    const checkUsername = () => {
+        setValidUsername(
+            username !== '' &&
+            username !== null &&
+            username.length > 2);
+    }
+
+    const handleApply = () => {
+        checkUsername();
+        if (validUsername) {
+            if (modalType === 'CREATE_NEW_ROOM') {
+                console.log('Criando a sala')
+                console.log(username, genre);
+                console.log(avatar)
+            } else {
+                console.log('entrando na sala');
+                console.log(username, genre);
+                console.log(avatar)
+            }
+        } 
+    }
 
     const handleSelectedAvatar = (avatar: string) => {
         setAvatar(avatar);
@@ -97,24 +123,31 @@ const Modal: React.FC = () => {
                                 <ModalTitleInput maxLength={20} valid={titleValid.valid} value={titleInput} onChange={e => setTitleInput(e.target.value)} />
                             </Form>}
                     </ModalTitleContainer>
-                    {!editing
-                        ? <EditButton onClick={handleEditTitle}>
-                            <TbEdit size={20} color={myColor_100} />
-                        </EditButton>
-                        : <SaveButton onClick={handleSaveTitle}>
-                            <GoCheck size={20} color={myColor_100} />
-                        </SaveButton>}
+                    {modalType === 'CREATE_NEW_ROOM' ? (
+                        !editing
+                            ? <EditButton onClick={handleEditTitle}>
+                                <FiEdit size={20} color={myColor_100} />
+                            </EditButton>
+                            : <SaveButton onClick={handleSaveTitle}>
+                                <FiCheck size={20} color={myColor_100} />
+                            </SaveButton>
+                    ) : (
+                        <OnlineMembers>
+                            <FiUser size={18} color={myColor_200} />
+                            4
+                        </OnlineMembers>
+                    )
+                    }
 
                 </ModalHeader>
 
                 <NameContainer>
-                    <ModalLabel>
-                        Seu apelido
-                    </ModalLabel>
-                    <Input
+                    <ModalLabel>Seu apelido</ModalLabel>
+                    <UsernameInput
+                        valid={validUsername}
                         type='text'
                         value={username}
-                        onChange={e => setUsername(e.target.value)}
+                        onChange={e => { setUsername(e.target.value) }}
                         placeholder='Seu apelido...'
                         maxLength={15}
                     />
@@ -122,7 +155,6 @@ const Modal: React.FC = () => {
                 </NameContainer>
 
                 <AvatarsContainer>
-
                     <AvatarsHeader>
                         <ModalLabel>
                             Escolha um avatar
@@ -145,39 +177,36 @@ const Modal: React.FC = () => {
                     </AvatarsHeader>
 
                     <AvatarsContent>
-                        {genre === 'male' ?
-                            (
-                                maleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}><Image
-                                    style={{ borderRadius: '50%' }}
-                                    width={60} height={60}
-                                    src={item} /></Avatar>)
-                            )
-                            : (
-                                femaleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}><Image
-                                    style={{ borderRadius: '50%' }}
-                                    width={60} height={60}
-                                    src={item} /></Avatar>)
-                            )}
-
+                        <AvatarsScroll>
+                            {genre === 'male' ?
+                                (
+                                    maleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}><Image
+                                        style={{ borderRadius: '50%' }}
+                                        width={60} height={60}
+                                        src={item} /></Avatar>)
+                                )
+                                : (
+                                    femaleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}><Image
+                                        style={{ borderRadius: '50%' }}
+                                        width={60} height={60}
+                                        src={item} /></Avatar>)
+                                )}
+                        </AvatarsScroll>
                         <AvatarsCredits>
                             Designed by Kubanek
                         </AvatarsCredits>
-
                     </AvatarsContent>
-
                 </AvatarsContainer>
 
                 <ButtonsContainer>
-                    <Button onClick={() => { }} primary>
+                    <Button onClick={handleApply} primary>
                         <ButtonText primary>
-                            Criar sala
+                            {modalType === 'CREATE_NEW_ROOM' ? 'Criar sala' : 'Entrar na sala'}
                         </ButtonText>
                     </Button>
 
                     <Button onClick={handleCancel} primary={false}>
-                        <ButtonText primary={false}>
-                            Cancelar
-                        </ButtonText>
+                        <ButtonText primary={false}>Cancelar</ButtonText>
                     </Button>
                 </ButtonsContainer>
 

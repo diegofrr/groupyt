@@ -34,11 +34,16 @@ interface AvatarProps {
     selected: boolean;
 }
 
+interface InputUsernameProps {
+    valid: boolean;
+}
+
 export const ModalContainer = styled.div`
     width: 100vw;
     height: 100vh;
     display: grid;
     place-items: center;
+    overflow-x: hidden;
 
     &>* {
         z-index: 10;
@@ -156,7 +161,7 @@ export const SaveButton = styled.button`
     }
 `
 
-export const ErrorMessage = styled.text`
+export const ErrorMessage = styled.span`
     position: absolute;
     left: 20px;
     bottom: 85px;
@@ -167,13 +172,22 @@ export const ErrorMessage = styled.text`
     transition: all .3s ease;
 `
 
-export const OnlineMembers = styled.div``
+export const OnlineMembers = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: ${myColor_200};
+    flex-direction: row;
+    font-size: .8rem;
+    font-weight: bold;
+`
 
 export const NameContainer = styled.div`
     position: relative;
 `
 
-export const LetterCounter = styled.text<LetterCounter>`
+export const LetterCounter = styled.span<LetterCounter>`
     position: absolute;
     right: 0;
     bottom: 60px;
@@ -188,7 +202,7 @@ export const ModalLabel = styled.label`
     font-size: .9rem;
 `
 
-export const Input = styled.input`
+export const UsernameInput = styled.input<InputUsernameProps>`
     display: block;
     width: 100%;
     height: 50px;
@@ -197,9 +211,10 @@ export const Input = styled.input`
     border-radius: 10px;
     border: none;
     padding: 0 10px;
-    background-color: ${blockHeaderColor};
+    background-color: ${p => p.valid ? blockHeaderColor : invalidBgColor};
     margin-top: 10px;
     color: ${myColor_100};
+    outline-color: ${p => !p.valid && invalidOutlineColor};
 
     &::placeholder {
         font-style: italic;
@@ -233,7 +248,7 @@ export const AvatarGenreContainer = styled.div`
     gap: 10px;
 `
 
-export const GenreOption = styled.text<GenreProps>`
+export const GenreOption = styled.span<GenreProps>`
     cursor: pointer;
     font-size: .8rem;
     transition: all .3s ease;
@@ -256,12 +271,16 @@ export const AvatarsContent = styled.div`
     border: 1px solid ${blockHeaderColor};
     border-radius: 10px;
     padding: 20px 20px;
+    position: relative;
+`
+
+export const AvatarsScroll = styled.div`
     display: grid;
+    padding: 10px 0;
     grid-template-columns: repeat(6, minmax(20px, 60px));
     grid-auto-rows: auto;
     justify-content: center;
     gap: 10px;
-    position: relative;
 
     @media screen and (max-width: 500px) {
         grid-template-columns: repeat(4, minmax(20px, 60px));
@@ -273,7 +292,7 @@ export const Avatar = styled.div<AvatarProps>`
     place-items: center;
     border-radius: 50%;
     overflow: hidden;
-    opacity: ${p => p.selected ? 1 : .5 };
+    opacity: ${p => p.selected ? 1 : .5};
     filter: grayscale(${p => p.selected ? 0 : .5});
     outline: 3px solid ${p => p.selected ? purpleColor : 'transparent'};
     transition: all .3s ease;
@@ -294,19 +313,21 @@ export const ButtonsContainer = styled.div`
     justify-content: space-between;
 `
 
-export const AvatarsCredits = styled.text`
+export const AvatarsCredits = styled.span`
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: ${blockColor};
     border-radius: 20px;
     border: 1px solid ${blockHeaderColor};
-    padding: 0 10px;
-    height: 20px;
+    padding: 4px 10px;
     left: 50%;
     bottom: -10px;
     transform: translateX(-50%);
     position: absolute;
     color: ${myColor_300};
     font-size: .6rem;
+    user-select: none;
+    cursor: default;
+    text-align: center;
 `

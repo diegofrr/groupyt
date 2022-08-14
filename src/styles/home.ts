@@ -11,13 +11,14 @@ interface BackImage {
 
 export const Container = styled.div`
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: ${bgColor};
+    display: grid;
+    place-items: center;
 `
 
 export const Content = styled.div`
     width: calc(100% - 40px);
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +39,7 @@ export const LogoContainer = styled.div`
     place-items: center;
 `
 
-export const AppDescription = styled.text`
+export const AppDescription = styled.span`
     display: block;
     font-weight: bold;
     font-size: 2em;
@@ -82,7 +83,7 @@ export const Button = styled.button<ButtonProps>`
     }
 `
 
-export const ButtonText = styled.text<ButtonProps>`
+export const ButtonText = styled.span<ButtonProps>`
     font-weight: bold;
     font-size: .8rem;
     color: ${p => p.primary ? myColor_100 : myColor_200};

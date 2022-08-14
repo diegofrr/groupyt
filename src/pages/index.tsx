@@ -21,14 +21,16 @@ import { ModalContext } from '../context/modal';
 
 const Home: NextPage = () => {
 
-  const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
+  const { modalIsOpen, setModalIsOpen, setModalType } = useContext(ModalContext);
 
   const handleCreateNewRoom = () => {
+    setModalType('CREATE_NEW_ROOM');
     setModalIsOpen(true);
   }
 
   const handleEnterToRoom = () => {
-    alert('entrando em uma sala')
+    setModalType('ENTER_TO_ROOM');
+    setModalIsOpen(true);
   }
 
   const openModal = (t: boolean) => {
