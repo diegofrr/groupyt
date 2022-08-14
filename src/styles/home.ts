@@ -73,6 +73,10 @@ export const Button = styled.button<ButtonProps>`
     width: 100%;
     transition: all .3s ease;
 
+    @media screen and (max-width: 500px) {
+        height: 40px;
+    }
+
     &:hover {
         filter: brightness(1.1);
     }
@@ -106,7 +110,6 @@ export const BackImage = styled.img<BackImage>`
         top: 0;
         width: 800px;
     }
-
 
 `
 
