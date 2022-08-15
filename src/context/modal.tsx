@@ -15,7 +15,7 @@ export const ModalContext = createContext({} as ContextType);
 
 export default function ModalProvider({ children }: ContextProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
-    const [modalType, setModalType] = useState<string>('CREATE_NEW_ROOM');
+    const [modalType, setModalType] = useState<string>('');
 
     return <ModalContext.Provider
         value={{

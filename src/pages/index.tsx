@@ -40,7 +40,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Groupyt</title>
       </Head>
 
       <Container>
