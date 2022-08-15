@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "node-fetch": "^2.6.7"
+  },
   "dependencies": {
     "@fontsource/plus-jakarta-sans": "^4.5.9",
     "@types/styled-components": "^5.1.26",
