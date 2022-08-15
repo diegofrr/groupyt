@@ -1,13 +1,19 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Youtube, { YouTubeEvent } from 'react-youtube';
+import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import {
     Container,
     VideoContainer,
     NotClick,
-    ControlsContainer
+    ControlsContainer,
+    ActionButton,
+    CurrentTimeBar,
+    BackgroundBar,
+    CurrentTimeContainer
 
 } from './styles';
+import { myColor_100, myColor_300 } from "../../styles/variables";
 
 
 interface VideoProps {
@@ -21,6 +27,8 @@ export default function VideoiFrame(props: VideoProps) {
     const [currentTime, setCurrentTime] = useState<string>('00:00');
     const [progress, setProgress] = useState(0);
     const [intervalID, setIntervalID] = useState({} as any)
+    const [videoDuration, setVideoDuration] = useState<number>();
+    const [videoState, setVideoState] = useState<number>();
 
     useEffect(() => { setVideoId(props?.videoID) }, [])
 
@@ -39,6 +47,7 @@ export default function VideoiFrame(props: VideoProps) {
 
     const handleOnReady = (e: YouTubeEvent) => {
         setVideo(e);
+        setVideoDuration(e.target.getDuration());
     }
 
     const handleCurrentTimeChange = () => {
@@ -47,15 +56,13 @@ export default function VideoiFrame(props: VideoProps) {
     }
 
     const handleStateChange = () => {
-        video.target.setOption({ constrols: 0 })
-        let state = video.target?.getPlayerState();
-        if (state === 1) {
+        setVideoState(video.target?.getPlayerState()); 
+        if (videoState === 1) {
             setIntervalID(
                 setInterval(() => {
                     setProgress(video.target?.getCurrentTime());
                     let n = Number(video.target.getCurrentTime())
                     formatTime(n);
-                    console.log('teste')
                 }, 1000)
             )
         } else {
@@ -82,15 +89,12 @@ export default function VideoiFrame(props: VideoProps) {
     }
 
     const applyZero = (val: number) => {
-        let n = '' + val;
-        if (val < 10) {
-            n = `0${val}`;
-        }
-        return n;
+        if (val < 10) return `0${val}`;
+        return val;
     }
 
     const handleStartedVideo = () => {
-        
+
     }
 
     const handleFinishedVideo = () => {
@@ -109,20 +113,35 @@ export default function VideoiFrame(props: VideoProps) {
                     onReady={e => handleOnReady(e)}
                 />
                 <ControlsContainer>
-                    <button onClick={() => video.target.playVideo()}>PLAY</button>
-                    <button onClick={() => video.target.pauseVideo()}>STOP</button>
-                    <input
-                        type='range'
-                        onChangeCapture={() => video.target?.pauseVideo()}
-                        onClickCapture={handleCurrentTimeChange}
-                        onChange={e => setProgress(Number(e.target.value))}
-                        value={progress} max={video.target?.getDuration()} min={0} />
+
+                    {videoState === 2
+                        ? <ActionButton onClick={() => video.target.playVideo()}>
+                            <BsPlayFill size={20} color={myColor_100} />
+                        </ActionButton>
+                        : <ActionButton onClick={() => video.target.pauseVideo()}>
+                            <BsPauseFill size={20} color={myColor_100} />
+                        </ActionButton>}
+
+                    <CurrentTimeContainer>
+                        <BackgroundBar
+                            duration={videoDuration as number}
+                            progress={progress}
+                        />
+                        <CurrentTimeBar
+                            type='range'
+                            onChangeCapture={() => video.target?.pauseVideo()}
+                            onClickCapture={handleCurrentTimeChange}
+                            onChange={e => setProgress(Number(e.target.value))}
+                            value={progress} max={video.target?.getDuration()} min={0} />
+                    </CurrentTimeContainer>
                 </ControlsContainer>
                 <NotClick />
             </VideoContainer>
             {currentTime}
             <br />
             {progress}
+            <br />
+            {videoDuration}
         </Container>
 
     )
