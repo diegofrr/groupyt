@@ -13,7 +13,7 @@ export const VideoContainer = styled.div`
     width: 720px;
     border-radius: 10px;
     overflow: hidden;
-    position: relative;
+    position: relative; 
 `
 
 export const NotClick = styled.div`
@@ -23,14 +23,12 @@ export const NotClick = styled.div`
     width: 100%;
     height: calc(100% - 40px);
     background-color: transparent;
-    
-    display: none;
 `
 
 export const ControlsContainer = styled.div`
     background-color: ${blockHeaderColor};
     height: 50px;
-    margin-top: -3px;
+    margin-top: -4px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -47,6 +45,11 @@ export const ActionButton = styled.button`
     place-items: center;
     border-radius: 30px;
     background-color: ${purpleColor};
+    transition: all .3s ease;
+    
+    &:hover {
+        filter: brightness(1.1)
+    }
 `
 
 export const CurrentTimeContainer = styled.div`
@@ -63,9 +66,9 @@ export const BackgroundBar = styled.div<VideoProps>`
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #434e81;
+    background-color: #434e81; 
     width: ${p => `${
-        (p.progress * 100 / p.duration) > 50 
+        (p.progress * 100 / p.duration) > 50
         ? `${p.progress * 100 / p.duration + 1}%`
         : `${p.progress * 100 / p.duration + 3}%`}`};
         

@@ -15,7 +15,6 @@ import {
 } from './styles';
 import { myColor_100, myColor_300 } from "../../styles/variables";
 
-
 interface VideoProps {
     videoID: string
 }
@@ -30,7 +29,9 @@ export default function VideoiFrame(props: VideoProps) {
     const [videoDuration, setVideoDuration] = useState<number>();
     const [videoState, setVideoState] = useState<number>();
 
-    useEffect(() => { setVideoId(props?.videoID) }, [])
+    useEffect(() => {
+        setVideoId(props?.videoID);
+    }, [])
 
     const options = {
         height: '400',
@@ -56,8 +57,8 @@ export default function VideoiFrame(props: VideoProps) {
     }
 
     const handleStateChange = () => {
-        setVideoState(video.target?.getPlayerState()); 
-        if (videoState === 1) {
+        setVideoState(video.target?.getPlayerState());
+        if (video.target?.getPlayerState() === 1) {
             setIntervalID(
                 setInterval(() => {
                     setProgress(video.target?.getCurrentTime());
@@ -114,12 +115,12 @@ export default function VideoiFrame(props: VideoProps) {
                 />
                 <ControlsContainer>
 
-                    {videoState === 2
-                        ? <ActionButton onClick={() => video.target.playVideo()}>
-                            <BsPlayFill size={20} color={myColor_100} />
-                        </ActionButton>
-                        : <ActionButton onClick={() => video.target.pauseVideo()}>
+                    {videoState === 1
+                        ? <ActionButton onClick={() => video.target.pauseVideo()}>
                             <BsPauseFill size={20} color={myColor_100} />
+                        </ActionButton>
+                        : <ActionButton onClick={() => video.target.playVideo()}>
+                            <BsPlayFill size={20} color={myColor_100} />
                         </ActionButton>}
 
                     <CurrentTimeContainer>

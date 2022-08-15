@@ -10,6 +10,7 @@ import {
 } from './styles';
 
 import VideoiFrame from '../../components/VideoiFrame';
+import Chat from '../../components/Chat';
 
 const Room: NextPage = () => {
     const { user, setUser } = useContext(UserContext);
@@ -34,7 +35,8 @@ const Room: NextPage = () => {
             <Header roomName={roomDetails.name} />
             <Container>
                 {user.name}
-                <VideoiFrame videoID='eKb-ZvqTx9o' />
+                {/* <VideoiFrame videoID='eKb-ZvqTx9o' /> */}
+                <Chat />
             </Container>
         </>
 
