@@ -15,6 +15,7 @@ export const Container = styled.nav`
     display: grid;
     place-items: center;
     padding: 0 20px;
+    z-index: 999;
 `
 
 export const Content = styled.div`

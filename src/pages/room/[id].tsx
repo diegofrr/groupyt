@@ -6,7 +6,7 @@ import { UserContext } from '../../context/user';
 import Header from '../../components/Header';
 import Head from 'next/head';
 import {
-    Container
+    Container, LeftContent, RightContent
 } from './styles';
 
 import VideoiFrame from '../../components/VideoiFrame';
@@ -25,8 +25,6 @@ const Room: NextPage = () => {
         {}
     ])
 
-    console.log(query.id);
-
     return (
         <>
             <Head>
@@ -34,9 +32,13 @@ const Room: NextPage = () => {
             </Head>
             <Header roomName={roomDetails.name} />
             <Container>
-                {user.name}
-                {/* <VideoiFrame videoID='eKb-ZvqTx9o' /> */}
-                <Chat />
+                <LeftContent>
+                   <VideoiFrame videoID='eKb-ZvqTx9o' />
+                </LeftContent>
+
+                <RightContent>
+                    <Chat />
+                </RightContent>
             </Container>
         </>
 

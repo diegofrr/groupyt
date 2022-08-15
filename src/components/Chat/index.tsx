@@ -1,19 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../services/firebase';
-import { Container } from './styles';
+import {
+    Container,
+    Header,
+    Content,
+} from './styles';
+import Image from 'next/image';
+import Message from '../Message';
 import { format } from 'date-fns';
 
 type Message = {
     user: string,
     message: string,
     id: string,
+    avatarURL: string,
     created: string,
     createdFormat: string
 }
 
 export default function Chat() {
 
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Message[]>([
+        {
+            id: '1',
+            user: 'user1',
+            message: 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.',
+            avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75',
+            created: '',
+            createdFormat: ''
+        },
+        {
+            id: '2', user: 'user2', message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself',
+            avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75',
+            created: '', createdFormat: ''
+        },
+        {
+            id: '3', user: 'user',
+            avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75',
+            message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself', created: '', createdFormat: ''
+        }
+    ]);
     const [message, setMessage] = useState<string>('');
     const [user, setUser] = useState<string>('');
 
@@ -32,12 +58,13 @@ export default function Chat() {
                             message: e.data().message,
                             created: e.data().created,
                             createdFormat: format(e.data().created.toDate(), 'HH:mm:ss'),
-                            id: e.id
+                            id: e.id,
+                            avatarURL: '',
                         });
                     });
                     setMessages(list);
                 })
-        })();
+        })
 
     }, [])
 
@@ -53,15 +80,10 @@ export default function Chat() {
     }
 
     return (
-        <div>
-            COMPONENTE DO CHAT
-            <br />
-
-            <ul>
-                {messages.map(message => <li style={{color: 'white'}} key={message.id}>
-                    {`${message.user} - ${message.message} - ${message.createdFormat}`}
-                </li>)}
-            </ul>
+        <Container>
+            <Content>
+                {messages.map(message => <Message data={message} />)}
+            </Content>
 
             <br />
 
@@ -80,6 +102,6 @@ export default function Chat() {
             <button onClick={handleEnviarMensagem}>
                 ENVIAR MENSAGEM
             </button>
-        </div>
+        </Container>
     )
 }

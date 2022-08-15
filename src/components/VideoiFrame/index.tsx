@@ -20,6 +20,8 @@ interface VideoProps {
 }
 
 export default function VideoiFrame(props: VideoProps) {
+    
+    const { innerWidth: width, innerHeight: height } = window;
     // getVideoData() pega as informações do video (titulo - autor)
     const [videoId, setVideoId] = useState<String>('');
     const [video, setVideo] = useState<YouTubeEvent>({} as YouTubeEvent);
@@ -33,9 +35,13 @@ export default function VideoiFrame(props: VideoProps) {
         setVideoId(props?.videoID);
     }, [])
 
+    useEffect(() => {
+        console.log(width)
+    }, [width])
+
     const options = {
         height: '400',
-        width: '720',
+        width: width <= 800 ? width - 56 : width * 0.6,
         playerVars: {
             'autoplay': 1,
             'controls': 0,
@@ -104,8 +110,9 @@ export default function VideoiFrame(props: VideoProps) {
 
     return (
         <Container>
-            <VideoContainer>
+            <VideoContainer width={width} height={height}>
                 <Youtube
+                    style={{width: '600px'}}
                     videoId={videoId as string}
                     opts={options}
                     onEnd={handleFinishedVideo}
@@ -138,11 +145,6 @@ export default function VideoiFrame(props: VideoProps) {
                 </ControlsContainer>
                 <NotClick />
             </VideoContainer>
-            {currentTime}
-            <br />
-            {progress}
-            <br />
-            {videoDuration}
         </Container>
 
     )

@@ -64,7 +64,7 @@ const Modal: React.FC = () => {
         setAvatar(`/images/avatars/${genre}/avatar1.png`)
     }, [genre]);
 
-    useEffect(() => {if(username.length > 0) checkUsername()}, [username]);
+    useEffect(() => { if (username.length > 0) checkUsername() }, [username]);
 
     const checkUsername = () => {
         setValidUsername(
@@ -85,7 +85,7 @@ const Modal: React.FC = () => {
                 console.log(username, genre);
                 console.log(avatar)
             }
-        } 
+        }
     }
 
     const handleSelectedAvatar = (avatar: string) => {
@@ -180,16 +180,20 @@ const Modal: React.FC = () => {
                         <AvatarsScroll>
                             {genre === 'male' ?
                                 (
-                                    maleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}><Image
-                                        style={{ borderRadius: '50%' }}
-                                        width={60} height={60}
-                                        src={item} /></Avatar>)
+                                    maleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}>
+                                        <Image
+                                            style={{ borderRadius: '50%' }}
+                                            width={60} height={60}
+                                            src={item} />
+                                    </Avatar>)
                                 )
                                 : (
-                                    femaleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}><Image
-                                        style={{ borderRadius: '50%' }}
-                                        width={60} height={60}
-                                        src={item} /></Avatar>)
+                                    femaleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}>
+                                        <Image
+                                            style={{ borderRadius: '50%' }}
+                                            width={60} height={60}
+                                            src={item} />
+                                    </Avatar>)
                                 )}
                         </AvatarsScroll>
                         <AvatarsCredits>

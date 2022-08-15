@@ -1,20 +1,26 @@
 import styled from "styled-components";
-import { bgColor, blockHeaderColor, purpleColor } from "../../styles/variables";
+import { bgColor, blockColor, blockHeaderColor, purpleColor } from "../../styles/variables";
 
 interface VideoProps {
     duration: number;
     progress: number;
 }
 
+interface VideoContainerProps {
+    width: number,
+    height: number,
+}
+
 export const Container = styled.div`
 `
 
-export const VideoContainer = styled.div`
-    width: 720px;
+export const VideoContainer = styled.div<VideoContainerProps>`
+    width: ${p => p.width <= 800 ? `${p.width - 56}px` : `${p.width * 0.6}px`};
     border-radius: 10px;
     overflow: hidden;
     position: relative; 
-`
+    margin: 0 auto;
+` 
 
 export const NotClick = styled.div`
     position: absolute;
@@ -26,7 +32,7 @@ export const NotClick = styled.div`
 `
 
 export const ControlsContainer = styled.div`
-    background-color: ${blockHeaderColor};
+    background-color: ${blockColor};
     height: 50px;
     margin-top: -4px;
     width: 100%;
