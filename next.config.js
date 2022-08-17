@@ -7,6 +7,6 @@ const nextConfig = {
 module.exports = {
   nextConfig,
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'i.ytimg.com'],
   },
 }
