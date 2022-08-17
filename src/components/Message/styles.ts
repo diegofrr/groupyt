@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { blockHeaderColor, myColor_300 } from "../../styles/variables";
 
-export const Container = styled.div`
+interface MessageProps {
+    isOwner: boolean
+}
+
+export const Container = styled.div<MessageProps>`
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    flex-direction: ${p => p.isOwner ? 'row-reverse' : 'row'};
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    width: 100%;
 `
 
 export const Avatar = styled.div` 
@@ -19,17 +23,18 @@ export const Avatar = styled.div`
 
 export const UsernameAndMessage = styled.div`
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column; 
     gap: 8px;
 `
 
-export const Username = styled.span`
+export const Username = styled.span<MessageProps>`
     display: block;
     color: ${myColor_300};
-    font-weight: bold;
+    font-weight: bold; 
     width: 100%;
+    font-size: .9rem;
+    text-align: ${p => p.isOwner ? 'right' : 'left'};
 `
 
 export const MessageContainer = styled.div`

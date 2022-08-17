@@ -7,6 +7,7 @@ type ContextProps = {
 type User = {
     name: string,
     avatarURL: string,
+    id: string,
 }
 
 type ContextType = {
@@ -18,6 +19,7 @@ export const UserContext = createContext({} as ContextType);
 
 export default function UserProvider({ children }: ContextProps) {
     const [user, setUser] = useState<User>({
+        id: '1',
         name: 'diego', avatarURL: 'link do avatar'
     })
 

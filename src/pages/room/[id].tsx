@@ -11,6 +11,8 @@ import {
 
 import VideoiFrame from '../../components/VideoiFrame';
 import Chat from '../../components/Chat';
+import Playlist from '../../components/Playlist';
+import useWindowDimensions from '../../components/CustomHooks/useWindowDimensions';
 
 const Room: NextPage = () => {
     const { user, setUser } = useContext(UserContext);
@@ -21,9 +23,6 @@ const Room: NextPage = () => {
         users: [{ name: 'Diêgo', avatar: '' }, { name: 'João', avatar: '' }]
     });
 
-    const [messages, setMessages] = useState([
-        {}
-    ])
 
     return (
         <>
@@ -34,9 +33,11 @@ const Room: NextPage = () => {
             <Container>
                 <LeftContent>
                    <VideoiFrame videoID='eKb-ZvqTx9o' />
+                   {useWindowDimensions().width > 800 && <Playlist />}
                 </LeftContent>
 
                 <RightContent>
+                    {useWindowDimensions().width <= 800 && <Playlist />}
                     <Chat />
                 </RightContent>
             </Container>

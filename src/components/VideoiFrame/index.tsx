@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Youtube, { YouTubeEvent } from 'react-youtube';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import {
@@ -14,14 +14,15 @@ import {
 
 } from './styles';
 import { myColor_100, myColor_300 } from "../../styles/variables";
+import useWindowDimensions from "../CustomHooks/useWindowDimensions";
 
 interface VideoProps {
     videoID: string
 }
 
 export default function VideoiFrame(props: VideoProps) {
-    
-    const { innerWidth: width, innerHeight: height } = window;
+
+    const { width, height } = useWindowDimensions();
     // getVideoData() pega as informações do video (titulo - autor)
     const [videoId, setVideoId] = useState<String>('');
     const [video, setVideo] = useState<YouTubeEvent>({} as YouTubeEvent);
@@ -35,12 +36,19 @@ export default function VideoiFrame(props: VideoProps) {
         setVideoId(props?.videoID);
     }, [])
 
-    useEffect(() => {
-        console.log(width)
-    }, [width])
+    const getVideo = useCallback(() => {
+        return <Youtube
+            videoId={videoId as string}
+            opts={options}
+            onEnd={handleFinishedVideo}
+            onStateChange={handleStateChange}
+            onPlay={handleStartedVideo}
+            onReady={e => handleOnReady(e)}
+        />
+    }, [width, height]); 
 
     const options = {
-        height: '400',
+        height: '350',
         width: width <= 800 ? width - 56 : width * 0.6,
         playerVars: {
             'autoplay': 1,
@@ -111,15 +119,7 @@ export default function VideoiFrame(props: VideoProps) {
     return (
         <Container>
             <VideoContainer width={width} height={height}>
-                <Youtube
-                    style={{width: '600px'}}
-                    videoId={videoId as string}
-                    opts={options}
-                    onEnd={handleFinishedVideo}
-                    onStateChange={handleStateChange}
-                    onPlay={handleStartedVideo}
-                    onReady={e => handleOnReady(e)}
-                />
+                {getVideo()}
                 <ControlsContainer>
 
                     {videoState === 1

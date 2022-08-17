@@ -1,44 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import firebase from '../../services/firebase';
 import {
     Container,
     Header,
     Content,
+    MessageInput,
+    SendMessageContainer,
+    SendMessageButton
+
 } from './styles';
 import Image from 'next/image';
 import Message from '../Message';
 import { format } from 'date-fns';
+import { BiSend } from 'react-icons/bi';
+import { myColor_100} from '../../styles/variables';
 
-type Message = {
-    user: string,
+export type UserType = {
+    id: string,
+    name: string,
+    avatarURL: string,
+}
+
+export type MessageType = {
+    user: UserType,
     message: string,
     id: string,
-    avatarURL: string,
     created: string,
     createdFormat: string
 }
 
 export default function Chat() {
 
-    const [messages, setMessages] = useState<Message[]>([
+    const [messages, setMessages] = useState<MessageType[]>([
         {
-            id: '1',
-            user: 'user1',
-            message: 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.',
-            avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75',
-            created: '',
-            createdFormat: ''
-        },
-        {
-            id: '2', user: 'user2', message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself',
-            avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75',
+            id: '1', user: {id: '1', name: 'Diêgo', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            message: 'Nor is there anyone who loves or pursues ',
             created: '', createdFormat: ''
         },
+
         {
-            id: '3', user: 'user',
-            avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75',
-            message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself', created: '', createdFormat: ''
-        }
+            id: '2', user: {id: '2', name: 'João', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself',
+            created: '', createdFormat: ''
+        },
+
+        {
+            id: '3', user: {id: '3', name: 'José', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself',
+            created: '', createdFormat: ''
+        },
+
+        {
+            id: '4', user: {id: '4', name: 'Maria', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself. Nor is there anyone who loves or pursues or desires to obtain pain of itself',
+            created: '', createdFormat: ''
+        },
+        
     ]);
     const [message, setMessage] = useState<string>('');
     const [user, setUser] = useState<string>('');
@@ -51,7 +68,7 @@ export default function Chat() {
                 .collection('messages')
                 .orderBy('created')
                 .onSnapshot(snapshot => {
-                    let list = [] as Message[];
+                    let list = [] as MessageType[];
                     snapshot.forEach(e => {
                         list.push({
                             user: e.data().user,
@@ -59,7 +76,6 @@ export default function Chat() {
                             created: e.data().created,
                             createdFormat: format(e.data().created.toDate(), 'HH:mm:ss'),
                             id: e.id,
-                            avatarURL: '',
                         });
                     });
                     setMessages(list);
@@ -68,40 +84,51 @@ export default function Chat() {
 
     }, [])
 
+    const handleSendMessage = (e: FormEvent) => {
+        e.preventDefault();
+        setMessage('');
+        alert(message)
+    }
+
     const handleEnviarMensagem = async () => {
-        await firebase.firestore().collection('rooms')
-            .doc('EkiFWwXV4CtnMJK6havD')
-            .collection('messages')
-            .add({
-                created: new Date(),
-                user: user,
-                message: message,
-            })
+
+        if (message !== null && message !== '') {
+            await firebase.firestore().collection('rooms')
+                .doc('EkiFWwXV4CtnMJK6havD')
+                .collection('messages')
+                .add({
+                    created: new Date(),
+                    user: user,
+                    message: message,
+                })
+        } else {
+            alert('vazio')
+        }
     }
 
     return (
         <Container>
+            <Header>
+                <span>Chat</span>
+            </Header>
             <Content>
-                {messages.map(message => <Message data={message} />)}
+                {messages.map(message => <Message key={message.id} data={message} />)}
             </Content>
 
             <br />
 
-            <input
-                value={user}
-                onChange={e => setUser(e.target.value)}
-                placeholder='user'
-                type='text' />
+            <SendMessageContainer onSubmit={e => handleSendMessage(e)}>
+                <MessageInput
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    placeholder='Mensagem...'
+                    type='text' />
 
-            <input
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-                placeholder='mensagem'
-                type='text' />
+                <SendMessageButton>
+                    <BiSend size={18} color={myColor_100} />
+                </SendMessageButton>
+            </SendMessageContainer>
 
-            <button onClick={handleEnviarMensagem}>
-                ENVIAR MENSAGEM
-            </button>
         </Container>
     )
 }

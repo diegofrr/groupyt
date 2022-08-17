@@ -1,5 +1,6 @@
-import React, { } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
+import { MessageType } from '../Chat';
 import {
     Container,
     Avatar,
@@ -8,32 +9,28 @@ import {
     MessageContainer,
     MessageText
 } from './styles';
+import { UserContext } from '../../context/user';
 
 interface MessageProps {
-    data: Message
-}
-
-type Message = {
-    user: string,
-    message: string,
-    id: string,
-    avatarURL: string,
-    created: string,
-    createdFormat: string
+    data: MessageType
 }
 
 export default function Message({ data }: MessageProps) {
+
+    const { user } = useContext(UserContext);
+    const [isOwner, setIsOwner] = useState<boolean>(user.id === data?.user.id)
+
     return (
-        <Container>
+        <Container isOwner={isOwner}>
             <Avatar>
                 <Image
                     style={{ borderRadius: '50%' }}
                     width={60} height={60}
-                    src={data?.avatarURL} />
+                    src={data?.user.avatarURL} />
             </Avatar>
             <UsernameAndMessage>
-                <Username>
-                    {data?.user}
+                <Username isOwner={isOwner}>
+                    {data?.user.name}
                 </Username>
                 <MessageContainer>
                     <MessageText>
