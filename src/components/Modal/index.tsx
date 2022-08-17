@@ -38,7 +38,7 @@ import { ModalContext } from '../../context/modal';
 
 const Modal: React.FC = () => {
 
-    const { setModalIsOpen, modalType } = useContext(ModalContext);
+    const { modalIsOpen, setModalIsOpen, modalType } = useContext(ModalContext);
 
     const [roomTitle, setRoomTitle] = useState<string>('Minha sala');
     const [titleInput, setTitleInput] = useState<string>(roomTitle);
@@ -109,7 +109,7 @@ const Modal: React.FC = () => {
     }
 
     return (
-        <ModalContainer>
+        <ModalContainer isOpen={modalIsOpen}>
             <ModalContent>
 
                 <ModalHeader>

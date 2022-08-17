@@ -12,17 +12,31 @@ import {
 import VideoiFrame from '../../components/VideoiFrame';
 import Chat from '../../components/Chat';
 import Playlist from '../../components/Playlist';
-import useWindowDimensions from '../../components/CustomHooks/useWindowDimensions';
 
 const Room: NextPage = () => {
     const { user, setUser } = useContext(UserContext);
+    const [width, setWidth] = useState<number>(0);
+    const [counter, setCounter] = useState(0);
 
     const { query } = useRouter();
     const [roomDetails, setRoomDetails] = useState({
         name: 'Sala de Diêgo',
         users: [{ name: 'Diêgo', avatar: '' }, { name: 'João', avatar: '' }]
     });
-
+    
+    useEffect(() => {
+        function updateDimensions() {
+            setWidth(window.innerWidth);
+        }
+        function getDimensions() {
+            updateDimensions();
+            setCounter(1);
+        }
+        if(counter < 1) {
+            updateDimensions();
+            window.addEventListener('resize', getDimensions)
+        }
+    });
 
     return (
         <>
@@ -33,11 +47,11 @@ const Room: NextPage = () => {
             <Container>
                 <LeftContent>
                    <VideoiFrame videoID='eKb-ZvqTx9o' />
-                   {useWindowDimensions().width > 800 && <Playlist />}
+                   {width > 800 && <Playlist />}
                 </LeftContent>
 
                 <RightContent>
-                    {useWindowDimensions().width <= 800 && <Playlist />}
+                    {width <= 800 && <Playlist />}
                     <Chat />
                 </RightContent>
             </Container>

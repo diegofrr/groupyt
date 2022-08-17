@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
     bgColor,
     blockColor,
@@ -27,7 +27,7 @@ interface LetterCounter {
 
 interface GenreProps {
     selected: boolean;
-    genre: string
+    genre: string;
 }
 
 interface AvatarProps {
@@ -38,12 +38,25 @@ interface InputUsernameProps {
     valid: boolean;
 }
 
-export const ModalContainer = styled.div`
+interface ModalProps {
+    isOpen: boolean;
+}
+
+export const ModalContainer = styled.div<ModalProps>`
     width: 100vw;
     height: 100vh;
     display: grid;
     place-items: center;
     overflow-x: hidden;
+    transition: all .3s ease;
+    ${p => p.isOpen && css`
+        animation: openModal 0.2s ease-in-out;
+    `}
+
+    @keyframes openModal {
+        0%{transform: scale(0);}
+        100% {transform: scale(1);}
+    }
 
     &>* {
         z-index: 10;

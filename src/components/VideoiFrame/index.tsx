@@ -14,7 +14,6 @@ import {
 
 } from './styles';
 import { myColor_100, myColor_300 } from "../../styles/variables";
-import useWindowDimensions from "../CustomHooks/useWindowDimensions";
 
 interface VideoProps {
     videoID: string
@@ -22,7 +21,8 @@ interface VideoProps {
 
 export default function VideoiFrame(props: VideoProps) {
 
-    const { width, height } = useWindowDimensions();
+    const [width, setWidth] = useState<number>(0);
+    const [height, setHeight] = useState<number>(0);
     // getVideoData() pega as informações do video (titulo - autor)
     const [videoId, setVideoId] = useState<String>('');
     const [video, setVideo] = useState<YouTubeEvent>({} as YouTubeEvent);
@@ -31,10 +31,26 @@ export default function VideoiFrame(props: VideoProps) {
     const [intervalID, setIntervalID] = useState({} as any)
     const [videoDuration, setVideoDuration] = useState<number>();
     const [videoState, setVideoState] = useState<number>();
+    const [counter, setCounter] = useState(0)
 
     useEffect(() => {
         setVideoId(props?.videoID);
     }, [])
+
+    useEffect(() => {
+        function updateDimensions() {
+            setWidth(window.innerWidth);
+            setHeight(window.innerHeight);
+        }
+        function getDimensions() {
+            updateDimensions();
+            setCounter(1);
+        }
+        if(counter < 1) {
+            updateDimensions();
+            window.addEventListener('resize', getDimensions)
+        }
+    });
 
     const getVideo = useCallback(() => {
         return <Youtube
@@ -45,7 +61,7 @@ export default function VideoiFrame(props: VideoProps) {
             onPlay={handleStartedVideo}
             onReady={e => handleOnReady(e)}
         />
-    }, [width, height]); 
+    }, [width]);
 
     const options = {
         height: '350',

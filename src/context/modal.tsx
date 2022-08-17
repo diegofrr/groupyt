@@ -14,7 +14,7 @@ type ContextType = {
 export const ModalContext = createContext({} as ContextType);
 
 export default function ModalProvider({ children }: ContextProps) {
-    const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
     const [modalType, setModalType] = useState<string>('');
 
     return <ModalContext.Provider

@@ -125,7 +125,7 @@ export const BackImage2 = styled.img<BackImage>`
     animation: rotate infinite 1000s alternate-reverse linear;
     user-select: none;
     display: none;
-
+    
     @keyframes rotate {
         from {
             transform: rotate(0deg);
