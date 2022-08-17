@@ -26,11 +26,10 @@ export default function VideoiFrame(props: VideoProps) {
     // getVideoData() pega as informações do video (titulo - autor)
     const [videoId, setVideoId] = useState<String>('');
     const [video, setVideo] = useState<YouTubeEvent>({} as YouTubeEvent);
-    const [currentTime, setCurrentTime] = useState<string>('00:00');
     const [progress, setProgress] = useState(0);
     const [intervalID, setIntervalID] = useState({} as any)
     const [videoDuration, setVideoDuration] = useState<number>();
-    const [videoState, setVideoState] = useState<number>();
+    const [videoState, setVideoState] = useState<number>(0);
     const [counter, setCounter] = useState(0)
 
     useEffect(() => {
@@ -46,7 +45,7 @@ export default function VideoiFrame(props: VideoProps) {
             updateDimensions();
             setCounter(1);
         }
-        if(counter < 1) {
+        if (counter < 1) {
             updateDimensions();
             window.addEventListener('resize', getDimensions)
         }
@@ -57,7 +56,7 @@ export default function VideoiFrame(props: VideoProps) {
             videoId={videoId as string}
             opts={options}
             onEnd={handleFinishedVideo}
-            onStateChange={handleStateChange}
+            onStateChange={e => handleStateChange(e)}
             onPlay={handleStartedVideo}
             onReady={e => handleOnReady(e)}
         />
@@ -65,7 +64,7 @@ export default function VideoiFrame(props: VideoProps) {
 
     const options = {
         height: '350',
-        width: width <= 800 ? width - 56 : width * 0.6,
+        width: width <= 800 ? width - 56 : width * 0.55,
         playerVars: {
             'autoplay': 1,
             'controls': 0,
@@ -78,7 +77,9 @@ export default function VideoiFrame(props: VideoProps) {
 
     const handleOnReady = (e: YouTubeEvent) => {
         setVideo(e);
-        setVideoDuration(e.target.getDuration());
+        e.target?.playVideo();
+        setVideoDuration(e.target?.getDuration());
+        setVideoState(e.target?.getPlayerState());
     }
 
     const handleCurrentTimeChange = () => {
@@ -86,13 +87,13 @@ export default function VideoiFrame(props: VideoProps) {
         video.target?.playVideo();
     }
 
-    const handleStateChange = () => {
-        setVideoState(video.target?.getPlayerState());
-        if (video.target?.getPlayerState() === 1) {
+    const handleStateChange = (e: YouTubeEvent) => {
+        setVideoState(e.target?.getPlayerState());
+        if (e.target?.getPlayerState() === 1) {
             setIntervalID(
                 setInterval(() => {
-                    setProgress(video.target?.getCurrentTime());
-                    let n = Number(video.target.getCurrentTime())
+                    setProgress(e.target?.getCurrentTime());
+                    let n = Number(e.target?.getCurrentTime())
                     formatTime(n);
                 }, 1000)
             )
@@ -114,8 +115,6 @@ export default function VideoiFrame(props: VideoProps) {
         let r = hours >= 1
             ? `${hours}:${applyZero(min)}:${applyZero(sec)}`
             : `${applyZero(min)}:${applyZero(sec)}`
-
-        setCurrentTime(r);
 
     }
 
@@ -139,10 +138,10 @@ export default function VideoiFrame(props: VideoProps) {
                 <ControlsContainer>
 
                     {videoState === 1
-                        ? <ActionButton onClick={() => video.target.pauseVideo()}>
+                        ? <ActionButton onClick={() => {video.target?.pauseVideo()}}>
                             <BsPauseFill size={20} color={myColor_100} />
                         </ActionButton>
-                        : <ActionButton onClick={() => video.target.playVideo()}>
+                        : <ActionButton onClick={() => video.target?.playVideo()}>
                             <BsPlayFill size={20} color={myColor_100} />
                         </ActionButton>}
 

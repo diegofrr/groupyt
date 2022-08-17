@@ -15,7 +15,7 @@ export const Container = styled.div`
 `
 
 export const VideoContainer = styled.div<VideoContainerProps>`
-    width: ${p => p.width <= 800 ? `${p.width - 56}px` : `${p.width * 0.6}px`};
+    width: ${p => p.width <= 800 ? `${p.width - 56}px` : `${p.width * 0.55}px`};
     border-radius: 10px;
     overflow: hidden;
     position: relative; 

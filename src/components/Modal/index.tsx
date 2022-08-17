@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import {
     ModalContainer,
@@ -34,9 +34,11 @@ import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
 import { myColor_100, myColor_200 } from '../../styles/variables';
 import { maleAvatars, femaleAvatars } from '../AvatarsList';
 import { ModalContext } from '../../context/modal';
+import { useRouter } from 'next/router';
 
 
 const Modal: React.FC = () => {
+    const router = useRouter();
 
     const { modalIsOpen, setModalIsOpen, modalType } = useContext(ModalContext);
 
@@ -80,10 +82,11 @@ const Modal: React.FC = () => {
                 console.log('Criando a sala')
                 console.log(username, genre);
                 console.log(avatar)
-            } else {
+            } else if (modalType === 'ENTER_TO_ROOM') {
                 console.log('entrando na sala');
                 console.log(username, genre);
                 console.log(avatar)
+                router.push('/room/testando')
             }
         }
     }

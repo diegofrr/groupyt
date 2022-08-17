@@ -9,7 +9,7 @@ export const Container = styled.div`
     flex-direction: row;
     gap: 20px;
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1080px;
     min-height: 100vh;
     width: calc(100% - 40px);
 
