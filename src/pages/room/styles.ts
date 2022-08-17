@@ -12,6 +12,7 @@ export const Container = styled.div`
     max-width: 1080px;
     min-height: 100vh;
     width: calc(100% - 40px);
+    padding-bottom: 20px;
 
     @media screen and (max-width: 800px) {
         flex-direction: column;
