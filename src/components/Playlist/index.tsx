@@ -81,7 +81,7 @@ export default function Playlist() {
             url: '//www.youtube.com/watch?v=2fJYeOr3b2s',
         },
     ]);
-
+    
     const getInfo = () => {
         if (videoUrl.trim() === '') {
             alert('url vazia')
@@ -124,13 +124,17 @@ export default function Playlist() {
                 </AddNewVideo>
 
                 <ActionButtonsContainer>
-                    <ActionButton onClick={() => setMargin(margin < 0 ? margin + 310 : margin)}>
-                        <FiChevronLeft size={18} color={bgColor} />
-                    </ActionButton>
+                    {margin !== 0 ? (
+                        <ActionButton onClick={() => setMargin(margin < 0 ? margin + 310 : margin)}>
+                            <FiChevronLeft size={18} color={bgColor} />
+                        </ActionButton>
+                    ) : <span></span>}
 
-                    <ActionButton onClick={() => setMargin(margin > -300*(videos.length - 1) ? margin - 310 : margin)}>
-                        <FiChevronRight size={18} color={bgColor} />
-                    </ActionButton>
+                    {margin !== (-310 * (videos.length - 1)) && (
+                        <ActionButton onClick={() => setMargin(margin > -310 * (videos.length - 1) ? margin - 310 : margin)}>
+                            <FiChevronRight size={18} color={bgColor} />
+                        </ActionButton>
+                    )}
                 </ActionButtonsContainer>
             </PlaylistHeader>
 
