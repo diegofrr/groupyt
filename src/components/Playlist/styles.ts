@@ -1,34 +1,44 @@
-import styled, {css} from "styled-components";
-import { blockColor, blockHeaderColor, myColor_200, myColor_300 } from "../../styles/variables";
+import styled, { css } from "styled-components";
+import { blockColor, blockHeaderColor, myColor_200, myColor_300, purpleColor } from "../../styles/variables";
 
 interface FormProps {
     activeInput: boolean
 }
 
+interface PlaylistProps {
+    margin: number
+}
+
 export const Container = styled.div`
     background-color: ${blockColor};
     border-radius: 10px;
-    height: 100px;
     padding: 10px;
     min-width: 200px;
+    position: relative;
+    height: 100px;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 800px) and (min-width: 501px) {
         height: 520px;
     }
 
     @media screen and (max-width: 500px) {
-        display: none;
+        width: 100%;
     }
+
 `
 
 export const PlaylistHeader = styled.div`
-    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+    right: 10px;
+    gap: 10px;
+    position: absolute;
+    z-index: 1000;
     
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 800px) and (min-width: 501px) {
         flex-direction: column;
         gap: 10px;
     }
@@ -48,7 +58,11 @@ export const AddNewVideo = styled.form<FormProps>`
     width: 100%;
     position: relative;
 
-    & input {
+    button {
+        box-shadow: 0 0 20px -5px rgba(0,0,0,.5);
+    }
+
+    input {
         height: 40px;
         border: none;
         outline: none;
@@ -61,6 +75,8 @@ export const AddNewVideo = styled.form<FormProps>`
         font-size: .8rem;
         background-color: ${blockHeaderColor};
         color: ${myColor_200};
+        
+        box-shadow: 0 0 20px -5px rgba(0,0,0,.5);
 
         ${p => p.activeInput && css`
             max-width: 400px;
@@ -84,8 +100,70 @@ export const CancelButton = styled.button`
     height: 20px;
     background-color: transparent;
     transition: all .3s ease;
+    box-shadow: none !important;
 
     &:hover {
         filter: brightness(1.1);
     }
+`
+
+export const VideosContainer = styled.div`
+    position: absolute;
+    top: 10px;
+    width: calc(100% - 20px);
+    overflow-x: hidden;
+    border-radius: 10px;
+
+    @media screen and (max-width: 800px) {
+        overflow-y: scroll;
+        height: 450px;
+        z-index: 1000;
+        margin-top: 50px;
+
+        scrollbar-width: none;
+    
+        &::-webkit-scrollbar {
+        width: 0;
+        }
+    }
+
+`
+
+export const VideosContent = styled.div<PlaylistProps>`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    transition: all .3s ease;
+    margin-left: ${p => `${p.margin}px`};
+
+    @media screen and (max-width: 800px) and (min-width: 501px) {
+        flex-direction: column;
+    }
+`
+
+export const ActionButtonsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+
+    @media screen and (max-width: 800px) and (min-width: 501px) {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    @media screen and (max-width: 800px) {
+        display: none;
+    }
+`
+
+export const ActionButton = styled.button`
+    background-color: #FFF;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
 `
