@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import { Button } from '../Header/styles';
 import {
     Container,
@@ -17,6 +17,7 @@ import { FiPlus, FiXCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi
 import { bgColor, myColor_100 } from '../../styles/variables';
 import api from '../../services/api';
 import PlaylistVideo from '../PlaylistVideo';
+import { PlaylistContext } from '../../contexts/playlist';
 
 export type VideoType = {
     id: string,
@@ -29,60 +30,14 @@ export type VideoType = {
 }
 
 export default function Playlist() {
+    const { videos } = useContext(PlaylistContext);
+
     const [margin, setMargin] = useState(0);
 
     const [searching, setSearching] = useState<boolean>(false);
     const [videoUrl, setVideoUrl] = useState('');
     const [exists, setExists] = useState<boolean>(true);
     const [validUrl, setValidUrl] = useState<boolean>(false);
-    const [videos, setVideos] = useState<VideoType[]>([
-        // {
-        //     id: 'oVi5gtzTDx0',
-        //     creator: 'Nice Guys',
-        //     creatorurl: '',
-        //     description: '',
-        //     thumb: 'https://i.ytimg.com/vi/oVi5gtzTDx0/mqdefault.jpg',
-        //     title: 'Indie / Bedroom / Pop / Surf Rock - 24/7 Radio - Nice Guys Chill FM',
-        //     url: '//www.youtube.com/watch?v=oVi5gtzTDx0',
-        // },
-        {
-            id: '2fJYeOr3b2s',
-            creator: 'sasbo',
-            creatorurl: '',
-            description: '',
-            thumb: 'https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg',
-            title: '[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside',
-            url: '//www.youtube.com/watch?v=2fJYeOr3b2s',
-        },
-
-        {
-            id: '2fJYeOr3b2s2',
-            creator: 'sasbo',
-            creatorurl: '',
-            description: '',
-            thumb: 'https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg',
-            title: '[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside',
-            url: '//www.youtube.com/watch?v=2fJYeOr3b2s',
-        },
-        {
-            id: '2fJYeOr3b2s233',
-            creator: 'sasbo',
-            creatorurl: '',
-            description: '',
-            thumb: 'https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg',
-            title: '[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside',
-            url: '//www.youtube.com/watch?v=2fJYeOr3b2s',
-        },
-        {
-            id: '2fJYeOr3b2s23',
-            creator: 'sasbo',
-            creatorurl: '',
-            description: '',
-            thumb: 'https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg',
-            title: '[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside',
-            url: '//www.youtube.com/watch?v=2fJYeOr3b2s',
-        },
-    ]);
 
     const getInfo = () => {
         if (videoUrl.trim() === '') {

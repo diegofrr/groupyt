@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import firebase from '../../services/firebase';
-import { UserContext } from '../../context/user';
+import { UserContext } from '../../contexts/user';
 import Header from '../../components/Header';
 import Head from 'next/head';
 import {
@@ -46,7 +46,7 @@ const Room: NextPage = () => {
             <Header roomName={roomDetails.name} />
             <Container>
                 <LeftContent>
-                   <VideoiFrame videoID='eKb-ZvqTx9o' />
+                   <VideoiFrame />
                    {width > 800 && <Playlist />}
                 </LeftContent>
 

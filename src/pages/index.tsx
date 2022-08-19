@@ -17,7 +17,7 @@ import Modal from '../components/Modal';
 import logo from '../../public/images/groupyt_logo.svg';
 import Image from 'next/image';
 import { useContext, useState } from 'react';
-import { ModalContext } from '../context/modal';
+import { ModalContext } from '../contexts/modal';
 
 const Home: NextPage = () => {
 

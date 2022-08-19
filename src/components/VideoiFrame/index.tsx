@@ -1,7 +1,8 @@
 import { NextPage } from "next";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Youtube, { YouTubeEvent } from 'react-youtube';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
+import { VideoType } from "../Playlist";
 import {
     Container,
     VideoContainer,
@@ -14,12 +15,10 @@ import {
 
 } from './styles';
 import { myColor_100, myColor_300 } from "../../styles/variables";
+import { PlaylistContext } from "../../contexts/playlist";
 
-interface VideoProps {
-    videoID: string
-}
-
-export default function VideoiFrame(props: VideoProps) {
+export default function VideoiFrame() {
+    const { videos, setVideos } = useContext(PlaylistContext);
 
     const [width, setWidth] = useState<number>(0);
     const [height, setHeight] = useState<number>(0);
@@ -33,7 +32,7 @@ export default function VideoiFrame(props: VideoProps) {
     const [counter, setCounter] = useState(0)
 
     useEffect(() => {
-        setVideoId(props?.videoID);
+        setVideoId(videos[0].id)
     }, [])
 
     useEffect(() => {

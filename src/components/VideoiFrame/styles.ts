@@ -12,11 +12,12 @@ interface VideoContainerProps {
 }
 
 export const Container = styled.div`
+    border-radius: 10px;
+    overflow: hidden;
 `
 
 export const VideoContainer = styled.div<VideoContainerProps>`
     width: ${p => p.width <= 800 ? `${p.width - 56}px` : `${p.width * 0.55}px`};
-    border-radius: 10px;
     overflow: hidden;
     position: relative; 
     margin: 0 auto;

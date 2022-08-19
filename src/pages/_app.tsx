@@ -1,14 +1,17 @@
 import type { AppProps } from 'next/app';
 import '@fontsource/plus-jakarta-sans';
 import '../styles/global.css';
-import ModalProvider from '../context/modal';
-import UserProvider from '../context/user';
+import ModalProvider from '../contexts/modal';
+import UserProvider from '../contexts/user';
+import PlaylistProvider from '../contexts/playlist';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <>
     <ModalProvider>
       <UserProvider>
-        <Component {...pageProps} />
+        <PlaylistProvider>
+          <Component {...pageProps} />
+        </PlaylistProvider>
       </UserProvider>
     </ModalProvider>
   </>

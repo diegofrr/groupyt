@@ -9,7 +9,7 @@ import {
     MessageContainer,
     MessageText
 } from './styles';
-import { UserContext } from '../../context/user';
+import { UserContext } from '../../contexts/user';
 
 interface MessageProps {
     data: MessageType

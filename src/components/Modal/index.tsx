@@ -33,7 +33,7 @@ import { FiEdit, FiCheck, FiUser } from 'react-icons/fi';
 import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
 import { myColor_100, myColor_200 } from '../../styles/variables';
 import { maleAvatars, femaleAvatars } from '../AvatarsList';
-import { ModalContext } from '../../context/modal';
+import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';
 
 
@@ -81,13 +81,16 @@ const Modal: React.FC = () => {
             if (modalType === 'CREATE_NEW_ROOM') {
                 console.log('Criando a sala')
                 console.log(username, genre);
-                console.log(avatar)
+                console.log(avatar);
+                router.push('/room/testando');
             } else if (modalType === 'ENTER_TO_ROOM') {
                 console.log('entrando na sala');
                 console.log(username, genre);
                 console.log(avatar)
                 router.push('/room/testando')
             }
+
+            setModalIsOpen(false)
         }
     }
 
