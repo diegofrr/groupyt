@@ -6,7 +6,9 @@ export const Container = styled.div`
     background-color: ${blockHeaderColor};
     overflow: hidden;
     z-index: 0;
+    max-width: 400px;
     min-width: 300px;
+    position: relative; 
 
     @media screen and (max-width: 800px) and (min-width: 501px) {
         min-width: 100%;
@@ -36,6 +38,14 @@ export const VideoInfo = styled.div`
         color: ${myColor_200};
         font-weight: bold;
         font-size: .7rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: flexbox;
+        max-height: 32px;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        box-orient: vertical;
+        -webkit-box-orient: vertical;
     }
 
     span {

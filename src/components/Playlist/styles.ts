@@ -23,6 +23,7 @@ export const Container = styled.div`
 
     @media screen and (max-width: 500px) {
         width: 100%;
+        height: 150px;
     }
 
 `
@@ -41,6 +42,12 @@ export const PlaylistHeader = styled.div`
     @media screen and (max-width: 800px) and (min-width: 501px) {
         flex-direction: column;
         gap: 10px;
+    }
+
+    @media screen and (max-width: 500px) {
+        flex-direction: row-reverse;
+        align-items: center;
+        height: 40px;
     }
 
     & span {
@@ -152,10 +159,11 @@ export const ActionButtonsContainer = styled.div`
     @media screen and (max-width: 800px) and (min-width: 501px) {
         flex-direction: column;
         height: 100%;
+        display: none;
     }
 
-    @media screen and (max-width: 800px) {
-        display: none;
+    @media screen and (max-width: 500px) {
+        
     }
 `
 
@@ -166,4 +174,13 @@ export const ActionButton = styled.button`
     height: 30px;
     display: grid;
     place-items: center;
+`
+
+export const EmptyPlaylist = styled.span`
+    display: grid;
+    place-items: center;
+    color: ${myColor_300};
+    font-size: .8rem;
+    height: 80px;
+
 `

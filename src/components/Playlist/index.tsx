@@ -8,7 +8,9 @@ import {
     VideosContainer,
     VideosContent,
     ActionButtonsContainer,
-    ActionButton
+    ActionButton,
+    EmptyPlaylist,
+
 
 } from './styles';
 import { FiPlus, FiXCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
@@ -34,15 +36,15 @@ export default function Playlist() {
     const [exists, setExists] = useState<boolean>(true);
     const [validUrl, setValidUrl] = useState<boolean>(false);
     const [videos, setVideos] = useState<VideoType[]>([
-        {
-            id: 'oVi5gtzTDx0',
-            creator: 'Nice Guys',
-            creatorurl: '',
-            description: '',
-            thumb: 'https://i.ytimg.com/vi/oVi5gtzTDx0/mqdefault.jpg',
-            title: 'Indie / Bedroom / Pop / Surf Rock - 24/7 Radio - Nice Guys Chill FM',
-            url: '//www.youtube.com/watch?v=oVi5gtzTDx0',
-        },
+        // {
+        //     id: 'oVi5gtzTDx0',
+        //     creator: 'Nice Guys',
+        //     creatorurl: '',
+        //     description: '',
+        //     thumb: 'https://i.ytimg.com/vi/oVi5gtzTDx0/mqdefault.jpg',
+        //     title: 'Indie / Bedroom / Pop / Surf Rock - 24/7 Radio - Nice Guys Chill FM',
+        //     url: '//www.youtube.com/watch?v=oVi5gtzTDx0',
+        // },
         {
             id: '2fJYeOr3b2s',
             creator: 'sasbo',
@@ -81,7 +83,7 @@ export default function Playlist() {
             url: '//www.youtube.com/watch?v=2fJYeOr3b2s',
         },
     ]);
-    
+
     const getInfo = () => {
         if (videoUrl.trim() === '') {
             alert('url vazia')
@@ -124,13 +126,13 @@ export default function Playlist() {
                 </AddNewVideo>
 
                 <ActionButtonsContainer>
-                    {margin !== 0 ? (
+                    {(margin !== 0 && videos.length !== 0) ? (
                         <ActionButton onClick={() => setMargin(margin < 0 ? margin + 310 : margin)}>
                             <FiChevronLeft size={18} color={bgColor} />
                         </ActionButton>
                     ) : <span></span>}
 
-                    {margin !== (-310 * (videos.length - 1)) && (
+                    {(margin !== (-310 * (videos.length - 1)) && videos.length !== 0) && (
                         <ActionButton onClick={() => setMargin(margin > -310 * (videos.length - 1) ? margin - 310 : margin)}>
                             <FiChevronRight size={18} color={bgColor} />
                         </ActionButton>
@@ -139,9 +141,13 @@ export default function Playlist() {
             </PlaylistHeader>
 
             <VideosContainer>
-                <VideosContent margin={margin}>
-                    {videos.map(video => <PlaylistVideo key={video.id} video={video} />)}
-                </VideosContent>
+                {videos.length === 0
+                    ? <EmptyPlaylist>Lista de reprodução vazia...</EmptyPlaylist>
+                    : (
+                        <VideosContent margin={margin}>
+                            {videos.map(video => <PlaylistVideo key={video.id} video={video} />)}
+                        </VideosContent>
+                    )}
             </VideosContainer>
 
         </Container>
