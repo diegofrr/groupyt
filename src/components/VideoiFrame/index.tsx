@@ -11,10 +11,11 @@ import {
     ActionButton,
     CurrentTimeBar,
     BackgroundBar,
-    CurrentTimeContainer
+    CurrentTimeContainer,
+    EmptyVideo,
 
 } from './styles';
-import { myColor_100, myColor_300 } from "../../styles/variables";
+import { blockColor, myColor_100, myColor_300 } from "../../styles/variables";
 import { PlaylistContext } from "../../contexts/playlist";
 
 export default function VideoiFrame() {
@@ -27,13 +28,25 @@ export default function VideoiFrame() {
     const [video, setVideo] = useState<YouTubeEvent>({} as YouTubeEvent);
     const [progress, setProgress] = useState(0);
     const [intervalID, setIntervalID] = useState({} as any)
-    const [videoDuration, setVideoDuration] = useState<number>();
+    const [videoDuration, setVideoDuration] = useState<number>(0);
     const [videoState, setVideoState] = useState<number>(0);
     const [counter, setCounter] = useState(0)
 
     useEffect(() => {
-        setVideoId(videos[0].id)
-    }, [])
+
+        if (videos.length > 0) {
+            let videoId = videos[0].id;
+            setVideoId(videoId);
+            console.log(videos);
+        }
+
+        setIntervalID(
+            setInterval(() => {
+                setProgress(video.target?.getCurrentTime());
+            }, 1000)
+        )
+        return clearInterval(intervalID)
+    }, [video])
 
     useEffect(() => {
         function updateDimensions() {
@@ -59,7 +72,7 @@ export default function VideoiFrame() {
             onPlay={handleStartedVideo}
             onReady={e => handleOnReady(e)}
         />
-    }, [width]);
+    }, [width, videoId]);
 
     const options = {
         height: '350',
@@ -77,8 +90,6 @@ export default function VideoiFrame() {
     const handleOnReady = (e: YouTubeEvent) => {
         setVideo(e);
         e.target?.playVideo();
-        setVideoDuration(e.target?.getDuration());
-        setVideoState(e.target?.getPlayerState());
     }
 
     const handleCurrentTimeChange = () => {
@@ -88,16 +99,24 @@ export default function VideoiFrame() {
 
     const handleStateChange = (e: YouTubeEvent) => {
         setVideoState(e.target?.getPlayerState());
-        if (e.target?.getPlayerState() === 1) {
-            setIntervalID(
-                setInterval(() => {
-                    setProgress(e.target?.getCurrentTime());
-                    let n = Number(e.target?.getCurrentTime())
-                    formatTime(n);
-                }, 1000)
-            )
+        setVideoDuration(e.target?.getDuration());
+
+    }
+
+    const handleStartedVideo = () => {
+
+    }
+
+    const handleFinishedVideo = () => {
+        if (videos.length > 1) {
+            let newList = videos.filter(video => video.id !== videoId);
+            setVideos(newList);
+            setProgress(0);
+            console.log(videos);
         } else {
-            clearInterval(intervalID)
+            setVideo({} as YouTubeEvent)
+            setVideos([] as VideoType[])
+            alert('sem videos na playlist')
         }
 
     }
@@ -115,6 +134,7 @@ export default function VideoiFrame() {
             ? `${hours}:${applyZero(min)}:${applyZero(sec)}`
             : `${applyZero(min)}:${applyZero(sec)}`
 
+        return r;
     }
 
     const applyZero = (val: number) => {
@@ -122,22 +142,15 @@ export default function VideoiFrame() {
         return val;
     }
 
-    const handleStartedVideo = () => {
-
-    }
-
-    const handleFinishedVideo = () => {
-        alert('terminou')
-    }
-
     return (
         <Container>
             <VideoContainer width={width} height={height}>
-                {getVideo()}
+                {videos.length > 0 ? getVideo()
+                    : <EmptyVideo height={height} width={width}><span>Adicione vídeos à playlist.</span></EmptyVideo>}
                 <ControlsContainer>
 
                     {videoState === 1
-                        ? <ActionButton onClick={() => {video.target?.pauseVideo()}}>
+                        ? <ActionButton onClick={() => { video.target?.pauseVideo() }}>
                             <BsPauseFill size={20} color={myColor_100} />
                         </ActionButton>
                         : <ActionButton onClick={() => video.target?.playVideo()}>
@@ -156,6 +169,7 @@ export default function VideoiFrame() {
                             onChange={e => setProgress(Number(e.target.value))}
                             value={progress} max={video.target?.getDuration()} min={0} />
                     </CurrentTimeContainer>
+                    {formatTime(videoDuration - progress)}
                 </ControlsContainer>
                 <NotClick />
             </VideoContainer>

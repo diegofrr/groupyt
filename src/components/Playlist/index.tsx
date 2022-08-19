@@ -100,7 +100,7 @@ export default function Playlist() {
                     ? <EmptyPlaylist>Lista de reprodução vazia...</EmptyPlaylist>
                     : (
                         <VideosContent margin={margin}>
-                            {videos.map(video => <PlaylistVideo key={video.id} video={video} />)}
+                            {videos.length > 0 && videos.map(video => <PlaylistVideo key={video.id} video={video} />)}
                         </VideosContent>
                     )}
             </VideosContainer>

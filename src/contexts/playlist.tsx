@@ -16,13 +16,13 @@ export const PlaylistContext = createContext({} as ContextType);
 export default function PlaylistProvider({ children }: ContextProps) {
     const [videos, setVideos] = useState<VideoType[]>([
         {
-            id: 'oVi5gtzTDx0',
+            id: 'IN4YtOl-AnA',
             creator: 'Nice Guys',
             creatorurl: '',
             description: '',
-            thumb: 'https://i.ytimg.com/vi/oVi5gtzTDx0/mqdefault.jpg',
-            title: 'Indie / Bedroom / Pop / Surf Rock - 24/7 Radio - Nice Guys Chill FM',
-            url: '//www.youtube.com/watch?v=oVi5gtzTDx0',
+            thumb: 'https://i.ytimg.com/vi/IN4YtOl-AnA/mqdefault.jpg',
+            title: "Ian 80's japan vibes playlist .pt 3",
+            url: '//www.youtube.com/watch?v=IN4YtOl-AnA',
         },
         {
             id: '2fJYeOr3b2s',

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { bgColor, blockColor, blockHeaderColor, purpleColor } from "../../styles/variables";
+import { bgColor, blockColor, blockHeaderColor, myColor_300, purpleColor } from "../../styles/variables";
 
 interface VideoProps {
     duration: number;
@@ -42,6 +42,7 @@ export const ControlsContainer = styled.div`
     justify-content: center;
     flex-direction: row;
     padding: 0 10px;
+    border-radius: 0 0 10px 10px;
 `
 
 export const ActionButton = styled.button` 
@@ -49,10 +50,11 @@ export const ActionButton = styled.button`
     height: 30px;
     margin-right: 10px;
     display: grid;
-    place-items: center;
+    place-items: center; 
     border-radius: 30px;
     background-color: ${purpleColor};
     transition: all .3s ease;
+    z-index: 1000;
     
     &:hover {
         filter: brightness(1.1)
@@ -137,4 +139,13 @@ export const CurrentTimeBar = styled.input`
         border: none;
         opacity: 0;
     }
+`
+
+export const EmptyVideo = styled.div<VideoContainerProps>`
+    display: grid;
+    place-items: center;
+    background-color: ${blockColor};
+    height: 350px;
+    width: ${p => p.width < 800 ? p.width - 56 : p.width * 0.55};
+    color: ${myColor_300};
 `
