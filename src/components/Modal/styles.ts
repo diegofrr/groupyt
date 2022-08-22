@@ -344,12 +344,3 @@ export const AvatarsCredits = styled.span`
     cursor: default;
     text-align: center;
 `
-
-export const Loading = styled.div`
-    width: 100%;
-    height: 100%;
-    background-color: ${bgColor};
-    min-height: 300px;
-    display: grid;
-    place-items: center;
-`
