@@ -1,22 +1,26 @@
 import { VideoType } from "../Playlist";
-import { 
+import {
     Container,
     Content,
     Thumb,
-    VideoInfo
- } from "./styles";
+    VideoInfo,
+    ThumbContainer,
+    
+} from "./styles";
 
- interface PlaylistProps {
+interface PlaylistProps {
     video: VideoType
     playing: boolean
- }
+}
 
- export default function PlaylistVideo({video, playing}: PlaylistProps) {
+export default function PlaylistVideo({ video, playing }: PlaylistProps) {
 
-    return(
+    return (
         <Container>
             <Content playing={playing}>
-                <Thumb src={video.thumb} alt='Video thumb' />
+                <ThumbContainer>
+                    <Thumb src={video.thumb} alt='Video thumb' />
+                </ThumbContainer>
                 <VideoInfo>
                     <strong>{video.title}</strong>
                     <span>{video.creator}</span>
@@ -25,4 +29,4 @@ import {
         </Container>
     )
 
- }
+}

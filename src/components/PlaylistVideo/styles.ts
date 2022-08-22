@@ -46,6 +46,12 @@ export const Content = styled.div<VideoProps>`
         }
     }
 `
+export const ThumbContainer = styled.div`
+    display: grid;
+    place-items: center;
+    background-color: #000;
+    width: 140px;
+`
 
 export const Thumb = styled.img`
     max-height: 80px;
