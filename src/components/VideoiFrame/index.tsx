@@ -1,4 +1,3 @@
-import { NextPage } from "next";
 import { useCallback, useContext, useEffect, useState } from "react";
 import Youtube, { YouTubeEvent } from 'react-youtube';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
@@ -17,15 +16,21 @@ import {
     VideoInfo,
 
 } from './styles';
-import { blockColor, myColor_100, myColor_300 } from "../../styles/variables";
+import { myColor_100, } from "../../styles/variables";
 import { PlaylistContext } from "../../contexts/playlist";
+
+type DataType = {
+    progress: number,
+    videoId: string,
+    videos: VideoType[],
+    time: Date,
+}
 
 export default function VideoiFrame() {
     const { videos, setVideos } = useContext(PlaylistContext);
 
     const [width, setWidth] = useState<number>(0);
     const [height, setHeight] = useState<number>(0);
-    // getVideoData() pega as informações do video (titulo - autor)
     const [videoId, setVideoId] = useState<String>('');
     const [video, setVideo] = useState<YouTubeEvent>({} as YouTubeEvent);
     const [progress, setProgress] = useState(0);

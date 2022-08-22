@@ -75,9 +75,9 @@ export const AddNewVideo = styled.form<FormProps>`
         outline: none;
         border-radius: 10px;
         transition: all .3s ease;
-        width: min-content;
         width: 100%;
         max-width: 0;
+        min-width: 0;
         transition: all .3s ease;
         font-size: .8rem;
         background-color: ${blockHeaderColor};
@@ -155,6 +155,7 @@ export const ActionButtonsContainer = styled.div`
     align-items: flex-end;
     justify-content: space-between;
     width: 100%;
+    max-width: 70px;
 
     @media screen and (max-width: 800px) and (min-width: 501px) {
         flex-direction: column;
@@ -162,8 +163,8 @@ export const ActionButtonsContainer = styled.div`
         display: none;
     }
 
-    @media screen and (max-width: 500px) {
-        
+    @media screen and (max-width: 300px) {
+        display: none;
     }
 `
 

@@ -34,11 +34,16 @@ export const Content = styled.div<VideoProps>`
             background-color: rgba(0,0,0,.7);
             width: 140px;
             height: 80px;
+
         }
     `}
 
     @media screen and (max-width: 800px) and (min-width: 501px) {
         flex-direction: column;
+
+        ::after {
+            width: 180px;
+        }
     }
 `
 
