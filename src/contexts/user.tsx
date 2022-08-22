@@ -19,12 +19,7 @@ type ContextType = {
 export const UserContext = createContext({} as ContextType);
 
 export default function UserProvider({ children }: ContextProps) {
-    const [user, setUser] = useState<UserType>({
-        id: '1',
-        name: 'diego',
-        avatarURL: 'link do avatar',
-        admin: true,
-    })
+    const [user, setUser] = useState<UserType>({} as UserType)
 
     return <UserContext.Provider
         value={{

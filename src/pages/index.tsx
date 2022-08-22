@@ -66,12 +66,6 @@ const Home: NextPage = () => {
                   Criar uma sala
                 </ButtonText>
               </Button>
-
-              <Button onClick={handleEnterToRoom} primary={false}>
-                <ButtonText primary={false}>
-                  Entrar em uma sala
-                </ButtonText>
-              </Button>
             </ButtonsContainer>
 
           </Content>}

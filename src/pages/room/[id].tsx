@@ -5,6 +5,8 @@ import firebase from '../../services/firebase';
 import { UserContext } from '../../contexts/user';
 import Header from '../../components/Header';
 import Head from 'next/head';
+import { UserType } from '../../contexts/user';
+import Modal from '../../components/Modal';
 import {
     Container, LeftContent, RightContent
 } from './styles';
@@ -14,22 +16,46 @@ import Chat from '../../components/Chat';
 import Playlist from '../../components/Playlist';
 import { ModalContext } from '../../contexts/modal';
 
+type RoomType = {
+    roomName: string,
+}
+
 const Room: NextPage = () => {
+    const router = useRouter();
+
     const { user, setUser } = useContext(UserContext);
-    const { setModalIsOpen } = useContext(ModalContext);
+    const { setModalIsOpen, setModalType } = useContext(ModalContext);
+
     const [width, setWidth] = useState<number>(0);
     const [counter, setCounter] = useState(0);
-
     const { query } = useRouter();
-    const [roomDetails, setRoomDetails] = useState({
-        name: 'Sala de José',
-        users: [{ name: 'Diêgo', avatar: '' }, { name: 'João', avatar: '' }]
-    });
+    const [roomDetails, setRoomDetails] = useState<RoomType>({} as RoomType);
 
     useEffect(() => {
         setModalIsOpen(false);
+
+        if (Object.keys(user).length === 0) {
+            setModalIsOpen(true);
+            setModalType('ENTER_TO_ROOM');
+        }
+
+    }, [])
+
+    useEffect(() => {
+        (async () => {
+            let roomId = query?.id;
+            await firebase.firestore().collection('rooms')
+                .doc(String(roomId))
+                .get()
+                .then(e => {
+                    if(!e.data()?.details) {
+                        router.push('/');
+                        setModalIsOpen(false)
+                    }
+                })
+        })();
     })
-    
+
     useEffect(() => {
         function updateDimensions() {
             setWidth(window.innerWidth);
@@ -38,7 +64,7 @@ const Room: NextPage = () => {
             updateDimensions();
             setCounter(1);
         }
-        if(counter < 1) {
+        if (counter < 1) {
             updateDimensions();
             window.addEventListener('resize', getDimensions)
         }
@@ -47,19 +73,23 @@ const Room: NextPage = () => {
     return (
         <>
             <Head>
-                <title>{roomDetails.name}</title>
+                <title>{roomDetails.roomName}</title>
             </Head>
-            <Header roomName={roomDetails.name} />
+            <Header roomName={roomDetails.roomName} />
             <Container>
-                <LeftContent>
-                   <VideoiFrame />
-                   {width > 800 && <Playlist />}
-                </LeftContent>
+                {Object.keys(user).length === 0
+                    ? <Modal />
+                    : <>
+                        <LeftContent>
+                            <VideoiFrame />
+                            {width > 800 && <Playlist />}
+                        </LeftContent>
 
-                <RightContent>
-                    {width <= 800 && <Playlist />}
-                    <Chat />
-                </RightContent>
+                        <RightContent>
+                            {width <= 800 && <Playlist />}
+                            <Chat />
+                        </RightContent>
+                    </>}
             </Container>
         </>
 

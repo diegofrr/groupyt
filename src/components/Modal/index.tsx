@@ -74,18 +74,20 @@ const Modal: React.FC = () => {
         setLoading(false);
     }, [])
 
-    useEffect(() => { if (username.length > 0) checkUsername() }, [username]);
+    useEffect(() => { if (username.length > 0) usernameIsvalid() }, [username]);
 
-    const checkUsername = () => {
-        setValidUsername(
+    const usernameIsvalid = () => {
+        let isValid = (
             username !== '' &&
             username !== null &&
-            username.length > 2);
+            username.length > 2
+        )
+        setValidUsername(isValid);
+        return isValid;
     }
 
     const handleApply = () => {
-        checkUsername();
-        if (validUsername) {
+        if (usernameIsvalid()) {
             setLoading(true);
             if (modalType === 'CREATE_NEW_ROOM') {
                 createNewRoom();
@@ -98,10 +100,14 @@ const Modal: React.FC = () => {
         }
     }
 
+    const enterToRoom = async () => {
+
+    }
+
     const createNewRoom = async () => {
         await firebase.firestore().collection('rooms')
             .add({})
-            .then(e =>
+            .then(e => {
                 firebase.firestore().collection('rooms')
                     .doc(e.id)
                     .collection('users')
@@ -119,8 +125,10 @@ const Modal: React.FC = () => {
                                 } as UserType);
                             });
 
-                    })
-                    .catch(() => { })
+                    });
+                router.push(`/room/${e.id}`)
+            }
+
             )
     }
 
