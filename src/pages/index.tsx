@@ -22,6 +22,7 @@ import { ModalContext } from '../contexts/modal';
 const Home: NextPage = () => {
 
   const { modalIsOpen, setModalIsOpen, setModalType } = useContext(ModalContext);
+  const [loadingPage, setLoadingPage] = useState(true);
 
   const handleCreateNewRoom = () => {
     setModalType('CREATE_NEW_ROOM');

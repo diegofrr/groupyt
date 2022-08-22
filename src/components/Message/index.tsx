@@ -21,7 +21,7 @@ export default function Message({ data }: MessageProps) {
     const [isOwner, setIsOwner] = useState<boolean>(user.id === data?.user.id)
 
     return (
-        <Container isOwner={isOwner}>
+        <Container isOwner={isOwner} isAdmin={data?.user.admin}>
             <Avatar>
                 <Image
                     style={{ borderRadius: '50%' }}
@@ -29,7 +29,7 @@ export default function Message({ data }: MessageProps) {
                     src={data?.user.avatarURL} />
             </Avatar>
             <UsernameAndMessage>
-                <Username isOwner={isOwner}>
+                <Username isOwner={isOwner} isAdmin={data?.user.admin}>
                     {data?.user.name}
                 </Username>
                 <MessageContainer>

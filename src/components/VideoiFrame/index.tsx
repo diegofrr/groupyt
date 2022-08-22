@@ -46,7 +46,7 @@ export default function VideoiFrame() {
             }, 1000)
         )
         return clearInterval(intervalID)
-    }, [video])
+    }, [video, videos])
 
     useEffect(() => {
         function updateDimensions() {

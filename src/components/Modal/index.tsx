@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import ReactLoading from 'react-loading';
 import {
     ModalContainer,
     ModalContent,
@@ -31,10 +32,11 @@ import {
 import { Button, ButtonText } from '../../styles/home';
 import { FiEdit, FiCheck, FiUser } from 'react-icons/fi';
 import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
-import { myColor_100, myColor_200 } from '../../styles/variables';
+import { myColor_100, myColor_200, purpleColor } from '../../styles/variables';
 import { maleAvatars, femaleAvatars } from '../AvatarsList';
 import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';
+import Loading from '../Loading';
 
 
 const Modal: React.FC = () => {
@@ -42,15 +44,14 @@ const Modal: React.FC = () => {
 
     const { modalIsOpen, setModalIsOpen, modalType } = useContext(ModalContext);
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [roomTitle, setRoomTitle] = useState<string>('Minha sala');
     const [titleInput, setTitleInput] = useState<string>(roomTitle);
     const [editing, setEditing] = useState<boolean>(false);
     const [titleValid, setTitleValid] = useState({ valid: true, msg: '' });
-
     const [username, setUsername] = useState<string>('');
     const [genre, setGenre] = useState<string>('female');
     const [avatar, setAvatar] = useState<string>('');
-
     const [validUsername, setValidUsername] = useState<boolean>(true);
 
     useEffect(() => {
@@ -66,6 +67,10 @@ const Modal: React.FC = () => {
         setAvatar(`/images/avatars/${genre}/avatar1.png`)
     }, [genre]);
 
+    useEffect(() => {
+        setLoading(false);
+    }, [])
+
     useEffect(() => { if (username.length > 0) checkUsername() }, [username]);
 
     const checkUsername = () => {
@@ -78,6 +83,7 @@ const Modal: React.FC = () => {
     const handleApply = () => {
         checkUsername();
         if (validUsername) {
+            setLoading(true);
             if (modalType === 'CREATE_NEW_ROOM') {
                 console.log('Criando a sala')
                 console.log(username, genre);
@@ -89,8 +95,6 @@ const Modal: React.FC = () => {
                 console.log(avatar)
                 router.push('/room/testando')
             }
-
-            setModalIsOpen(false)
         }
     }
 
@@ -147,78 +151,82 @@ const Modal: React.FC = () => {
 
                 </ModalHeader>
 
-                <NameContainer>
-                    <ModalLabel>Seu apelido</ModalLabel>
-                    <UsernameInput
-                        valid={validUsername}
-                        type='text'
-                        value={username}
-                        onChange={e => { setUsername(e.target.value) }}
-                        placeholder='Seu apelido...'
-                        maxLength={15}
-                    />
-                    <LetterCounter letters={username.length}>{username.length}/15</LetterCounter>
-                </NameContainer>
+                {loading
+                    ? <Loading />
+                    : <>
+                        <NameContainer>
+                            <ModalLabel>Seu apelido</ModalLabel>
+                            <UsernameInput
+                                valid={validUsername}
+                                type='text'
+                                value={username}
+                                onChange={e => { setUsername(e.target.value) }}
+                                placeholder='Seu apelido...'
+                                maxLength={15}
+                            />
+                            <LetterCounter letters={username.length}>{username.length}/15</LetterCounter>
+                        </NameContainer>
 
-                <AvatarsContainer>
-                    <AvatarsHeader>
-                        <ModalLabel>
-                            Escolha um avatar
-                        </ModalLabel>
-                        <AvatarGenreContainer>
-                            <GenreOption
-                                selected={genre === 'female'}
-                                genre='female'
-                                onClick={() => setGenre('female')}>
-                                <BiFemaleSign size={18} />
-                            </GenreOption>
+                        <AvatarsContainer>
+                            <AvatarsHeader>
+                                <ModalLabel>
+                                    Escolha um avatar
+                                </ModalLabel>
+                                <AvatarGenreContainer>
+                                    <GenreOption
+                                        selected={genre === 'female'}
+                                        genre='female'
+                                        onClick={() => setGenre('female')}>
+                                        <BiFemaleSign size={18} />
+                                    </GenreOption>
 
-                            <GenreOption
-                                selected={genre === 'male'}
-                                genre='male'
-                                onClick={() => setGenre('male')}>
-                                <BiMaleSign size={18} />
-                            </GenreOption>
-                        </AvatarGenreContainer>
-                    </AvatarsHeader>
+                                    <GenreOption
+                                        selected={genre === 'male'}
+                                        genre='male'
+                                        onClick={() => setGenre('male')}>
+                                        <BiMaleSign size={18} />
+                                    </GenreOption>
+                                </AvatarGenreContainer>
+                            </AvatarsHeader>
 
-                    <AvatarsContent>
-                        <AvatarsScroll>
-                            {genre === 'male' ?
-                                (
-                                    maleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}>
-                                        <Image
-                                            style={{ borderRadius: '50%' }}
-                                            width={60} height={60}
-                                            src={item} />
-                                    </Avatar>)
-                                )
-                                : (
-                                    femaleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}>
-                                        <Image
-                                            style={{ borderRadius: '50%' }}
-                                            width={60} height={60}
-                                            src={item} />
-                                    </Avatar>)
-                                )}
-                        </AvatarsScroll>
-                        <AvatarsCredits>
-                            Designed by Kubanek
-                        </AvatarsCredits>
-                    </AvatarsContent>
-                </AvatarsContainer>
+                            <AvatarsContent>
+                                <AvatarsScroll>
+                                    {genre === 'male' ?
+                                        (
+                                            maleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}>
+                                                <Image
+                                                    style={{ borderRadius: '50%' }}
+                                                    width={60} height={60}
+                                                    src={item} />
+                                            </Avatar>)
+                                        )
+                                        : (
+                                            femaleAvatars.map(item => <Avatar selected={item === avatar} key={item} onClick={() => handleSelectedAvatar(item)}>
+                                                <Image
+                                                    style={{ borderRadius: '50%' }}
+                                                    width={60} height={60}
+                                                    src={item} />
+                                            </Avatar>)
+                                        )}
+                                </AvatarsScroll>
+                                <AvatarsCredits>
+                                    Designed by Kubanek
+                                </AvatarsCredits>
+                            </AvatarsContent>
+                        </AvatarsContainer>
 
-                <ButtonsContainer>
-                    <Button onClick={handleApply} primary>
-                        <ButtonText primary>
-                            {modalType === 'CREATE_NEW_ROOM' ? 'Criar sala' : 'Entrar na sala'}
-                        </ButtonText>
-                    </Button>
+                        <ButtonsContainer>
+                            <Button onClick={handleApply} primary>
+                                <ButtonText primary>
+                                    {modalType === 'CREATE_NEW_ROOM' ? 'Criar sala' : 'Entrar na sala'}
+                                </ButtonText>
+                            </Button>
 
-                    <Button onClick={handleCancel} primary={false}>
-                        <ButtonText primary={false}>Cancelar</ButtonText>
-                    </Button>
-                </ButtonsContainer>
+                            <Button onClick={handleCancel} primary={false}>
+                                <ButtonText primary={false}>Cancelar</ButtonText>
+                            </Button>
+                        </ButtonsContainer>
+                    </>}
 
             </ModalContent>
         </ModalContainer>

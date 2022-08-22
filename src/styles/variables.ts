@@ -10,6 +10,7 @@ export const btnSecColor = '#3A3E4C';
 export const myColor_100 = '#e0e4ff';
 export const myColor_200 = '#ABAFBF';
 export const myColor_300 = '#727686';
+export const adminUsername = '#cfc178';
 
 // INPUT VALIDITY
 export const validBgColor = '#242833';

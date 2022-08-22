@@ -12,17 +12,23 @@ import {
 import VideoiFrame from '../../components/VideoiFrame';
 import Chat from '../../components/Chat';
 import Playlist from '../../components/Playlist';
+import { ModalContext } from '../../contexts/modal';
 
 const Room: NextPage = () => {
     const { user, setUser } = useContext(UserContext);
+    const { setModalIsOpen } = useContext(ModalContext);
     const [width, setWidth] = useState<number>(0);
     const [counter, setCounter] = useState(0);
 
     const { query } = useRouter();
     const [roomDetails, setRoomDetails] = useState({
-        name: 'Sala de Diêgo',
+        name: 'Sala de José',
         users: [{ name: 'Diêgo', avatar: '' }, { name: 'João', avatar: '' }]
     });
+
+    useEffect(() => {
+        setModalIsOpen(false);
+    })
     
     useEffect(() => {
         function updateDimensions() {
@@ -36,7 +42,7 @@ const Room: NextPage = () => {
             updateDimensions();
             window.addEventListener('resize', getDimensions)
         }
-    });
+    }, [counter]);
 
     return (
         <>

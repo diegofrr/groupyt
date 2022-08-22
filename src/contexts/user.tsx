@@ -4,23 +4,26 @@ type ContextProps = {
     children: ReactNode
 }
 
-type User = {
+export type UserType = {
+    id: string,
     name: string,
     avatarURL: string,
-    id: string,
+    admin: boolean,
 }
 
 type ContextType = {
-    user: User,
-    setUser: (newUser: User) => void,
+    user: UserType,
+    setUser: (newUser: UserType) => void,
 }
 
 export const UserContext = createContext({} as ContextType);
 
 export default function UserProvider({ children }: ContextProps) {
-    const [user, setUser] = useState<User>({
+    const [user, setUser] = useState<UserType>({
         id: '1',
-        name: 'diego', avatarURL: 'link do avatar'
+        name: 'diego',
+        avatarURL: 'link do avatar',
+        admin: true,
     })
 
     return <UserContext.Provider

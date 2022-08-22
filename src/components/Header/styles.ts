@@ -48,13 +48,8 @@ export const Logo = styled.div`
     display: grid;
     place-items: center;
     opacity: .2;
-    cursor: pointer;
     transition: all .3s ease;
-
-    &:hover {
-        opacity: .3;
-    }
-
+    
     @media screen and (max-width: 600px) {
         width: 30px;
         height: 30px;

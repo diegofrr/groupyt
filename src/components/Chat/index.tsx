@@ -1,5 +1,6 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState, useCallback } from 'react';
 import firebase from '../../services/firebase';
+import { UserType } from '../../contexts/user';
 import {
     Container,
     Header,
@@ -15,12 +16,6 @@ import { format } from 'date-fns';
 import { BiSend } from 'react-icons/bi';
 import { myColor_100} from '../../styles/variables';
 
-export type UserType = {
-    id: string,
-    name: string,
-    avatarURL: string,
-}
-
 export type MessageType = {
     user: UserType,
     message: string,
@@ -33,25 +28,25 @@ export default function Chat() {
 
     const [messages, setMessages] = useState<MessageType[]>([
         {
-            id: '1', user: {id: '1', name: 'Diêgo', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            id: '1', user: {id: '1', admin: false, name: 'Diêgo', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
             message: 'Nor is there anyone who loves or pursues ',
             created: '', createdFormat: ''
         },
 
         {
-            id: '2', user: {id: '2', name: 'João', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            id: '2', user: {id: '2', admin: false, name: 'João', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
             message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself',
             created: '', createdFormat: ''
         },
 
         {
-            id: '3', user: {id: '3', name: 'José', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            id: '3', user: {id: '3', admin: true, name: 'José', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
             message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself',
             created: '', createdFormat: ''
         },
 
         {
-            id: '4', user: {id: '4', name: 'Maria', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
+            id: '4', user: {id: '4', admin: false, name: 'Maria', avatarURL: 'http://localhost:3000/_next/image?url=%2Fimages%2Favatars%2Fmale%2Favatar10.png&w=64&q=75'},
             message: 'Nor is there anyone who loves or pursues or desires to obtain pain of itself. Nor is there anyone who loves or pursues or desires to obtain pain of itself',
             created: '', createdFormat: ''
         },
@@ -84,13 +79,13 @@ export default function Chat() {
 
     }, [])
 
-    const handleSendMessage = (e: FormEvent) => {
+    const handleSendMessage = useCallback((e: FormEvent) => {
         e.preventDefault();
         setMessage('');
         alert(message)
-    }
+    },[message])
 
-    const handleEnviarMensagem = async () => {
+    const handleEnviarMensagem = useCallback(async () => {
 
         if (message !== null && message !== '') {
             await firebase.firestore().collection('rooms')
@@ -104,7 +99,7 @@ export default function Chat() {
         } else {
             alert('vazio')
         }
-    }
+    },[message])
 
     return (
         <Container>

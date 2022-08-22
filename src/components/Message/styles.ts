@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { blockHeaderColor, myColor_300 } from "../../styles/variables";
+import { adminUsername, blockHeaderColor, myColor_300 } from "../../styles/variables";
 
 interface MessageProps {
-    isOwner: boolean
+    isOwner: boolean,
+    isAdmin: boolean
 }
 
 export const Container = styled.div<MessageProps>`
@@ -30,7 +31,7 @@ export const UsernameAndMessage = styled.div`
 
 export const Username = styled.span<MessageProps>`
     display: block;
-    color: ${myColor_300};
+    color: ${p => p.isAdmin ? adminUsername : myColor_300};
     font-weight: bold; 
     width: 100%;
     font-size: .9rem;
