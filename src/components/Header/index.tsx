@@ -31,7 +31,7 @@ const Header = ({ roomName }: HeaderProps) => {
                     {roomName}
                 </RoomName>
 
-                <Logo>
+                <Logo onClick={() => router.push('/')}>
                     <Image alt='Groupyt Icon' width={40} height={40} src={groupytIcon} />
                 </Logo>
 

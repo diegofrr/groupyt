@@ -8,13 +8,14 @@ import {
 
  interface PlaylistProps {
     video: VideoType
+    playing: boolean
  }
 
- export default function PlaylistVideo({video}: PlaylistProps) {
+ export default function PlaylistVideo({video, playing}: PlaylistProps) {
 
     return(
         <Container>
-            <Content>
+            <Content playing={playing}>
                 <Thumb src={video.thumb} alt='Video thumb' />
                 <VideoInfo>
                     <strong>{video.title}</strong>

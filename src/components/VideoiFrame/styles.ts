@@ -78,6 +78,7 @@ export const VideoInfo = styled.div`
     justify-content: center;
     width: 100%;
     flex-direction: column;
+    max-width: 300px;
 
     strong {
         color: ${myColor_200};
@@ -111,7 +112,13 @@ export const CurrentTimeContainer = styled.div`
     background-color: ${bgColor};
     border-radius: 40px;
     z-index: 1;
-    display: none;
+
+    /// SOMENTE PARA TROCAR DE VÍDEO
+    /// NÃO TERÁ ESTE RECURSO NO FINAL DO PROJETO
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
 `
 
 export const BackgroundBar = styled.div<VideoProps>`
@@ -121,8 +128,8 @@ export const BackgroundBar = styled.div<VideoProps>`
     background-color: #434e81; 
     width: ${p => `${
         (p.progress * 100 / p.duration) > 50
-        ? `${p.progress * 100 / p.duration + 1}%`
-        : `${p.progress * 100 / p.duration + 3}%`}`};
+        ? `${p.progress * 100 / p.duration + 0}%`
+        : `${p.progress * 100 / p.duration + -0}%`}`};
         
     z-index: -1;
     height: 30px;
@@ -135,7 +142,7 @@ export const BackgroundBar = styled.div<VideoProps>`
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        right: -5px;
+        right: 0px;
         top: 0;
         background-color: ${purpleColor};
     }
@@ -188,7 +195,7 @@ export const EmptyVideo = styled.div<VideoContainerProps>`
     display: grid;
     place-items: center;
     background-color: ${blockColor};
-    height: 350px;
+    height: 400px;
     width: ${p => p.width < 800 ? p.width - 56 : p.width * 0.55};
     color: ${myColor_300};
 `

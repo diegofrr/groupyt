@@ -133,19 +133,21 @@ const Modal: React.FC = () => {
                                 <ModalTitleInput maxLength={20} valid={titleValid.valid} value={titleInput} onChange={e => setTitleInput(e.target.value)} />
                             </Form>}
                     </ModalTitleContainer>
-                    {modalType === 'CREATE_NEW_ROOM' ? (
-                        !editing
-                            ? <EditButton onClick={handleEditTitle}>
-                                <FiEdit size={20} color={myColor_100} />
-                            </EditButton>
-                            : <SaveButton onClick={handleSaveTitle}>
-                                <FiCheck size={20} color={myColor_100} />
-                            </SaveButton>
-                    ) : (
-                        <OnlineMembers>
-                            <FiUser size={18} color={myColor_200} />
-                            4
-                        </OnlineMembers>
+                    {!loading && (
+                        modalType === 'CREATE_NEW_ROOM' ? (
+                            !editing
+                                ? <EditButton onClick={handleEditTitle}>
+                                    <FiEdit size={20} color={myColor_100} />
+                                </EditButton>
+                                : <SaveButton onClick={handleSaveTitle}>
+                                    <FiCheck size={20} color={myColor_100} />
+                                </SaveButton>
+                        ) : (
+                            <OnlineMembers>
+                                <FiUser size={18} color={myColor_200} />
+                                4
+                            </OnlineMembers>
+                        )
                     )
                     }
 

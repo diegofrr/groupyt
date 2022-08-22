@@ -39,6 +39,10 @@ export default function Playlist() {
     const [exists, setExists] = useState<boolean>(true);
     const [validUrl, setValidUrl] = useState<boolean>(false);
 
+    useEffect(() => {
+        setMargin(0);
+    },[videos])
+
     const getInfo = () => {
         if (videoUrl.trim() === '') {
             alert('url vazia')
@@ -100,7 +104,7 @@ export default function Playlist() {
                     ? <EmptyPlaylist>Lista de reprodução vazia...</EmptyPlaylist>
                     : (
                         <VideosContent margin={margin}>
-                            {videos.length > 0 && videos.map(video => <PlaylistVideo key={video.id} video={video} />)}
+                            {videos.length > 0 && videos.map(video => <PlaylistVideo key={video.id} video={video} playing={videos[0]?.id === video.id} />)}
                         </VideosContent>
                     )}
             </VideosContainer>

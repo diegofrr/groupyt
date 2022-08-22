@@ -1,5 +1,9 @@
-import styled from "styled-components";
-import { blockHeaderColor, myColor_200, myColor_300 } from "../../styles/variables";
+import styled, { css } from "styled-components";
+import { blockHeaderColor, myColor_100, myColor_200, myColor_300 } from "../../styles/variables";
+
+interface VideoProps {
+    playing: boolean
+}
 
 export const Container = styled.div`
     border-radius: 10px;
@@ -15,9 +19,23 @@ export const Container = styled.div`
     }
 `
 
-export const Content = styled.div`
+export const Content = styled.div<VideoProps>`
     display: flex;
     flex-direction: row;
+
+    ${p => p.playing && css`
+        ::after {
+            content: 'Tocando agora';
+            color: ${myColor_200};
+            position: absolute;
+            font-size: .7rem;
+            display: grid;
+            place-items: center;
+            background-color: rgba(0,0,0,.7);
+            width: 140px;
+            height: 80px;
+        }
+    `}
 
     @media screen and (max-width: 800px) and (min-width: 501px) {
         flex-direction: column;
@@ -26,6 +44,8 @@ export const Content = styled.div`
 
 export const Thumb = styled.img`
     max-height: 80px;
+    display: grid;
+    place-items: center;
 `
 
 export const VideoInfo = styled.div`

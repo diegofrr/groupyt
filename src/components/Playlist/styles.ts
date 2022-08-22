@@ -66,7 +66,7 @@ export const AddNewVideo = styled.form<FormProps>`
     position: relative;
 
     button {
-        box-shadow: 0 0 20px -5px rgba(0,0,0,.5);
+        box-shadow: 0 0 20px -10px rgba(0,0,0,.5);
     }
 
     input {

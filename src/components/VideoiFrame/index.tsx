@@ -39,7 +39,6 @@ export default function VideoiFrame() {
         if (videos.length > 0) {
             let videoId = videos[0].id;
             setVideoId(videoId);
-            console.log(videos);
         }
 
         setIntervalID(
@@ -114,7 +113,6 @@ export default function VideoiFrame() {
             let newList = videos.filter(video => video.id !== videoId);
             setVideos(newList);
             setProgress(0);
-            console.log(videos);
         } else {
             setVideo({} as YouTubeEvent)
             setVideos([] as VideoType[])
@@ -147,41 +145,48 @@ export default function VideoiFrame() {
     return (
         <Container>
             <VideoContainer width={width} height={height}>
-                {videos.length > 0 ? getVideo()
-                    : <EmptyVideo height={height} width={width}><span>Adicione vídeos à playlist.</span></EmptyVideo>}
-                <ControlsContainer>
+                {videos.length === 0 ? (
+                    <EmptyVideo height={height} width={width}>Adicione vídeos à sua playlist.</EmptyVideo>
+                )
+                    : (
+                        <>
+                            {getVideo()}
+                            <ControlsContainer>
 
-                    {videoState === 1
-                        ? <ActionButton onClick={() => { video.target?.pauseVideo() }}>
-                            <BsPauseFill size={20} color={myColor_100} />
-                        </ActionButton>
-                        : <ActionButton onClick={() => video.target?.playVideo()}>
-                            <BsPlayFill size={20} color={myColor_100} />
-                        </ActionButton>}
+                                {videoState === 1
+                                    ? <ActionButton onClick={() => { video.target?.pauseVideo() }}>
+                                        <BsPauseFill size={20} color={myColor_100} />
+                                    </ActionButton>
+                                    : <ActionButton onClick={() => video.target?.playVideo()}>
+                                        <BsPlayFill size={20} color={myColor_100} />
+                                    </ActionButton>}
 
-                    <CurrentTimeContainer>
-                        <BackgroundBar
-                            duration={videoDuration as number}
-                            progress={progress}
-                        />
-                        <CurrentTimeBar
-                            type='range'
-                            onChangeCapture={() => video.target?.pauseVideo()}
-                            onClickCapture={handleCurrentTimeChange}
-                            onChange={e => setProgress(Number(e.target.value))}
-                            value={progress} max={video.target?.getDuration()} min={0} />
-                    </CurrentTimeContainer>
+                                <CurrentTimeContainer>
+                                    <BackgroundBar
+                                        duration={videoDuration as number}
+                                        progress={progress}
+                                    />
+                                    <CurrentTimeBar
+                                        type='range'
+                                        onChangeCapture={() => video.target?.pauseVideo()}
+                                        onClickCapture={handleCurrentTimeChange}
+                                        onChange={e => setProgress(Number(e.target.value))}
+                                        value={progress} max={video.target?.getDuration()} min={0} />
+                                </CurrentTimeContainer>
 
-                    <VideoInfo>
-                        <strong>{video.target?.getVideoData()?.author}</strong>
-                        <span>{video.target?.getVideoData()?.title}</span>
-                    </VideoInfo>
-                    <ProgressTime>
-                        <span>
-                            {formatTime(videoDuration - progress)}
-                        </span>
-                    </ProgressTime>
-                </ControlsContainer>
+                                <VideoInfo>
+                                    <strong>{video.target?.getVideoData()?.author}</strong>
+                                    <span>{video.target?.getVideoData()?.title}</span>
+                                </VideoInfo>
+                                <ProgressTime>
+                                    <span>
+                                        {formatTime(videoDuration - progress)}
+                                    </span>
+                                </ProgressTime>
+                            </ControlsContainer>
+                        </>
+                    )}
+
                 <NotClick />
             </VideoContainer>
         </Container>
