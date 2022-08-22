@@ -23,10 +23,7 @@ export type VideoType = {
     id: string,
     title: string,
     creator: string,
-    creatorurl: string,
-    description: string,
     thumb: string,
-    url: string,
 }
 
 export default function Playlist() {
@@ -59,13 +56,15 @@ export default function Playlist() {
                 setVideoUrl('');
                 setExists(true);
                 let videoId = response.data?.url.split('v=')[1];
-                console.log(response.data)
                 if (!idExists(videoId)) {
                     let newVideo = {
                         id: videoId,
-                        ...response.data
-                    }
+                        title: response.data.title,
+                        creator: response.data.creator,
+                        thumb: response.data.thumb,
+                    } as VideoType;
                     setVideos([...videos, newVideo]);
+                    
                 } else {
                     alert('Este vídeo já está na playlist')
                 }

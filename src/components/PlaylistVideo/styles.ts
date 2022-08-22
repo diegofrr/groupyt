@@ -50,7 +50,7 @@ export const ThumbContainer = styled.div`
     display: grid;
     place-items: center;
     background-color: #000;
-    width: 140px;
+    min-width: 140px;
 `
 
 export const Thumb = styled.img`

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import ReactLoading from 'react-loading';
+import firebase from '../../services/firebase';
 import {
     ModalContainer,
     ModalContent,
@@ -37,12 +38,14 @@ import { maleAvatars, femaleAvatars } from '../AvatarsList';
 import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';
 import Loading from '../Loading';
+import { UserContext, UserType } from '../../contexts/user';
 
 
 const Modal: React.FC = () => {
     const router = useRouter();
 
     const { modalIsOpen, setModalIsOpen, modalType } = useContext(ModalContext);
+    const { setUser } = useContext(UserContext);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [roomTitle, setRoomTitle] = useState<string>('Minha sala');
@@ -85,10 +88,7 @@ const Modal: React.FC = () => {
         if (validUsername) {
             setLoading(true);
             if (modalType === 'CREATE_NEW_ROOM') {
-                console.log('Criando a sala')
-                console.log(username, genre);
-                console.log(avatar);
-                router.push('/room/testando');
+                createNewRoom();
             } else if (modalType === 'ENTER_TO_ROOM') {
                 console.log('entrando na sala');
                 console.log(username, genre);
@@ -96,6 +96,32 @@ const Modal: React.FC = () => {
                 router.push('/room/testando')
             }
         }
+    }
+
+    const createNewRoom = async () => {
+        await firebase.firestore().collection('rooms')
+            .add({})
+            .then(e =>
+                firebase.firestore().collection('rooms')
+                    .doc(e.id)
+                    .collection('users')
+                    .add({
+                        name: username,
+                        avatarURL: avatar,
+                        admin: true,
+                    })
+                    .then(doc => {
+                        doc.get()
+                            .then(user => {
+                                setUser({
+                                    id: user.id,
+                                    ...user.data()
+                                } as UserType);
+                            });
+
+                    })
+                    .catch(() => { })
+            )
     }
 
     const handleSelectedAvatar = (avatar: string) => {
