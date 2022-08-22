@@ -23,7 +23,6 @@ export const Container = styled.div`
 
     @media screen and (max-width: 500px) {
         width: 100%;
-        height: 150px;
     }
 
 `
@@ -40,15 +39,9 @@ export const PlaylistHeader = styled.div`
     z-index: 1000;
     
     @media screen and (max-width: 800px) and (min-width: 501px) {
-        flex-direction: column;
         gap: 10px;
     }
 
-    @media screen and (max-width: 500px) {
-        flex-direction: row-reverse;
-        align-items: center;
-        height: 40px;
-    }
 
     & span {
         color: ${myColor_200};
@@ -121,7 +114,7 @@ export const VideosContainer = styled.div`
     overflow-x: hidden;
     border-radius: 10px;
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 800px)  and (min-width: 501px) {
         overflow-y: scroll;
         height: 450px;
         z-index: 1000;
@@ -155,17 +148,11 @@ export const ActionButtonsContainer = styled.div`
     align-items: flex-end;
     justify-content: space-between;
     width: 100%;
-    max-width: 70px;
 
     @media screen and (max-width: 800px) and (min-width: 501px) {
-        flex-direction: column;
-        height: 100%;
         display: none;
     }
 
-    @media screen and (max-width: 300px) {
-        display: none;
-    }
 `
 
 export const ActionButton = styled.button`

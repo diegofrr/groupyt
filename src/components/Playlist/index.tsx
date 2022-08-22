@@ -59,8 +59,7 @@ export default function Playlist() {
                 setVideoUrl('');
                 setExists(true);
                 let videoId = response.data?.url.split('v=')[1];
-                if (!idExists) {
-
+                if (!idExists(videoId)) {
                     let newVideo = {
                         id: videoId,
                         ...response.data
