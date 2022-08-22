@@ -30,7 +30,7 @@ export type VideoType = {
 }
 
 export default function Playlist() {
-    const { videos } = useContext(PlaylistContext);
+    const { videos, setVideos } = useContext(PlaylistContext);
 
     const [margin, setMargin] = useState(0);
 
@@ -41,7 +41,11 @@ export default function Playlist() {
 
     useEffect(() => {
         setMargin(0);
-    },[videos])
+    }, [videos])
+
+    const idExists = (id: string) => {
+        return videos.some(video => video.id === id);
+    }
 
     const getInfo = () => {
         if (videoUrl.trim() === '') {
@@ -51,13 +55,22 @@ export default function Playlist() {
 
         api.get(`/lookup?url=//${videoUrl}`)
             .then(response => {
-                console.log(response.data);
                 setSearching(false);
                 setVideoUrl('');
-                setExists(true)
+                setExists(true);
+                let videoId = response.data?.url.split('v=')[1];
+                if (!idExists) {
+
+                    let newVideo = {
+                        id: videoId,
+                        ...response.data
+                    }
+                    setVideos([...videos, newVideo]);
+                } else {
+                    alert('Este vídeo já está na playlist')
+                }
             })
             .catch(e => console.log(e))
-
     }
 
     const handleAddNewVideo = (e: FormEvent) => {

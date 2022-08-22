@@ -37,10 +37,10 @@ export default function VideoiFrame() {
     const [intervalID, setIntervalID] = useState({} as any)
     const [videoDuration, setVideoDuration] = useState<number>(0);
     const [videoState, setVideoState] = useState<number>(0);
-    const [counter, setCounter] = useState(0)
+    const [counter, setCounter] = useState(0);
+    const [playlist, setPlaylist] = useState<VideoType[]>([])
 
     useEffect(() => {
-
         if (videos.length > 0) {
             let videoId = videos[0].id;
             setVideoId(videoId);
@@ -78,7 +78,7 @@ export default function VideoiFrame() {
             onPlay={handleStartedVideo}
             onReady={e => handleOnReady(e)}
         />
-    }, [width, videoId]);
+    }, [width, videoId, videos]);
 
     const options = {
         height: '350',
@@ -114,6 +114,7 @@ export default function VideoiFrame() {
     }
 
     const handleFinishedVideo = () => {
+        console.log(videos);
         if (videos.length > 1) {
             let newList = videos.filter(video => video.id !== videoId);
             setVideos(newList);

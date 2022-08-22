@@ -52,8 +52,8 @@ export default function PlaylistProvider({ children }: ContextProps) {
             title: '[FREE] EARL SWEATSHIRT // NEO SOUL TYPE BEAT \"ÅKANDER\""',
             url: '//www.youtube.com/watch?v=8IUkz8PD1t8',
         },
-    ]);
-
+    ]); 
+    
     return <PlaylistContext.Provider
         value={{
             videos,
