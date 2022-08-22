@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { bgColor, blockColor, blockHeaderColor, myColor_300, purpleColor } from "../../styles/variables";
+import { bgColor, blockColor, blockHeaderColor, myColor_200, myColor_300, purpleColor } from "../../styles/variables";
 
 interface VideoProps {
     duration: number;
@@ -39,16 +39,16 @@ export const ControlsContainer = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: row;
     padding: 0 10px;
+    gap: 10px;
     border-radius: 0 0 10px 10px;
 `
 
 export const ActionButton = styled.button` 
     min-width: 60px;
     height: 30px;
-    margin-right: 10px;
     display: grid;
     place-items: center; 
     border-radius: 30px;
@@ -61,6 +61,48 @@ export const ActionButton = styled.button`
     }
 `
 
+export const ProgressTime = styled.div`
+    width: 60px;
+    min-width: 60px;
+    display: grid;
+    place-items: center;
+
+    span {
+        color: ${myColor_300};
+    }
+`
+
+export const VideoInfo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+
+    strong {
+        color: ${myColor_200};
+        font-weight: bold;
+        font-size: .8rem;
+    }
+
+    span {
+        color: ${myColor_300};
+        font-size: .8rem;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: flexbox;
+        max-height: 32px;
+        line-clamp: 1;
+        -webkit-line-clamp: 1;
+        box-orient: vertical;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        -ms-word-break: break-all;
+    }
+
+`
+
 export const CurrentTimeContainer = styled.div`
     width: 100%;
     height: 30px;
@@ -69,6 +111,7 @@ export const CurrentTimeContainer = styled.div`
     background-color: ${bgColor};
     border-radius: 40px;
     z-index: 1;
+    display: none;
 `
 
 export const BackgroundBar = styled.div<VideoProps>`

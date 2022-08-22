@@ -13,6 +13,8 @@ import {
     BackgroundBar,
     CurrentTimeContainer,
     EmptyVideo,
+    ProgressTime,
+    VideoInfo,
 
 } from './styles';
 import { blockColor, myColor_100, myColor_300 } from "../../styles/variables";
@@ -169,7 +171,16 @@ export default function VideoiFrame() {
                             onChange={e => setProgress(Number(e.target.value))}
                             value={progress} max={video.target?.getDuration()} min={0} />
                     </CurrentTimeContainer>
-                    {formatTime(videoDuration - progress)}
+
+                    <VideoInfo>
+                        <strong>{video.target?.getVideoData()?.author}</strong>
+                        <span>{video.target?.getVideoData()?.title}</span>
+                    </VideoInfo>
+                    <ProgressTime>
+                        <span>
+                            {formatTime(videoDuration - progress)}
+                        </span>
+                    </ProgressTime>
                 </ControlsContainer>
                 <NotClick />
             </VideoContainer>
