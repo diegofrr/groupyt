@@ -28,15 +28,17 @@ export const Content = styled.div<VideoProps>`
             content: 'Tocando agora';
             color: ${myColor_200};
             position: absolute;
+            left: 0;
+            top: 0;
             font-size: .7rem;
             display: grid;
             place-items: center;
             background-color: rgba(0,0,0,.7);
-            width: 140px;
+            min-width: 140px;
             height: 80px;
 
         }
-    `}
+    `} 
 
     @media screen and (max-width: 800px) and (min-width: 501px) {
         flex-direction: column;
@@ -54,6 +56,7 @@ export const ThumbContainer = styled.div`
 `
 
 export const Thumb = styled.img`
+    max-width: 140px;
     max-height: 80px;
     display: grid;
     place-items: center;
