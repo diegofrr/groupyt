@@ -73,7 +73,6 @@ const Home: NextPage = () => {
       </Container>
 
       <BackImage src='/images/backvector.png' />
-      <BackImage2 src='/images/backvector.png' />
 
     </>
   )

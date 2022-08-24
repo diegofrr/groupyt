@@ -77,9 +77,14 @@ export const Button = styled.button<ButtonProps>`
         height: 40px;
     }
 
-    &:hover {
+    :hover {
         filter: brightness(1.1);
     }
+    
+    :active {
+        transform: scale(.95); 
+    }
+    
 `
 
 export const ButtonText = styled.span<ButtonProps>`
@@ -142,7 +147,6 @@ export const BackImage2 = styled.img<BackImage>`
         width: 500px;
         top: 0px;
     }
-    
 `
 
 export const NotFoundDescription = styled.span`

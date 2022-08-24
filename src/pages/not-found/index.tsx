@@ -37,14 +37,12 @@ const NotFoundRoom: NextPage = () => {
                     <ButtonsContainer>
                         <Button onClick={() => router.push('/')} primary>
                             <ButtonText primary>
-                                Voltar para a página inicial
+                                Voltar para a o início
                             </ButtonText>
                         </Button>
                     </ButtonsContainer>
 
                 </Content>
-
-
 
             </Container>
 
