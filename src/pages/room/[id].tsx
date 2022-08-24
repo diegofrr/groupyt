@@ -127,7 +127,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     // } else {
     //     return {
     //         redirect: {
-    //             destination: '/',
+    //             destination: '/not-found',
     //             permanent: false,
     //         }
     //     }

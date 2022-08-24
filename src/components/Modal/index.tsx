@@ -120,7 +120,9 @@ const Modal: React.FC = () => {
 
     const createNewRoom = async () => {
         await firebase.firestore().collection('rooms')
-            .add({})
+            .add({
+                roomName: roomTitle,
+            })
             .then(e => {
                 firebase.firestore().collection('rooms')
                     .doc(e.id)
