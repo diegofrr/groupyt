@@ -21,7 +21,6 @@ export const Content = styled.div`
     width: calc(100% - 40px);
     display: flex;
     align-items: center;
-    justify-content: center;
     max-width: 1080;
     flex-direction: column;
     justify-content: center;
@@ -39,7 +38,7 @@ export const LogoContainer = styled.div`
     place-items: center;
 `
 
-export const AppDescription = styled.span`
+export const Description = styled.span`
     display: block;
     font-weight: bold;
     font-size: 2em;
@@ -55,7 +54,7 @@ export const ButtonsContainer = styled.div`
     flex-direction: row;
     gap: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; 
 
     @media screen and (max-width: 400px) {
         flex-direction: column;
@@ -144,4 +143,12 @@ export const BackImage2 = styled.img<BackImage>`
         top: 0px;
     }
     
+`
+
+export const NotFoundDescription = styled.span`
+    margin-top: -40px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: ${myColor_200};
+    text-align: center;
 `
