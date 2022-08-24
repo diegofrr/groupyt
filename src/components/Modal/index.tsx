@@ -69,7 +69,7 @@ const Modal: React.FC = () => {
     useEffect(() => {
         setAvatar(`/images/avatars/${genre}/avatar1.png`)
     }, [genre]);
-
+    
     useEffect(() => {
         setLoading(false);
     }, [])
@@ -92,16 +92,15 @@ const Modal: React.FC = () => {
             if (modalType === 'CREATE_NEW_ROOM') {
                 createNewRoom();
             } else if (modalType === 'ENTER_TO_ROOM') {
-                console.log('entrando na sala');
                 console.log(username, genre);
                 console.log(avatar)
-                router.push('/room/testando')
+                router.push('/room/testando');
             }
         }
     }
 
     const enterToRoom = async () => {
-
+        
     }
 
     const createNewRoom = async () => {
