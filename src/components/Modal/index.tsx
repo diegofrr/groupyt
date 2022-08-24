@@ -43,6 +43,7 @@ import { UserContext, UserType } from '../../contexts/user';
 
 const Modal: React.FC = () => {
     const router = useRouter();
+    const { query } = useRouter();
 
     const { modalIsOpen, setModalIsOpen, modalType } = useContext(ModalContext);
     const { setUser } = useContext(UserContext);
@@ -72,9 +73,29 @@ const Modal: React.FC = () => {
     
     useEffect(() => {
         setLoading(false);
-    }, [])
+    }, []);
 
     useEffect(() => { if (username.length > 0) usernameIsvalid() }, [username]);
+
+    const EnterToRoom = async () => {
+        let roomId = query?.id;
+        await firebase.firestore().collection('rooms')
+        .doc(String(roomId))
+        .collection('users')
+        .add({
+            avatarURL: avatar,
+            name: username,
+            admin: false,
+        })
+        .then(e => {
+            setUser({
+                id: e.id,
+                name: username,
+                admin: false,
+                avatarURL: avatar
+            });
+        })
+    }
 
     const usernameIsvalid = () => {
         let isValid = (
@@ -92,15 +113,9 @@ const Modal: React.FC = () => {
             if (modalType === 'CREATE_NEW_ROOM') {
                 createNewRoom();
             } else if (modalType === 'ENTER_TO_ROOM') {
-                console.log(username, genre);
-                console.log(avatar)
-                router.push('/room/testando');
+                EnterToRoom();
             }
         }
-    }
-
-    const enterToRoom = async () => {
-        
     }
 
     const createNewRoom = async () => {
@@ -148,7 +163,10 @@ const Modal: React.FC = () => {
     }
 
     const handleCancel = () => {
-        setModalIsOpen(false)
+        if(modalType === 'ENTER_TO_ROOM') {
+            router.push('/')
+        }
+        setModalIsOpen(false);
     }
 
     return (

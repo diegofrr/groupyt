@@ -4,7 +4,7 @@ import {
   Container,
   Content,
   LogoContainer,
-  AppDescription,
+  Description,
   ButtonsContainer,
   Button,
   ButtonText,
@@ -56,9 +56,9 @@ const Home: NextPage = () => {
               />
             </LogoContainer>
 
-            <AppDescription>
+            <Description>
               Assista vídeos do Youtube com seus amigos.
-            </AppDescription>
+            </Description>
 
             <ButtonsContainer>
               <Button onClick={handleCreateNewRoom} primary>

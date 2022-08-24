@@ -39,7 +39,7 @@ export default function Room(props: RoomProps) {
 
     useEffect(() => {
         setModalIsOpen(false);
-
+                
         if (user.name === undefined) {
             setModalIsOpen(true);
             setModalType('ENTER_TO_ROOM');
@@ -65,11 +65,11 @@ export default function Room(props: RoomProps) {
     }, [counter]);
 
     return (
-        <>
+        <> 
             <Head>
                 <title>{roomDetails.roomName}</title>
             </Head>
-            {modalIsOpen
+            {(modalIsOpen || user.name === undefined)
                 ? <Modal />
                 : <>
                     <Header roomName={roomDetails.roomName} />
