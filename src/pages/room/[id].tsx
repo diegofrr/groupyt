@@ -19,54 +19,36 @@ import { ModalContext } from '../../contexts/modal';
 
 type RoomType = {
     roomName: string,
-}
-
-type ResponseRoom = {
-    roomName: string,
     users: UserType[],
-    messages: MessageType[]
 }
 
-export default function Room(props: ResponseRoom) {
+interface RoomProps {
+    roomDetails: RoomType
+}
+
+export default function Room(props: RoomProps) {
     const router = useRouter();
 
     const { user, setUser } = useContext(UserContext);
-    const { setModalIsOpen, setModalType } = useContext(ModalContext);
+    const { modalIsOpen, setModalIsOpen, setModalType } = useContext(ModalContext);
 
     const [width, setWidth] = useState<number>(0);
     const [counter, setCounter] = useState(0);
     const { query } = useRouter();
-    const [roomDetails, setRoomDetails] = useState<RoomType>({
-        roomName: 'Sala de José'
-    } as RoomType);
+    const [roomDetails, setRoomDetails] = useState<RoomType>(props.roomDetails);
 
     useEffect(() => {
         setModalIsOpen(false);
 
-        if (Object.keys(user).length === 0) {
+        if (user.name === undefined) {
             setModalIsOpen(true);
             setModalType('ENTER_TO_ROOM');
         }
 
-    }, [])
+    }, []);
 
     useEffect(() => {
     }, [user])
-
-    // useEffect(() => {
-    //     (async () => {
-    //         let roomId = query?.id;
-    //         await firebase.firestore().collection('rooms')
-    //             .doc(String(roomId))
-    //             .get()
-    //             .then(e => {
-    //                 if(!e.data()?.details) {
-    //                     router.push('/');
-    //                     setModalIsOpen(false)
-    //                 }
-    //             })
-    //     })();
-    // })
 
     useEffect(() => {
         function updateDimensions() {
@@ -87,11 +69,11 @@ export default function Room(props: ResponseRoom) {
             <Head>
                 <title>{roomDetails.roomName}</title>
             </Head>
-            <Header roomName={roomDetails.roomName} />
-            <Container>
-                {Object.keys(user).length === 0
-                    ? <Modal />
-                    : <>
+            {modalIsOpen
+                ? <Modal />
+                : <>
+                    <Header roomName={roomDetails.roomName} />
+                    <Container>
                         <LeftContent>
                             <VideoiFrame />
                             {width > 800 && <Playlist />}
@@ -101,17 +83,17 @@ export default function Room(props: ResponseRoom) {
                             {width <= 800 && <Playlist />}
                             <Chat />
                         </RightContent>
-                    </>}
-            </Container>
+                    </Container>
+                </>}
         </>
 
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     const roomId = params?.id;
-    let roomDetails = {} as ResponseRoom;
+    let roomDetails = {} as RoomType;
 
     // await firebase.firestore().collection('rooms')
     // .doc(String(roomId))
@@ -130,22 +112,14 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
     //     .then(snapshot => {
     //         let users = [] as UserType[];
     //         snapshot.forEach(item => {
-    //             users.push(item.data() as UserType)
+    //             users.push({
+    //                 id: item.id,
+    //                 admin: item.data().admin,
+    //                 avatarURL: item.data().avatarURL,
+    //                 name: item.data().name,
+    //             })
     //         });
     //         roomDetails.users = users;
-            
-    //         firebase.firestore().collection('rooms')
-    //         .doc(String(roomId))
-    //         .collection('messages')
-    //         .get()
-    //         .then(snapshot => {
-    //             let messages = [] as MessageType[];
-    //             snapshot.forEach(item => {
-    //                 messages.push(item.data() as MessageType)
-    //             });
-    //             roomDetails.messages = messages;
-    //         })
-
     //     });
 
     //     console.log(roomDetails)
@@ -158,6 +132,19 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
     //         }
     //     }
     // }
+
+
+    roomDetails = {
+        roomName: 'Minha sala',
+        users: [
+            {
+                id: 'LdRiNdcSZ8ni2bl7soSR',
+                admin: true,
+                avatarURL: '/images/avatars/male/avatar16.png',
+                name: 'Diêgo'
+            }
+        ]
+    }
 
     return {
         props: {
