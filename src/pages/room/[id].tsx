@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import firebase from '../../services/firebase';
 import { UserContext } from '../../contexts/user';
@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Head from 'next/head';
 import { UserType } from '../../contexts/user';
 import Modal from '../../components/Modal';
+import { MessageType } from '../../components/Chat';
 import {
     Container, LeftContent, RightContent
 } from './styles';
@@ -20,7 +21,13 @@ type RoomType = {
     roomName: string,
 }
 
-const Room: NextPage = () => {
+type ResponseRoom = {
+    roomName: string,
+    users: UserType[],
+    messages: MessageType[]
+}
+
+export default function Room(props: ResponseRoom) {
     const router = useRouter();
 
     const { user, setUser } = useContext(UserContext);
@@ -29,7 +36,9 @@ const Room: NextPage = () => {
     const [width, setWidth] = useState<number>(0);
     const [counter, setCounter] = useState(0);
     const { query } = useRouter();
-    const [roomDetails, setRoomDetails] = useState<RoomType>({} as RoomType);
+    const [roomDetails, setRoomDetails] = useState<RoomType>({
+        roomName: 'Sala de José'
+    } as RoomType);
 
     useEffect(() => {
         setModalIsOpen(false);
@@ -42,19 +51,22 @@ const Room: NextPage = () => {
     }, [])
 
     useEffect(() => {
-        (async () => {
-            let roomId = query?.id;
-            await firebase.firestore().collection('rooms')
-                .doc(String(roomId))
-                .get()
-                .then(e => {
-                    if(!e.data()?.details) {
-                        router.push('/');
-                        setModalIsOpen(false)
-                    }
-                })
-        })();
-    })
+    }, [user])
+
+    // useEffect(() => {
+    //     (async () => {
+    //         let roomId = query?.id;
+    //         await firebase.firestore().collection('rooms')
+    //             .doc(String(roomId))
+    //             .get()
+    //             .then(e => {
+    //                 if(!e.data()?.details) {
+    //                     router.push('/');
+    //                     setModalIsOpen(false)
+    //                 }
+    //             })
+    //     })();
+    // })
 
     useEffect(() => {
         function updateDimensions() {
@@ -96,4 +108,60 @@ const Room: NextPage = () => {
     )
 }
 
-export default Room;
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
+
+    const roomId = params?.id;
+    let roomDetails = {} as ResponseRoom;
+
+    // await firebase.firestore().collection('rooms')
+    // .doc(String(roomId))
+    // .get()
+    // .then(snapshot => {
+    //     if(snapshot.exists) {
+    //         roomDetails.roomName = snapshot.data()?.roomName;
+    //     } 
+    // });
+
+    // if(roomDetails.roomName !== undefined) {
+    //     await firebase.firestore().collection('rooms')
+    //     .doc(String(roomId))
+    //     .collection('users')
+    //     .get()
+    //     .then(snapshot => {
+    //         let users = [] as UserType[];
+    //         snapshot.forEach(item => {
+    //             users.push(item.data() as UserType)
+    //         });
+    //         roomDetails.users = users;
+            
+    //         firebase.firestore().collection('rooms')
+    //         .doc(String(roomId))
+    //         .collection('messages')
+    //         .get()
+    //         .then(snapshot => {
+    //             let messages = [] as MessageType[];
+    //             snapshot.forEach(item => {
+    //                 messages.push(item.data() as MessageType)
+    //             });
+    //             roomDetails.messages = messages;
+    //         })
+
+    //     });
+
+    //     console.log(roomDetails)
+
+    // } else {
+    //     return {
+    //         redirect: {
+    //             destination: '/',
+    //             permanent: false,
+    //         }
+    //     }
+    // }
+
+    return {
+        props: {
+            roomDetails
+        }
+    }
+}
