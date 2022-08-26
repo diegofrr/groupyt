@@ -6,11 +6,7 @@ import { ModalContext } from '../../contexts/modal';
 
 export default function Loading() {
     const { modalType } = useContext(ModalContext)
-
-    useEffect(() => {
-        console.log(modalType)
-    })
-
+    
     return (
         <Container>
             <span>

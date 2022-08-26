@@ -114,7 +114,6 @@ export default function VideoiFrame() {
     }
 
     const handleFinishedVideo = () => {
-        console.log(videos);
         if (videos.length > 1) {
             let newList = videos.filter(video => video.id !== videoId);
             setVideos(newList);
