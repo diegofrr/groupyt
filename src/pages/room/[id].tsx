@@ -9,17 +9,21 @@ import { UserType } from '../../contexts/user';
 import Modal from '../../components/Modal';
 import { MessageType } from '../../components/Chat';
 import {
-    Container, LeftContent, RightContent
+    Container,
+    LeftContent,
+    RightContent
 } from './styles';
 
 import VideoiFrame from '../../components/VideoiFrame';
 import Chat from '../../components/Chat';
-import Playlist from '../../components/Playlist';
+import Playlist, { VideoType } from '../../components/Playlist';
 import { ModalContext } from '../../contexts/modal';
+import { PlaylistContext } from '../../contexts/playlist';
 
 type RoomType = {
     roomName: string,
     users: UserType[],
+    playlist: VideoType[],
 }
 
 interface RoomProps {
@@ -31,6 +35,7 @@ export default function Room(props: RoomProps) {
 
     const { user, setUser } = useContext(UserContext);
     const { modalIsOpen, setModalIsOpen, setModalType } = useContext(ModalContext);
+    const { setVideos } = useContext(PlaylistContext);
 
     const [width, setWidth] = useState<number>(0);
     const [counter, setCounter] = useState(0);
@@ -38,6 +43,7 @@ export default function Room(props: RoomProps) {
     const [roomDetails, setRoomDetails] = useState<RoomType>(props.roomDetails);
 
     useEffect(() => {
+        setVideos(props.roomDetails.playlist)
         setModalIsOpen(false);
                 
         if (user.name === undefined) {
@@ -101,6 +107,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     // .then(snapshot => {
     //     if(snapshot.exists) {
     //         roomDetails.roomName = snapshot.data()?.roomName;
+    //         roomDetails.playlist = snapshot.data()?.playlist;
     //     } 
     // });
 
@@ -122,8 +129,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     //         roomDetails.users = users;
     //     });
 
-    //     console.log(roomDetails)
-
     // } else {
     //     return {
     //         redirect: {
@@ -132,7 +137,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     //         }
     //     }
     // }
-
 
     roomDetails = {
         roomName: 'Minha sala',
@@ -143,6 +147,21 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
                 avatarURL: '/images/avatars/male/avatar16.png',
                 name: 'Diêgo'
             }
+        ],
+        playlist: [
+            {
+                "id": "2fJYeOr3b2s",
+                "creator": "sasbo",
+                "thumb": "https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg",
+                "title": "[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside"
+            },
+            {
+                "id": "OZRYzH0Q0pU",
+                "creator": "Men I Trust",
+                "thumb": "https://i.ytimg.com/vi/OZRYzH0Q0pU/mqdefault.jpg",
+                "title": "Min I Trust - Show me How"
+            }
+
         ]
     }
 
