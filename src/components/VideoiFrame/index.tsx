@@ -179,10 +179,10 @@ export default function VideoiFrame() {
                                 )}
 
                                 {videoState === 1
-                                    ? <ActionButton onClick={() => { video.target?.pauseVideo() }}>
+                                    ? <ActionButton onClick={() => { }}>
                                         <BsPauseFill size={20} color={myColor_100} />
                                     </ActionButton>
-                                    : <ActionButton ref={buttonRef} onClick={() => video.target?.playVideo()}>
+                                    : <ActionButton ref={buttonRef} onClick={() => { }}>
                                         <BsPlayFill size={20} color={myColor_100} />
                                     </ActionButton>}
 
