@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { createContext, useContext, useEffect, ReactNode, useState } from "react";
 import { RoomDetailsContext } from "./roomDetails";
 
@@ -21,12 +22,6 @@ export const UserContext = createContext({} as ContextType);
 
 export default function UserProvider({ children }: ContextProps) {
     const [user, setUser] = useState<UserType>({} as UserType);
-    const { roomId } = useContext(RoomDetailsContext);
-
-    useEffect(() => {
-        const value = JSON.parse(localStorage.getItem("@user") || '{}');
-        setUser(value)
-    }, []);
 
     return <UserContext.Provider
         value={{

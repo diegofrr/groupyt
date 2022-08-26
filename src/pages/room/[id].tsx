@@ -27,6 +27,11 @@ type RoomType = {
     playlist: VideoType[],
 }
 
+type LocalCredentials = {
+    roomId: string,
+    user: UserType
+}
+
 interface RoomProps {
     roomDetails: RoomType
 }
@@ -42,7 +47,7 @@ export default function Room(props: RoomProps) {
     const { query } = useRouter();
 
     useEffect(() => {
-        if(user.name !== undefined) localStorage.setItem('@user', JSON.stringify(user));
+        checkRoomsCredentials();
         setModalIsOpen(false);
         setVideos(props.roomDetails.playlist);
         setRoomId(props.roomDetails.roomId);
@@ -63,6 +68,7 @@ export default function Room(props: RoomProps) {
 
     }, [user]);
 
+
     useEffect(() => {
         function updateDimensions() {
             setWidth(window.innerWidth);
@@ -76,6 +82,17 @@ export default function Room(props: RoomProps) {
             window.addEventListener('resize', getDimensions)
         }
     }, [counter]);
+
+    const checkRoomsCredentials = () => {
+        const oldData = JSON.parse(localStorage.getItem('@rooms_credentials') || '[]') as LocalCredentials[];
+        if (!oldData.some(item => item.roomId === query?.id)) {
+            localStorage.setItem('@rooms_credentials', JSON.stringify(
+                [...oldData, { roomId: query?.id, user: user }]
+            ));
+        } else {
+            setUser(oldData.filter(item => item.roomId === query.id)[0].user);
+        }
+    }
 
     return (
         <>
