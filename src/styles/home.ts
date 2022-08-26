@@ -65,8 +65,11 @@ export const ButtonsContainer = styled.div`
 `
 
 export const Button = styled.button<ButtonProps>`
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     border-radius: 10px;
     background-color: ${p => p.primary ? btnPriColor : btnSecColor};
     height: 50px;
