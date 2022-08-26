@@ -34,6 +34,7 @@ export const RightContent = styled.div`
     justify-content: center;
     flex-direction: row;
     gap: 20px;
+    width: 100%;
 
     @media screen and (max-width: 500px) {
         flex-direction: column;

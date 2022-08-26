@@ -124,64 +124,62 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     let roomDetails = {} as RoomType;
     roomDetails.roomId = String(roomId);
 
-    // await firebase.firestore().collection('rooms')
-    //     .doc(String(roomId))
-    //     .get()
-    //     .then(snapshot => {
-    //         if (snapshot.exists) {
-    //             roomDetails.roomName = snapshot.data()?.roomName;
-    //             roomDetails.playlist = snapshot.data()?.playlist;
-    //         }
-    //     });
-
-    // if (roomDetails.roomName !== undefined) {
-    //     await firebase.firestore().collection('rooms')
-    //         .doc(String(roomId))
-    //         .collection('users')
-    //         .get()
-    //         .then(snapshot => {
-    //             let users = [] as UserType[];
-    //             snapshot.forEach(item => {
-    //                 users.push({
-    //                     id: item.id,
-    //                     admin: item.data().admin,
-    //                     avatarURL: item.data().avatarURL,
-    //                     name: item.data().name,
-    //                 })
-    //             });
-    //             roomDetails.users = users;
-    //         });
-
-    // } else {
-    //     return {
-    //         redirect: {
-    //             destination: '/not-found',
-    //             permanent: false,
-    //         }
-    //     }
-    // }
-
-    roomDetails = {
-        roomId: 'RSX51HSgpPpUJxERJqPq',
-        roomName: 'Minha sala',
-        playlist: [],
-        users: [
-            {
-                id: 'JJ1BmSwcZ59zqXHEjbB1',
-                admin: false,
-                avatarURL: '/images/avatars/female/avatar2.png',
-                name: 'fafsfsd'
-            },
-            {
-                id: 'ZMSzElALVt5XUVw60KUm',
-                admin: true,
-                avatarURL: '/images/avatars/female/avatar1.png',
-                name: 'dddeee'
+    await firebase.firestore().collection('rooms')
+        .doc(String(roomId))
+        .get()
+        .then(snapshot => {
+            if (snapshot.exists) {
+                roomDetails.roomName = snapshot.data()?.roomName;
+                roomDetails.playlist = snapshot.data()?.playlist;
             }
-        ]
+        });
+
+    if (roomDetails.roomName !== undefined) {
+        await firebase.firestore().collection('rooms')
+            .doc(String(roomId))
+            .collection('users')
+            .get()
+            .then(snapshot => {
+                let users = [] as UserType[];
+                snapshot.forEach(item => {
+                    users.push({
+                        id: item.id,
+                        admin: item.data().admin,
+                        avatarURL: item.data().avatarURL,
+                        name: item.data().name,
+                    })
+                });
+                roomDetails.users = users;
+            });
+
+    } else {
+        return {
+            redirect: {
+                destination: '/not-found',
+                permanent: false,
+            }
+        }
     }
 
-    console.log(roomDetails)
+    // roomDetails = {
+    //     roomId: 'RSX51HSgpPpUJxERJqPq',
+    //     roomName: 'Minha sala',
+    //     playlist: [],
+    //     users: [
+    //         {
+    //             id: 'JJ1BmSwcZ59zqXHEjbB1',
+    //             admin: false,
+    //             avatarURL: '/images/avatars/female/avatar2.png',
+    //             name: 'fafsfsd'
+    //         },
+    //         {
+    //             id: 'ZMSzElALVt5XUVw60KUm',
+    //             admin: true,
+    //             avatarURL: '/images/avatars/female/avatar1.png',
+    //             name: 'dddeee'
+    //         }
+    //     ]
+    // }
 
     return {
         props: {
