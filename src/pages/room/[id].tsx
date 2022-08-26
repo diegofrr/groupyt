@@ -57,10 +57,27 @@ export default function Room(props: RoomProps) {
             setModalType('ENTER_TO_ROOM');
         }
 
-    }, [user]);
+    }, [
+        user, props.roomDetails.playlist, props.roomDetails.roomId,
+        props.roomDetails.roomName, setModalIsOpen, setModalType,
+        setRoomId, setRoomName, setVideos,
+    ]);
 
     useEffect(() => {
+
+        const checkRoomsCredentials = () => {
+            const oldData = JSON.parse(localStorage.getItem('@rooms_credentials') || '[]') as LocalCredentials[];
+            if (!oldData.some(item => item.roomId === query?.id)) {
+                localStorage.setItem('@rooms_credentials', JSON.stringify(
+                    [...oldData, { roomId: query?.id, user: user }]
+                ));
+            } else {
+                setUser(oldData.filter(item => item.roomId === query.id)[0].user);
+            }
+        }
+
         checkRoomsCredentials();
+
         (async () => {
             await firebase.firestore().collection('rooms')
                 .doc(props.roomDetails.roomId)
@@ -68,7 +85,9 @@ export default function Room(props: RoomProps) {
                     setVideos(e.data()?.playlist)
                 })
         })()
-    }, [])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.roomDetails.roomId, query.id, setUser, setVideos])
 
     useEffect(() => {
         function updateDimensions() {
@@ -80,17 +99,6 @@ export default function Room(props: RoomProps) {
         updateDimensions();
         window.addEventListener('resize', getDimensions)
     }, []);
-
-    const checkRoomsCredentials = () => {
-        const oldData = JSON.parse(localStorage.getItem('@rooms_credentials') || '[]') as LocalCredentials[];
-        if (!oldData.some(item => item.roomId === query?.id)) {
-            localStorage.setItem('@rooms_credentials', JSON.stringify(
-                [...oldData, { roomId: query?.id, user: user }]
-            ));
-        } else {
-            setUser(oldData.filter(item => item.roomId === query.id)[0].user);
-        }
-    }
 
     return (
         <>

@@ -26,11 +26,12 @@ export default function Message({ data }: MessageProps) {
                 <Image
                     style={{ borderRadius: '50%' }}
                     width={60} height={60}
+                    alt='User avatar'
                     src={data?.user.avatarURL} />
             </Avatar>
             <UsernameAndMessage>
                 <Username isOwner={isOwner} isAdmin={data?.user.admin}>
-                    {data?.user.name}
+                    {isOwner ? 'Você' : data?.user.name}
                 </Username>
                 <MessageContainer>
                     <MessageText>

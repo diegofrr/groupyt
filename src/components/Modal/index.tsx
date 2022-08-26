@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import ReactLoading from 'react-loading';
 import firebase from '../../services/firebase';
@@ -83,7 +83,17 @@ const Modal: React.FC = () => {
         setLoading(false);
     }, []);
 
-    useEffect(() => { if (username.length > 0) usernameIsvalid() }, [username]);
+    const usernameIsvalid = useCallback(() => {
+        let isValid = (
+            username !== '' &&
+            username !== null &&
+            username.length > 2
+        )
+        setValidUsername(isValid);
+        return isValid;
+    }, [username])
+
+    useEffect(() => { if (username.length > 0) usernameIsvalid() }, [username, usernameIsvalid]);
 
     const EnterToRoom = async () => {
         let roomId = query?.id;
@@ -104,16 +114,6 @@ const Modal: React.FC = () => {
                 });
             });
         setModalIsOpen(false);
-    }
-
-    const usernameIsvalid = () => {
-        let isValid = (
-            username !== '' &&
-            username !== null &&
-            username.length > 2
-        )
-        setValidUsername(isValid);
-        return isValid;
     }
 
     const handleApply = () => {
@@ -262,6 +262,7 @@ const Modal: React.FC = () => {
                                                 <Image
                                                     style={{ borderRadius: '50%' }}
                                                     width={60} height={60}
+                                                    alt='Avatar'
                                                     src={item} />
                                             </Avatar>)
                                         )
@@ -270,6 +271,7 @@ const Modal: React.FC = () => {
                                                 <Image
                                                     style={{ borderRadius: '50%' }}
                                                     width={60} height={60}
+                                                    alt='Avatar'
                                                     src={item} />
                                             </Avatar>)
                                         )}

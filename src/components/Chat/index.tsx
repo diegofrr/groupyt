@@ -57,14 +57,15 @@ export default function Chat() {
                 })
         })();
 
-    }, [])
+    }, [roomId])
 
-    const handleSendMessage = useCallback((e: FormEvent) => {
+    const handleSendMessage = (e: FormEvent) => {
         e.preventDefault();
         setMessage('');
-    }, [message])
+    }
 
     const handleEnviarMensagem = useCallback(async () => {
+        myRef.current?.scrollTo(0, myRef.current.scrollHeight);
         if (message !== null && message !== '') {
             await firebase.firestore().collection('rooms')
                 .doc(roomId)

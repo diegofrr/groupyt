@@ -1,6 +1,7 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import { Button } from '../Header/styles';
 import firebase from '../../services/firebase';
+import { toast } from 'react-hot-toast';
 import {
     Container,
     PlaylistHeader,
@@ -48,7 +49,7 @@ export default function Playlist() {
                     playlist: videos,
                 })
         })();
-    }, [videos]);
+    }, [videos, roomId, roomName]);
 
 
     const idExists = (id: string) => {
@@ -57,7 +58,7 @@ export default function Playlist() {
 
     const getInfo = () => {
         if (videoUrl.trim() === '') {
-            alert('url vazia')
+            toast.error('URL vazia.', { position: 'bottom-center' })
             return;
         }
 

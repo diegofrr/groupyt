@@ -9,4 +9,5 @@ module.exports = {
   images: {
     domains: ['localhost', 'i.ytimg.com'],
   },
+  pageExtensions: ['tsx', 'jsx']
 }

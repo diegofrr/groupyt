@@ -46,6 +46,22 @@ export const ControlsContainer = styled.div`
     border-radius: 0 0 10px 10px;
 `
 
+export const SkipVideo = styled.button`
+    background-color: ${purpleColor};
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 80px;
+    border-radius: 100px;
+    transition: all .3s ease;
+
+    :hover {
+        filter: brightness(1.1);
+    }
+`
+
 export const ActionButton = styled.button` 
     min-width: 60px;
     height: 30px;

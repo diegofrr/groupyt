@@ -1,7 +1,8 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useRef, useEffect, useState } from "react";
 import Youtube, { YouTubeEvent } from 'react-youtube';
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import { VideoType } from "../Playlist";
+import { toast } from 'react-hot-toast';
 import {
     Container,
     VideoContainer,
@@ -14,10 +15,14 @@ import {
     EmptyVideo,
     ProgressTime,
     VideoInfo,
+    SkipVideo,
 
 } from './styles';
-import { myColor_100, } from "../../styles/variables";
+import { myColor_100, myColor_200, } from "../../styles/variables";
 import { RoomDetailsContext } from "../../contexts/roomDetails";
+import { UserContext } from "../../contexts/user";
+import { Button, ButtonText } from "../Header/styles";
+import { FiSkipForward } from "react-icons/fi";
 
 type DataType = {
     progress: number,
@@ -28,6 +33,8 @@ type DataType = {
 
 export default function VideoiFrame() {
     const { videos, setVideos } = useContext(RoomDetailsContext);
+    const { user } = useContext(UserContext);
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
     const [width, setWidth] = useState<number>(0);
     const [height, setHeight] = useState<number>(0);
@@ -41,6 +48,10 @@ export default function VideoiFrame() {
     const [playlist, setPlaylist] = useState<VideoType[]>([])
 
     useEffect(() => {
+        setVideo({} as YouTubeEvent)
+    }, [])
+
+    useEffect(() => {
         if (videos.length > 0) {
             let videoId = videos[0].id;
             setVideoId(videoId);
@@ -52,6 +63,7 @@ export default function VideoiFrame() {
             }, 1000)
         )
         return clearInterval(intervalID)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [video, videos])
 
     useEffect(() => {
@@ -69,7 +81,37 @@ export default function VideoiFrame() {
         }
     });
 
+    const handleFinishedVideo = () => {
+        if (videos.length > 1) {
+            let newList = videos.filter(video => video.id !== videoId);
+            setVideos(newList);
+            setProgress(0);
+        } else {
+            setVideo({} as YouTubeEvent)
+            setVideos([] as VideoType[])
+            toast('Playlist vazia', {
+                style: { marginTop: '80px' },
+                icon: '😢'
+            })
+        }
+
+    }
+
     const getVideo = useCallback(() => {
+
+        const options = {
+            height: '350',
+            width: width <= 800 ? width - 56 : width * 0.55,
+            playerVars: {
+                'autoplay': 1,
+                'controls': 0,
+                'showinfo': 0,
+                'rel': 0,
+                'disablekb': 1,
+                'modestbranding': 1
+            },
+        }
+
         return <Youtube
             videoId={videoId as string}
             opts={options}
@@ -78,20 +120,7 @@ export default function VideoiFrame() {
             onPlay={handleStartedVideo}
             onReady={e => handleOnReady(e)}
         />
-    }, [width, videoId, videos]);
-
-    const options = {
-        height: '350',
-        width: width <= 800 ? width - 56 : width * 0.55,
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'showinfo': 0,
-            'rel': 0,
-            'disablekb': 1,
-            'modestbranding': 1
-        },
-    }
+    }, [width, videoId, handleFinishedVideo]);
 
     const handleOnReady = (e: YouTubeEvent) => {
         setVideo(e);
@@ -106,23 +135,9 @@ export default function VideoiFrame() {
     const handleStateChange = (e: YouTubeEvent) => {
         setVideoState(e.target?.getPlayerState());
         setVideoDuration(e.target?.getDuration());
-
     }
 
     const handleStartedVideo = () => {
-
-    }
-
-    const handleFinishedVideo = () => {
-        if (videos.length > 1) {
-            let newList = videos.filter(video => video.id !== videoId);
-            setVideos(newList);
-            setProgress(0);
-        } else {
-            setVideo({} as YouTubeEvent)
-            setVideos([] as VideoType[])
-            alert('sem videos na playlist')
-        }
 
     }
 
@@ -157,27 +172,34 @@ export default function VideoiFrame() {
                         <>
                             {getVideo()}
                             <ControlsContainer>
+                                {user.admin && (
+                                    <SkipVideo onClick={handleFinishedVideo}>
+                                        <FiSkipForward size={16} color={myColor_100} />
+                                    </SkipVideo>
+                                )}
 
                                 {videoState === 1
                                     ? <ActionButton onClick={() => { video.target?.pauseVideo() }}>
                                         <BsPauseFill size={20} color={myColor_100} />
                                     </ActionButton>
-                                    : <ActionButton onClick={() => video.target?.playVideo()}>
+                                    : <ActionButton ref={buttonRef} onClick={() => video.target?.playVideo()}>
                                         <BsPlayFill size={20} color={myColor_100} />
                                     </ActionButton>}
 
-                                <CurrentTimeContainer>
-                                    <BackgroundBar
-                                        duration={videoDuration as number}
-                                        progress={progress}
-                                    />
-                                    <CurrentTimeBar
-                                        type='range'
-                                        onChangeCapture={() => video.target?.pauseVideo()}
-                                        onClickCapture={handleCurrentTimeChange}
-                                        onChange={e => setProgress(Number(e.target.value))}
-                                        value={progress} max={video.target?.getDuration()} min={0} />
-                                </CurrentTimeContainer>
+                                {/* {user.admin && (
+                                    <CurrentTimeContainer>
+                                        <BackgroundBar
+                                            duration={videoDuration as number}
+                                            progress={progress}
+                                        />
+                                        <CurrentTimeBar
+                                            type='range'
+                                            onChangeCapture={() => video.target?.pauseVideo()}
+                                            onClickCapture={handleCurrentTimeChange}
+                                            onChange={e => setProgress(Number(e.target.value))}
+                                            value={progress} max={video.target?.getDuration()} min={0} />
+                                    </CurrentTimeContainer>
+                                )} */}
 
                                 <VideoInfo>
                                     <strong>{video.target?.getVideoData()?.author}</strong>
