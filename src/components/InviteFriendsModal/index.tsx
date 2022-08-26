@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { Button } from '../Header/styles';
+import { Button, ButtonText } from '../Header/styles';
 import {
     Background,
     CloseButton,
     Container,
     Content,
     RoomUrl,
-    RoomUrlContainer
+    RoomUrlContainer,
+    InviteMessage
 } from './styles';
 import { FiCopy, FiX } from 'react-icons/fi';
 import { myColor_100, myColor_300 } from '../../styles/variables';
@@ -24,6 +25,9 @@ export default function InviteFriendsModal({ modalIsOpen }: ModalProps) {
         <Container>
             <Background />
             <Content>
+                <InviteMessage>
+                    Copie este link e envie para seus amigos.
+                </InviteMessage>
                 <CloseButton onClick={() => modalIsOpen(false)}>
                     <FiX size={16} color={myColor_300} />
                 </CloseButton>
@@ -32,6 +36,7 @@ export default function InviteFriendsModal({ modalIsOpen }: ModalProps) {
                         {`localhost:3000${router.pathname}`}
                     </RoomUrl>
                     <Button primary>
+                        <ButtonText primary>Copiar</ButtonText>
                         <FiCopy size={18} color={myColor_100} />
                     </Button>
                 </RoomUrlContainer>

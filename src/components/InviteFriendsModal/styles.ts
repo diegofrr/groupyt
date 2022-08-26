@@ -24,6 +24,11 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+`
+
+export const InviteMessage = styled.strong`
+
 `
 
 export const RoomUrlContainer = styled.div`
@@ -31,6 +36,7 @@ export const RoomUrlContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 10px;
+    flex-direction: column;
 `
 export const RoomUrl = styled.strong`
     color: ${myColor_200};
