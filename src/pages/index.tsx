@@ -32,7 +32,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Groupyt</title>
+        <title>Bem vindo(a) ao Groupyt!</title>
       </Head>
 
       <Container>
