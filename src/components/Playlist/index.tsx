@@ -1,5 +1,6 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import { Button } from '../Header/styles';
+import firebase from '../../services/firebase';
 import {
     Container,
     PlaylistHeader,
@@ -27,7 +28,7 @@ export type VideoType = {
 }
 
 export default function Playlist() {
-    const { videos, setVideos } = useContext(RoomDetailsContext);
+    const { videos, setVideos, roomId, roomName } = useContext(RoomDetailsContext);
     const { query } = useRouter();
 
     const [margin, setMargin] = useState(0);
@@ -39,7 +40,16 @@ export default function Playlist() {
 
     useEffect(() => {
         setMargin(0);
-    }, [videos])
+        (async () => {
+            await firebase.firestore().collection('rooms')
+                .doc(roomId)
+                .set({
+                    roomName,
+                    playlist: videos,
+                })
+        })();
+    }, [videos]);
+
 
     const idExists = (id: string) => {
         return videos.some(video => video.id === id);
@@ -65,7 +75,7 @@ export default function Playlist() {
                         thumb: response.data.thumb,
                     } as VideoType;
                     setVideos([...videos, newVideo]);
-                    
+
                 } else {
                     alert('Este vídeo já está na playlist')
                 }

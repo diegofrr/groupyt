@@ -39,6 +39,7 @@ import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';
 import Loading from '../Loading';
 import { UserContext, UserType } from '../../contexts/user';
+import { RoomDetailsContext } from '../../contexts/roomDetails';
 
 
 const Modal: React.FC = () => {
@@ -47,6 +48,7 @@ const Modal: React.FC = () => {
 
     const { modalIsOpen, setModalIsOpen, modalType } = useContext(ModalContext);
     const { setUser } = useContext(UserContext);
+    const { roomName, users } = useContext(RoomDetailsContext);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [roomTitle, setRoomTitle] = useState<string>('Minha sala');
@@ -57,6 +59,12 @@ const Modal: React.FC = () => {
     const [genre, setGenre] = useState<string>('female');
     const [avatar, setAvatar] = useState<string>('');
     const [validUsername, setValidUsername] = useState<boolean>(true);
+
+    useEffect(() => {
+        if(roomName !== '') {
+            setRoomTitle(roomName)
+        }
+    }, [roomName]);
 
     useEffect(() => {
 
@@ -196,12 +204,7 @@ const Modal: React.FC = () => {
                                 : <SaveButton onClick={handleSaveTitle}>
                                     <FiCheck size={20} color={myColor_100} />
                                 </SaveButton>
-                        ) : (
-                            <OnlineMembers>
-                                <FiUser size={18} color={myColor_200} />
-                                4
-                            </OnlineMembers>
-                        )
+                        ) : <></>
                     )
                     }
 

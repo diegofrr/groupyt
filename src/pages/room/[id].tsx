@@ -42,28 +42,25 @@ export default function Room(props: RoomProps) {
     const { query } = useRouter();
 
     useEffect(() => {
-        setVideos(props.roomDetails.playlist);
         setModalIsOpen(false);
+        setVideos(props.roomDetails.playlist);
         setRoomId(props.roomDetails.roomId);
         setRoomName(props.roomDetails.roomName);
-                
+
         if (user.name === undefined) {
             setModalIsOpen(true);
             setModalType('ENTER_TO_ROOM');
         }
 
-    }, []);
-
-    useEffect(() => {
         (async () => {
             await firebase.firestore().collection('rooms')
-            .doc(props.roomDetails.roomId)
-            .set({
-                roomName,
-                playlist: videos,
-            })
-        })();
-    }, [videos]);
+                .doc(props.roomDetails.roomId)
+                .onSnapshot(e => {
+                    setVideos(e.data()?.playlist)
+                })
+        })()
+
+    }, []);
 
     useEffect(() => {
     }, [user])
@@ -83,7 +80,7 @@ export default function Room(props: RoomProps) {
     }, [counter]);
 
     return (
-        <> 
+        <>
             <Head>
                 <title>{roomName}</title>
             </Head>
@@ -115,32 +112,32 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     roomDetails.roomId = String(roomId);
 
     await firebase.firestore().collection('rooms')
-    .doc(String(roomId))
-    .get()
-    .then(snapshot => {
-        if(snapshot.exists) {
-            roomDetails.roomName = snapshot.data()?.roomName;
-            roomDetails.playlist = snapshot.data()?.playlist;
-        } 
-    });
-
-    if(roomDetails.roomName !== undefined) {
-        await firebase.firestore().collection('rooms')
         .doc(String(roomId))
-        .collection('users')
         .get()
         .then(snapshot => {
-            let users = [] as UserType[];
-            snapshot.forEach(item => {
-                users.push({
-                    id: item.id,
-                    admin: item.data().admin,
-                    avatarURL: item.data().avatarURL,
-                    name: item.data().name,
-                })
-            });
-            roomDetails.users = users;
+            if (snapshot.exists) {
+                roomDetails.roomName = snapshot.data()?.roomName;
+                roomDetails.playlist = snapshot.data()?.playlist;
+            }
         });
+
+    if (roomDetails.roomName !== undefined) {
+        await firebase.firestore().collection('rooms')
+            .doc(String(roomId))
+            .collection('users')
+            .get()
+            .then(snapshot => {
+                let users = [] as UserType[];
+                snapshot.forEach(item => {
+                    users.push({
+                        id: item.id,
+                        admin: item.data().admin,
+                        avatarURL: item.data().avatarURL,
+                        name: item.data().name,
+                    })
+                });
+                roomDetails.users = users;
+            });
 
     } else {
         return {

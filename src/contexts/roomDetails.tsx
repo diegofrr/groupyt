@@ -14,6 +14,7 @@ type ContextType = {
     roomId: string,
     setRoomId: (newId: string) => void,
     users: UserType[],
+    setUsers: (newUsers: UserType[]) => void,
     videos: VideoType[],
     setVideos: (newState: VideoType[]) => void
 }
@@ -26,16 +27,13 @@ export default function RoomDetailsProvider({ children }: ContextProps) {
     const [roomName, setRoomName] = useState('');
     const [roomId, setRoomId] = useState('');
 
-    useEffect(() => {
-
-    })
-
     return <RoomDetailsContext.Provider
         value={{
             roomId,
             setRoomId,
             setRoomName,
             roomName,
+            setUsers,
             users,
             videos,
             setVideos
