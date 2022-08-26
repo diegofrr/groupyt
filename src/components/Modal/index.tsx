@@ -33,14 +33,14 @@ import {
 import { Button, ButtonText } from '../../styles/home';
 import { FiEdit, FiCheck, FiUser } from 'react-icons/fi';
 import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
-import { myColor_100, myColor_200, purpleColor } from '../../styles/variables';
+import { bgColor, myColor_100, myColor_200, purpleColor } from '../../styles/variables';
 import { maleAvatars, femaleAvatars } from '../AvatarsList';
 import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';
 import Loading from '../Loading';
 import { UserContext, UserType } from '../../contexts/user';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
-
+import { toast } from 'react-hot-toast';
 
 const Modal: React.FC = () => {
     const router = useRouter();
@@ -118,11 +118,17 @@ const Modal: React.FC = () => {
 
     const handleApply = () => {
         if (usernameIsvalid()) {
-            setLoading(true);
-            if (modalType === 'CREATE_NEW_ROOM') {
-                createNewRoom();
-            } else if (modalType === 'ENTER_TO_ROOM') {
-                EnterToRoom();
+            if (!editing) {
+                setLoading(true);
+                if (modalType === 'CREATE_NEW_ROOM') {
+                    createNewRoom();
+                } else if (modalType === 'ENTER_TO_ROOM') {
+                    EnterToRoom();
+                }
+            } else {
+                toast('Confirme o nome da sala.', {
+                    icon: '👉🏻'
+                })
             }
         }
     }
