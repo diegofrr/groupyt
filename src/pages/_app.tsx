@@ -3,15 +3,15 @@ import '@fontsource/plus-jakarta-sans';
 import '../styles/global.css';
 import ModalProvider from '../contexts/modal';
 import UserProvider from '../contexts/user';
-import PlaylistProvider from '../contexts/playlist';
+import RoomDetailsProvider from '../contexts/roomDetails';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <>
     <ModalProvider>
       <UserProvider>
-        <PlaylistProvider>
+        <RoomDetailsProvider>
           <Component {...pageProps} />
-        </PlaylistProvider>
+        </RoomDetailsProvider>
       </UserProvider>
     </ModalProvider>
   </>

@@ -18,10 +18,11 @@ import VideoiFrame from '../../components/VideoiFrame';
 import Chat from '../../components/Chat';
 import Playlist, { VideoType } from '../../components/Playlist';
 import { ModalContext } from '../../contexts/modal';
-import { PlaylistContext } from '../../contexts/playlist';
+import { RoomDetailsContext } from '../../contexts/roomDetails';
 
 type RoomType = {
     roomName: string,
+    roomId: string,
     users: UserType[],
     playlist: VideoType[],
 }
@@ -35,16 +36,16 @@ export default function Room(props: RoomProps) {
 
     const { user, setUser } = useContext(UserContext);
     const { modalIsOpen, setModalIsOpen, setModalType } = useContext(ModalContext);
-    const { setVideos } = useContext(PlaylistContext);
-
+    const { setVideos, videos, roomName, setRoomName, setRoomId } = useContext(RoomDetailsContext);
     const [width, setWidth] = useState<number>(0);
     const [counter, setCounter] = useState(0);
     const { query } = useRouter();
-    const [roomDetails, setRoomDetails] = useState<RoomType>(props.roomDetails);
 
     useEffect(() => {
-        setVideos(props.roomDetails.playlist)
+        setVideos(props.roomDetails.playlist);
         setModalIsOpen(false);
+        setRoomId(props.roomDetails.roomId);
+        setRoomName(props.roomDetails.roomName);
                 
         if (user.name === undefined) {
             setModalIsOpen(true);
@@ -52,6 +53,17 @@ export default function Room(props: RoomProps) {
         }
 
     }, []);
+
+    useEffect(() => {
+        (async () => {
+            await firebase.firestore().collection('rooms')
+            .doc(props.roomDetails.roomId)
+            .set({
+                roomName,
+                playlist: videos,
+            })
+        })();
+    }, [videos]);
 
     useEffect(() => {
     }, [user])
@@ -73,12 +85,12 @@ export default function Room(props: RoomProps) {
     return (
         <> 
             <Head>
-                <title>{roomDetails.roomName}</title>
+                <title>{roomName}</title>
             </Head>
             {(modalIsOpen || user.name === undefined)
                 ? <Modal />
                 : <>
-                    <Header roomName={roomDetails.roomName} />
+                    <Header roomName={roomName} />
                     <Container>
                         <LeftContent>
                             <VideoiFrame />
@@ -100,70 +112,71 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     const roomId = params?.id;
     let roomDetails = {} as RoomType;
+    roomDetails.roomId = String(roomId);
 
-    // await firebase.firestore().collection('rooms')
-    // .doc(String(roomId))
-    // .get()
-    // .then(snapshot => {
-    //     if(snapshot.exists) {
-    //         roomDetails.roomName = snapshot.data()?.roomName;
-    //         roomDetails.playlist = snapshot.data()?.playlist;
-    //     } 
-    // });
+    await firebase.firestore().collection('rooms')
+    .doc(String(roomId))
+    .get()
+    .then(snapshot => {
+        if(snapshot.exists) {
+            roomDetails.roomName = snapshot.data()?.roomName;
+            roomDetails.playlist = snapshot.data()?.playlist;
+        } 
+    });
 
-    // if(roomDetails.roomName !== undefined) {
-    //     await firebase.firestore().collection('rooms')
-    //     .doc(String(roomId))
-    //     .collection('users')
-    //     .get()
-    //     .then(snapshot => {
-    //         let users = [] as UserType[];
-    //         snapshot.forEach(item => {
-    //             users.push({
-    //                 id: item.id,
-    //                 admin: item.data().admin,
-    //                 avatarURL: item.data().avatarURL,
-    //                 name: item.data().name,
-    //             })
-    //         });
-    //         roomDetails.users = users;
-    //     });
+    if(roomDetails.roomName !== undefined) {
+        await firebase.firestore().collection('rooms')
+        .doc(String(roomId))
+        .collection('users')
+        .get()
+        .then(snapshot => {
+            let users = [] as UserType[];
+            snapshot.forEach(item => {
+                users.push({
+                    id: item.id,
+                    admin: item.data().admin,
+                    avatarURL: item.data().avatarURL,
+                    name: item.data().name,
+                })
+            });
+            roomDetails.users = users;
+        });
 
-    // } else {
-    //     return {
-    //         redirect: {
-    //             destination: '/not-found',
-    //             permanent: false,
-    //         }
-    //     }
-    // }
-
-    roomDetails = {
-        roomName: 'Minha sala',
-        users: [
-            {
-                id: 'LdRiNdcSZ8ni2bl7soSR',
-                admin: true,
-                avatarURL: '/images/avatars/male/avatar16.png',
-                name: 'Diêgo'
+    } else {
+        return {
+            redirect: {
+                destination: '/not-found',
+                permanent: false,
             }
-        ],
-        playlist: [
-            {
-                "id": "2fJYeOr3b2s",
-                "creator": "sasbo",
-                "thumb": "https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg",
-                "title": "[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside"
-            },
-            {
-                "id": "OZRYzH0Q0pU",
-                "creator": "Men I Trust",
-                "thumb": "https://i.ytimg.com/vi/OZRYzH0Q0pU/mqdefault.jpg",
-                "title": "Min I Trust - Show me How"
-            }
-
-        ]
+        }
     }
+
+    // roomDetails = {
+    //     roomName: 'Minha sala',
+    //     users: [
+    //         {
+    //             id: 'LdRiNdcSZ8ni2bl7soSR',
+    //             admin: true,
+    //             avatarURL: '/images/avatars/male/avatar16.png',
+    //             name: 'Diêgo'
+    //         }
+    //     ],
+    //     playlist: [
+    //         {
+    //             "id": "2fJYeOr3b2s",
+    //             "creator": "sasbo",
+    //             "thumb": "https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg",
+    //             "title": "[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside"
+    //         },
+    //         {
+    //             "id": "OZRYzH0Q0pU",
+    //             "creator": "Men I Trust",
+    //             "thumb": "https://i.ytimg.com/vi/OZRYzH0Q0pU/mqdefault.jpg",
+    //             "title": "Min I Trust - Show me How"
+    //         }
+
+    //     ]
+    // }
 
     return {
         props: {

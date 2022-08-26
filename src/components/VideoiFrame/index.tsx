@@ -17,7 +17,7 @@ import {
 
 } from './styles';
 import { myColor_100, } from "../../styles/variables";
-import { PlaylistContext } from "../../contexts/playlist";
+import { RoomDetailsContext } from "../../contexts/roomDetails";
 
 type DataType = {
     progress: number,
@@ -27,7 +27,7 @@ type DataType = {
 }
 
 export default function VideoiFrame() {
-    const { videos, setVideos } = useContext(PlaylistContext);
+    const { videos, setVideos } = useContext(RoomDetailsContext);
 
     const [width, setWidth] = useState<number>(0);
     const [height, setHeight] = useState<number>(0);

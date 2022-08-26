@@ -94,7 +94,8 @@ const Modal: React.FC = () => {
                 admin: false,
                 avatarURL: avatar
             });
-        })
+        });
+        setModalIsOpen(false);
     }
 
     const usernameIsvalid = () => {
@@ -122,6 +123,7 @@ const Modal: React.FC = () => {
         await firebase.firestore().collection('rooms')
             .add({
                 roomName: roomTitle,
+                playlist: []
             })
             .then(e => {
                 firebase.firestore().collection('rooms')
@@ -157,7 +159,6 @@ const Modal: React.FC = () => {
     }
 
     const handleSaveTitle = () => {
-
         if (titleValid.valid) {
             setRoomTitle(titleInput);
             setEditing(false);
