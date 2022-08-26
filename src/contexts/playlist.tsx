@@ -1,3 +1,5 @@
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { VideoType } from "../components/Playlist";
 import firebase from '../services/firebase';
@@ -14,44 +16,13 @@ type ContextType = {
 export const PlaylistContext = createContext({} as ContextType);
 
 export default function PlaylistProvider({ children }: ContextProps) {
-    const [videos, setVideos] = useState<VideoType[]>([
-
-        {
-            "id": "KB2I-5hNA0c",
-            "title": "Froid - Fantasmas",
-            "thumb": "https://i.ytimg.com/vi/KB2I-5hNA0c/hqdefault.jpg",
-            "creator": "Froid"
-        },
-        {
-            "id": "2fJYeOr3b2s",
-            "creator": "sasbo",
-            "thumb": "https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg",
-            "title": "[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside"
-        },
-        {
-            "id": "OZRYzH0Q0pU",
-            "creator": "Men I Trust",
-            "thumb": "https://i.ytimg.com/vi/OZRYzH0Q0pU/mqdefault.jpg",
-            "title": "Min I Trust - Show me How"
-        }
-
-    ]);
-
-    // useEffect(() => {
-    //     (async () => {
-    //         firebase.firestore().collection('rooms')
-    //             .doc('EkiFWwXV4CtnMJK6havD')
-    //             .onSnapshot(snapshot => {
-    //                 setVideos(snapshot.data()?.playlist);
-    //             })
-
-    //     })();
-    // }, []);
+    const { query } = useRouter();
+    const [videos, setVideos] = useState<VideoType[]>([]);
 
     // useEffect(() => {
     //     (async () => {
     //         await firebase.firestore().collection('rooms')
-    //         .doc('EkiFWwXV4CtnMJK6havD')
+    //         .doc(String(query?.id))
     //         .set({
     //             playlist: videos,
     //         })

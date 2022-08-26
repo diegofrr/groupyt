@@ -18,6 +18,7 @@ import { bgColor, myColor_100 } from '../../styles/variables';
 import api from '../../services/api';
 import PlaylistVideo from '../PlaylistVideo';
 import { PlaylistContext } from '../../contexts/playlist';
+import { useRouter } from 'next/router';
 
 export type VideoType = {
     id: string,
@@ -28,6 +29,7 @@ export type VideoType = {
 
 export default function Playlist() {
     const { videos, setVideos } = useContext(PlaylistContext);
+    const { query } = useRouter();
 
     const [margin, setMargin] = useState(0);
 
