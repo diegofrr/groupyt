@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blockColor, myColor_200 } from "../../styles/variables";
+import { blockColor, myColor_200, myColor_300 } from "../../styles/variables";
 
 export const Container = styled.div`
     position: fixed;
@@ -16,11 +16,10 @@ export const Content = styled.div`
     border-radius: 10px;
     background-color:  ${blockColor};
     padding: 20px;
-    max-width: 400px;
+    max-width: 320px;
     width: calc(100% - 40px);
     z-index: 1;
     position: relative;
-    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,19 +27,28 @@ export const Content = styled.div`
 `
 
 export const InviteMessage = styled.strong`
-
+    margin-bottom: 20px;
+    color: ${myColor_200};
+    font-size: 1.2rem;
+    text-align: center;
 `
 
 export const RoomUrlContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
     flex-direction: column;
+    width: 100%;
 `
 export const RoomUrl = styled.strong`
-    color: ${myColor_200};
-    font-size: 1rem;
+    color: ${myColor_300};
+    font-size: .8rem;
+    font-style: italic;
+    max-width: 200px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    text-align: center;
+    word-break: break-all;
 `
 
 export const CloseButton = styled.button`

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, ButtonText } from '../Header/styles';
+import { Button, ButtonText } from '../../styles/home';
 import {
     Background,
     CloseButton,
@@ -26,18 +26,18 @@ export default function InviteFriendsModal({ modalIsOpen }: ModalProps) {
             <Background />
             <Content>
                 <InviteMessage>
-                    Copie este link e envie para seus amigos.
+                    Copie o link abaixo e envie para seus amigos.
                 </InviteMessage>
                 <CloseButton onClick={() => modalIsOpen(false)}>
                     <FiX size={16} color={myColor_300} />
                 </CloseButton>
                 <RoomUrlContainer>
                     <RoomUrl>
-                        {`localhost:3000${router.pathname}`}
+                        {`localhost:3000${router.asPath}`}
                     </RoomUrl>
-                    <Button primary>
-                        <ButtonText primary>Copiar</ButtonText>
+                    <Button style={{maxHeight: '40px'}} primary>
                         <FiCopy size={18} color={myColor_100} />
+                        <ButtonText primary>Copiar</ButtonText>
                     </Button>
                 </RoomUrlContainer>
             </Content>
