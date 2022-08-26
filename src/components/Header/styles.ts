@@ -14,7 +14,7 @@ export const Container = styled.nav`
     height: 80px;
     display: grid;
     place-items: center;
-    z-index: 100000;
+    z-index: 10000;
     padding: 0 20px;
 `
 
@@ -58,6 +58,10 @@ export const Logo = styled.div`
     @media screen and (max-width: 300px) {
        display: none;
     }
+`
+
+export const SettingsContainer = styled.div`
+    position: relative;
 `
 
 export const ButtonsContainer = styled.div`

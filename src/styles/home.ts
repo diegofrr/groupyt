@@ -72,6 +72,7 @@ export const Button = styled.button<ButtonProps>`
     height: 50px;
     width: 100%;
     transition: all .3s ease;
+    position: relative;
 
     @media screen and (max-width: 500px) {
         height: 40px;

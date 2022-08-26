@@ -29,15 +29,6 @@ const Home: NextPage = () => {
     setModalIsOpen(true);
   }
 
-  const handleEnterToRoom = () => { 
-    setModalType('ENTER_TO_ROOM');
-    setModalIsOpen(true);
-  }
-
-  const openModal = (t: boolean) => {
-    setModalIsOpen(t);
-  }
-
   return (
     <>
       <Head>

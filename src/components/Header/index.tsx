@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { useState } from 'react';
 import {
     Container,
     RoomName,
@@ -6,7 +6,8 @@ import {
     ButtonsContainer,
     Content,
     Button,
-    ButtonText
+    ButtonText,
+    SettingsContainer
 
 } from './styles';
 import Link from 'next/link';
@@ -15,17 +16,33 @@ import groupytIcon from '../../../public/icon.svg';
 import Image from 'next/image';
 import { myColor_100, myColor_200 } from '../../styles/variables';
 import { FiSettings, FiUserPlus } from 'react-icons/fi';
+import InviteFriendsModal from '../InviteFriendsModal';
+import SettingsOptions from '../SettingsOptions';
 
 interface HeaderProps {
     roomName: string;
 }
 
-
 const Header = ({ roomName }: HeaderProps) => {
+    const [inviteModal, setInviteModal] = useState(false);
+    const [settingsIsOpen, setSettingsIsOpen] = useState(false);
+
+    const handleInviteFriends = () => {
+        setInviteModal(!inviteModal);
+        setSettingsIsOpen(false);
+    }
+
+    const handleSettings = () => {
+        setSettingsIsOpen(!settingsIsOpen);
+        setInviteModal(false);
+    }
+
     const router = useRouter();
 
     return (
         <Container>
+            {inviteModal && <InviteFriendsModal modalIsOpen={setInviteModal} />}
+
             <Content>
                 <RoomName>
                     {roomName}
@@ -37,11 +54,14 @@ const Header = ({ roomName }: HeaderProps) => {
 
                 <ButtonsContainer>
 
-                    <Button onClick={() => alert('clicou')} primary={false}>
-                        <FiSettings size={18} color={myColor_200} />
-                    </Button>
+                    <SettingsContainer>
+                        <Button onClick={handleSettings} primary={false}>
+                            <FiSettings size={18} color={myColor_200} />
+                        </Button>
+                        <SettingsOptions isOpen={settingsIsOpen} setIsOpen={setSettingsIsOpen} />
+                    </SettingsContainer>
 
-                    <Button onClick={() => alert('clicou')} primary>
+                    <Button onClick={handleInviteFriends} primary>
                         <FiUserPlus style={{ display: 'none' }} size={18} color={myColor_100} />
                         <ButtonText primary>
                             Convidar amigos
