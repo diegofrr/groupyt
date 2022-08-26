@@ -42,6 +42,7 @@ export default function Room(props: RoomProps) {
     const { query } = useRouter();
 
     useEffect(() => {
+        if(user.name !== undefined) localStorage.setItem('@user', JSON.stringify(user));
         setModalIsOpen(false);
         setVideos(props.roomDetails.playlist);
         setRoomId(props.roomDetails.roomId);
@@ -60,10 +61,7 @@ export default function Room(props: RoomProps) {
                 })
         })()
 
-    }, []);
-
-    useEffect(() => {
-    }, [user])
+    }, [user]);
 
     useEffect(() => {
         function updateDimensions() {
@@ -147,33 +145,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             }
         }
     }
-
-    // roomDetails = {
-    //     roomName: 'Minha sala',
-    //     users: [
-    //         {
-    //             id: 'LdRiNdcSZ8ni2bl7soSR',
-    //             admin: true,
-    //             avatarURL: '/images/avatars/male/avatar16.png',
-    //             name: 'Diêgo'
-    //         }
-    //     ],
-    //     playlist: [
-    //         {
-    //             "id": "2fJYeOr3b2s",
-    //             "creator": "sasbo",
-    //             "thumb": "https://i.ytimg.com/vi/2fJYeOr3b2s/mqdefault.jpg",
-    //             "title": "[FREE] Isaiah Rashad x Mick Jenkins x Earthgang Type Beat 2022 | Outside"
-    //         },
-    //         {
-    //             "id": "OZRYzH0Q0pU",
-    //             "creator": "Men I Trust",
-    //             "thumb": "https://i.ytimg.com/vi/OZRYzH0Q0pU/mqdefault.jpg",
-    //             "title": "Min I Trust - Show me How"
-    //         }
-
-    //     ]
-    // }
 
     return {
         props: {

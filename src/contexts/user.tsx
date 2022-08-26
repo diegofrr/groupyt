@@ -23,15 +23,10 @@ export default function UserProvider({ children }: ContextProps) {
     const [user, setUser] = useState<UserType>({} as UserType);
     const { roomId } = useContext(RoomDetailsContext);
 
-    useEffect(() => {},[]);
-
     useEffect(() => {
-        const data = {
-            user,
-            roomId
-        }
-        localStorage.setItem('@user', JSON.stringify(user));
-    },[user])
+        const value = JSON.parse(localStorage.getItem("@user") || '{}');
+        setUser(value)
+    }, []);
 
     return <UserContext.Provider
         value={{

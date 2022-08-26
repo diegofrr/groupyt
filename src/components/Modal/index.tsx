@@ -61,7 +61,7 @@ const Modal: React.FC = () => {
     const [validUsername, setValidUsername] = useState<boolean>(true);
 
     useEffect(() => {
-        if(roomName !== '') {
+        if (roomName !== '') {
             setRoomTitle(roomName)
         }
     }, [roomName]);
@@ -78,7 +78,7 @@ const Modal: React.FC = () => {
     useEffect(() => {
         setAvatar(`/images/avatars/${genre}/avatar1.png`)
     }, [genre]);
-    
+
     useEffect(() => {
         setLoading(false);
     }, []);
@@ -88,21 +88,21 @@ const Modal: React.FC = () => {
     const EnterToRoom = async () => {
         let roomId = query?.id;
         await firebase.firestore().collection('rooms')
-        .doc(String(roomId))
-        .collection('users')
-        .add({
-            avatarURL: avatar,
-            name: username,
-            admin: false,
-        })
-        .then(e => {
-            setUser({
-                id: e.id,
+            .doc(String(roomId))
+            .collection('users')
+            .add({
+                avatarURL: avatar,
                 name: username,
                 admin: false,
-                avatarURL: avatar
+            })
+            .then(e => {
+                setUser({
+                    id: e.id,
+                    name: username,
+                    admin: false,
+                    avatarURL: avatar
+                });
             });
-        });
         setModalIsOpen(false);
     }
 
@@ -174,7 +174,7 @@ const Modal: React.FC = () => {
     }
 
     const handleCancel = () => {
-        if(modalType === 'ENTER_TO_ROOM') {
+        if (modalType === 'ENTER_TO_ROOM') {
             router.push('/')
         }
         setModalIsOpen(false);
