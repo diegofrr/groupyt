@@ -67,6 +67,10 @@ const Modal: React.FC = () => {
     }, [roomName]);
 
     useEffect(() => {
+        setRoomTitle('Minha sala')
+    }, [query?.id])
+
+    useEffect(() => {
 
         if (titleInput.trim() === '') setTitleValid({ valid: false, msg: 'Forneça um nome para a sala' })
         else if (titleInput.trim().length < 5) setTitleValid({ valid: false, msg: 'O nome da sala precisa ter, pelo menos, 5 caracteres.' });

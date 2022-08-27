@@ -22,8 +22,6 @@ export default function Message({ data, latestItem }: MessageProps) {
     const [isOwner, setIsOwner] = useState<boolean>(user.id === data?.user.id)
     const [diferentUser, setDiferentUser] = useState(latestItem?.user?.id !== data.user.id);
 
-    console.log(latestItem.user)
-
     return (
         <Container diferentUser={diferentUser} isOwner={isOwner} isAdmin={data?.user.admin}>
             {diferentUser && (
