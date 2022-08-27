@@ -36,6 +36,10 @@ export default function Chat() {
     const myRef = useRef<HTMLHeadingElement>(null)
 
     useEffect(() => {
+        myRef.current?.scrollTo(0, myRef.current?.scrollHeight)
+    }, [myRef, messages])
+
+    useEffect(() => {
 
         (async () => {
             await firebase.firestore().collection('rooms')
@@ -54,7 +58,7 @@ export default function Chat() {
                         });
                     });
                     setMessages(list);
-                })
+                });
         })();
 
     }, [roomId])
@@ -65,7 +69,6 @@ export default function Chat() {
     }
 
     const handleEnviarMensagem = useCallback(async () => {
-        myRef.current?.scrollTo(0, myRef.current.scrollHeight);
         if (message !== null && message !== '') {
             await firebase.firestore().collection('rooms')
                 .doc(roomId)
@@ -75,7 +78,6 @@ export default function Chat() {
                     user: user,
                     message: message,
                 })
-            myRef.current?.scrollTo(0, myRef.current?.scrollHeight)
 
         } else {
 
