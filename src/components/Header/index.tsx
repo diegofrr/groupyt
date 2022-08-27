@@ -10,7 +10,6 @@ import {
     SettingsContainer
 
 } from './styles';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import groupytIcon from '../../../public/icon.svg';
 import Image from 'next/image';

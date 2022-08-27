@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Container } from "./styles";
 import ReactLoading from 'react-loading';
 import { purpleColor } from "../../styles/variables";

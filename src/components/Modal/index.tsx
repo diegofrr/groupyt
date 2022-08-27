@@ -1,6 +1,5 @@
-import React, { useContext, useCallback, useEffect, useRef, useState } from 'react';
+import React, { useContext, useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
-import ReactLoading from 'react-loading';
 import firebase from '../../services/firebase';
 import {
     ModalContainer,
@@ -31,9 +30,9 @@ import {
 } from './styles';
 
 import { Button, ButtonText } from '../../styles/home';
-import { FiEdit, FiCheck, FiUser } from 'react-icons/fi';
+import { FiEdit, FiCheck } from 'react-icons/fi';
 import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
-import { bgColor, myColor_100, myColor_200, purpleColor } from '../../styles/variables';
+import { myColor_100 } from '../../styles/variables';
 import { maleAvatars, femaleAvatars } from '../AvatarsList';
 import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';

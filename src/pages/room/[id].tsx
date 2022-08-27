@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { GetServerSideProps, NextPage } from 'next';
+import React, { useContext, useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import firebase from '../../services/firebase';
 import { UserContext } from '../../contexts/user';
@@ -7,7 +7,6 @@ import Header from '../../components/Header';
 import Head from 'next/head';
 import { UserType } from '../../contexts/user';
 import Modal from '../../components/Modal';
-import { MessageType } from '../../components/Chat';
 import {
     Container,
     LeftContent,

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, ButtonText } from '../../styles/home';
 import {
     Background,
@@ -11,7 +11,6 @@ import {
 } from './styles';
 import { FiCheck, FiCopy, FiX } from 'react-icons/fi';
 import { myColor_100, myColor_300 } from '../../styles/variables';
-import { RoomDetailsContext } from '../../contexts/roomDetails';
 import { useRouter } from 'next/router';
 
 interface ModalProps {

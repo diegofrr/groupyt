@@ -1,6 +1,4 @@
-import { useRouter } from "next/router";
-import React, { createContext, useContext, useEffect, ReactNode, useState } from "react";
-import { RoomDetailsContext } from "./roomDetails";
+import React, { createContext, ReactNode, useState } from "react";
 
 type ContextProps = {
     children: ReactNode

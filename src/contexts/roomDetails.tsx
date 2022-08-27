@@ -1,7 +1,5 @@
-import { useRouter } from "next/router";
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 import { VideoType } from "../components/Playlist";
-import firebase from '../services/firebase';
 import { UserType } from "./user";
 
 type ContextProps = {

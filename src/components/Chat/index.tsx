@@ -10,7 +10,6 @@ import {
     SendMessageButton
 
 } from './styles';
-import Image from 'next/image';
 import Message from '../Message';
 import { format } from 'date-fns';
 import { BiSend } from 'react-icons/bi';

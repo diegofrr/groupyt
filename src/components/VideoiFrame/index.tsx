@@ -9,19 +9,15 @@ import {
     NotClick,
     ControlsContainer,
     ActionButton,
-    CurrentTimeBar,
-    BackgroundBar,
-    CurrentTimeContainer,
     EmptyVideo,
     ProgressTime,
     VideoInfo,
     SkipVideo,
 
 } from './styles';
-import { myColor_100, myColor_200, } from "../../styles/variables";
+import { myColor_100, } from "../../styles/variables";
 import { RoomDetailsContext } from "../../contexts/roomDetails";
 import { UserContext } from "../../contexts/user";
-import { Button, ButtonText } from "../Header/styles";
 import { FiSkipForward } from "react-icons/fi";
 
 type DataType = {
