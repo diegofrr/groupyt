@@ -12,28 +12,36 @@ import {
 import { UserContext } from '../../contexts/user';
 
 interface MessageProps {
-    data: MessageType
+    data: MessageType,
+    latestItem: MessageType,
 }
 
-export default function Message({ data }: MessageProps) {
+export default function Message({ data, latestItem }: MessageProps) {
 
     const { user } = useContext(UserContext);
     const [isOwner, setIsOwner] = useState<boolean>(user.id === data?.user.id)
+    const [diferentUser, setDiferentUser] = useState(latestItem?.user?.id !== data.user.id);
+
+    console.log(latestItem.user)
 
     return (
-        <Container isOwner={isOwner} isAdmin={data?.user.admin}>
-            <Avatar>
-                <Image
-                    style={{ borderRadius: '50%' }}
-                    width={60} height={60}
-                    alt='User avatar'
-                    src={data?.user.avatarURL} />
-            </Avatar>
-            <UsernameAndMessage>
-                <Username isOwner={isOwner} isAdmin={data?.user.admin}>
-                    {isOwner ? 'Você' : data?.user.name}
-                </Username>
-                <MessageContainer>
+        <Container diferentUser={diferentUser} isOwner={isOwner} isAdmin={data?.user.admin}>
+            {diferentUser && (
+                <Avatar>
+                    <Image
+                        style={{ borderRadius: '50%' }}
+                        width={60} height={60}
+                        alt='User avatar'
+                        src={data?.user.avatarURL} />
+                </Avatar>
+            )}
+            <UsernameAndMessage diferentUser>
+                {diferentUser && (
+                    <Username diferentUser isOwner={isOwner} isAdmin={data?.user.admin}>
+                        {isOwner ? 'Você' : data?.user.name}
+                    </Username>
+                )}
+                <MessageContainer diferentUser={diferentUser}>
                     <MessageText>
                         {data?.message}
                     </MessageText>

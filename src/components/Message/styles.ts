@@ -1,17 +1,25 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { adminUsername, blockHeaderColor, myColor_200, myColor_300 } from "../../styles/variables";
 
 interface MessageProps {
     isOwner: boolean,
-    isAdmin: boolean
+    isAdmin: boolean,
+    diferentUser: boolean | null
+}
+
+interface UserProps {
+    diferentUser: boolean,
 }
 
 export const Container = styled.div<MessageProps>`
     display: flex;
     flex-direction: ${p => p.isOwner ? 'row-reverse' : 'row'};
     gap: 10px;
-    margin-bottom: 20px;
     width: 100%;
+
+    ${p => p.diferentUser && css`
+        margin-top: 20px;
+    `}
 `
 
 export const Avatar = styled.div` 
@@ -22,7 +30,7 @@ export const Avatar = styled.div`
     height: 40px;
 `
 
-export const UsernameAndMessage = styled.div`
+export const UsernameAndMessage = styled.div<UserProps>`
     display: flex;
     justify-content: center;
     flex-direction: column; 
@@ -36,12 +44,16 @@ export const Username = styled.span<MessageProps>`
     width: 100%;
     font-size: .9rem;
     text-align: ${p => p.isOwner ? 'right' : 'left'};
+
 `
 
-export const MessageContainer = styled.div`
+export const MessageContainer = styled.div<UserProps>`
     background-color: ${blockHeaderColor};
     border-radius: 10px;
     padding: 10px;
+    ${p => !p.diferentUser && css`
+        margin-left: 50px;
+    `}
 `
 
 export const MessageText = styled.span`

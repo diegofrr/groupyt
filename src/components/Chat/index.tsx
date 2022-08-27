@@ -90,7 +90,9 @@ export default function Chat() {
                 <span>Chat</span>
             </Header>
             <Content ref={myRef}>
-                {messages.map(message => <Message key={message.id} data={message} />)}
+                {messages.map((message, index) => <>
+                    <Message latestItem={index > 0 ? messages[index - 1] : {} as MessageType} key={message.id} data={message} />
+                </>)}
             </Content>
 
             <SendMessageContainer onSubmit={e => handleSendMessage(e)}>

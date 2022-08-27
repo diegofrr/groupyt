@@ -36,7 +36,8 @@ export const Header = styled.div`
 
 export const Content = styled.div`
     overflow-y: scroll;
-    padding-top: 50px;
+    padding-top: 30px;
+    padding-bottom: 20px;
 
     scrollbar-width: none;
     
