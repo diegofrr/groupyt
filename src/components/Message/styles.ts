@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { adminUsername, blockHeaderColor, myColor_300 } from "../../styles/variables";
+import { adminUsername, blockHeaderColor, myColor_200, myColor_300 } from "../../styles/variables";
 
 interface MessageProps {
     isOwner: boolean,
@@ -45,6 +45,6 @@ export const MessageContainer = styled.div`
 `
 
 export const MessageText = styled.span`
-    font-size: .8rem;
-    color: ${myColor_300};
+    font-size: .9rem;
+    color: ${myColor_200};
 `
