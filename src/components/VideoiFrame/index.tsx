@@ -127,11 +127,6 @@ export default function VideoiFrame() {
         e.target?.playVideo();
     }
 
-    const handleCurrentTimeChange = () => {
-        video.target?.seekTo(progress);
-        video.target?.playVideo();
-    }
-
     const handleStateChange = (e: YouTubeEvent) => {
         setVideoState(e.target?.getPlayerState());
         setVideoDuration(e.target?.getDuration());
