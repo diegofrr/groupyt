@@ -41,7 +41,7 @@ export default function Room(props: RoomProps) {
 
     const { user, setUser } = useContext(UserContext);
     const { modalIsOpen, setModalIsOpen, setModalType } = useContext(ModalContext);
-    const { setVideos, videos, roomName, setRoomName, setRoomId } = useContext(RoomDetailsContext);
+    const { setVideos, videos, roomName, setRoomName, setRoomId, setUsers } = useContext(RoomDetailsContext);
     const [width, setWidth] = useState<number>(0);
     const [counter, setCounter] = useState(0);
     const { query } = useRouter();
@@ -51,6 +51,7 @@ export default function Room(props: RoomProps) {
         setVideos(props.roomDetails.playlist);
         setRoomId(props.roomDetails.roomId);
         setRoomName(props.roomDetails.roomName);
+        setUsers(props.roomDetails.users);
 
         if (user.name === undefined) {
             setModalIsOpen(true);
@@ -129,6 +130,12 @@ export default function Room(props: RoomProps) {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     const roomId = params?.id;
+    
+    if(roomId === undefined) return {redirect: {
+        destination: '/',
+        permanent: false,
+    }}
+
     let roomDetails = {} as RoomType;
     roomDetails.roomId = String(roomId);
 

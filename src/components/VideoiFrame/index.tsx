@@ -52,7 +52,7 @@ export default function VideoiFrame() {
     }, [])
 
     useEffect(() => {
-        if (videos.length > 0) {
+        if (videos?.length > 0) {
             let videoId = videos[0].id;
             setVideoId(videoId);
         }
@@ -82,7 +82,7 @@ export default function VideoiFrame() {
     });
 
     const handleFinishedVideo = () => {
-        if (videos.length > 1) {
+        if (videos?.length > 1) {
             let newList = videos.filter(video => video.id !== videoId);
             setVideos(newList);
             setProgress(0);
@@ -160,7 +160,7 @@ export default function VideoiFrame() {
     return (
         <Container>
             <VideoContainer width={width} height={height}>
-                {videos.length === 0 ? (
+                {videos?.length === 0 ? (
                     <EmptyVideo height={height} width={width}>Adicione vídeos à sua playlist.</EmptyVideo>
                 )
                     : (

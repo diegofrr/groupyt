@@ -37,20 +37,26 @@ export default function Playlist() {
     const [searching, setSearching] = useState<boolean>(false);
     const [videoUrl, setVideoUrl] = useState('');
     const [exists, setExists] = useState<boolean>(true);
-    const [validUrl, setValidUrl] = useState<boolean>(false);
 
     useEffect(() => {
         setMargin(0);
         (async () => {
             await firebase.firestore().collection('rooms')
                 .doc(roomId)
-                .set({
-                    roomName,
-                    playlist: videos,
+                .get()
+                .then(e => {
+                    if (e.data() !== undefined) {
+                        firebase.firestore().collection('rooms')
+                            .doc(roomId)
+                            .set({
+                                roomName,
+                                playlist: videos,
+                            })
+                    }
                 })
         })();
-    }, [videos, roomId, roomName]);
 
+    }, [videos, roomId, roomName]);
 
     const idExists = (id: string) => {
         return videos.some(video => video.id === id);
@@ -109,14 +115,14 @@ export default function Playlist() {
                 </AddNewVideo>
 
                 <ActionButtonsContainer>
-                    {(margin !== 0 && videos.length !== 0) ? (
+                    {(margin !== 0 && videos?.length !== 0) ? (
                         <ActionButton onClick={() => setMargin(margin < 0 ? margin + 310 : margin)}>
                             <FiChevronLeft size={18} color={bgColor} />
                         </ActionButton>
                     ) : <span></span>}
 
-                    {(margin !== (-310 * (videos.length - 1)) && videos.length !== 0) && (
-                        <ActionButton onClick={() => setMargin(margin > -310 * (videos.length - 1) ? margin - 310 : margin)}>
+                    {(margin !== (-310 * (videos?.length - 1)) && videos?.length !== 0) && (
+                        <ActionButton onClick={() => setMargin(margin > -310 * (videos?.length - 1) ? margin - 310 : margin)}>
                             <FiChevronRight size={18} color={bgColor} />
                         </ActionButton>
                     )}
@@ -124,11 +130,11 @@ export default function Playlist() {
             </PlaylistHeader>
 
             <VideosContainer>
-                {videos.length === 0
+                {videos?.length === 0
                     ? <EmptyPlaylist>Lista de reprodução vazia...</EmptyPlaylist>
                     : (
                         <VideosContent margin={margin}>
-                            {videos.length > 0 && videos.map(video => <PlaylistVideo key={video.id} video={video} playing={videos[0]?.id === video.id} />)}
+                            {videos?.length > 0 && videos.map(video => <PlaylistVideo key={video.id} video={video} playing={videos[0]?.id === video.id} />)}
                         </VideosContent>
                     )}
             </VideosContainer>
