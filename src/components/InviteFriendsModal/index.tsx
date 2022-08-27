@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { Button, ButtonText } from '../../styles/home';
 import {
     Background,
@@ -9,7 +9,7 @@ import {
     RoomUrlContainer,
     InviteMessage
 } from './styles';
-import { FiCopy, FiX } from 'react-icons/fi';
+import { FiCheck, FiCopy, FiX } from 'react-icons/fi';
 import { myColor_100, myColor_300 } from '../../styles/variables';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
 import { useRouter } from 'next/router';
@@ -20,6 +20,17 @@ interface ModalProps {
 
 export default function InviteFriendsModal({ modalIsOpen }: ModalProps) {
     const router = useRouter();
+    const urlRef = useRef<HTMLElement>(null);
+    const [copied, setCopied] = useState(false);
+
+    useEffect(() => {
+        setCopied(false);
+    }, [])
+
+    const handleCopy = () => {
+        setCopied(true);
+        navigator.clipboard.writeText(urlRef.current?.innerHTML || '');
+    }
 
     return (
         <Container>
@@ -32,13 +43,20 @@ export default function InviteFriendsModal({ modalIsOpen }: ModalProps) {
                     <FiX size={16} color={myColor_300} />
                 </CloseButton>
                 <RoomUrlContainer>
-                    <RoomUrl>
-                        {`localhost:3000${router.asPath}`}
+                    <RoomUrl ref={urlRef}>
+                        {`https://groupyt.vercel.app${router.asPath}`}
                     </RoomUrl>
-                    <Button style={{maxHeight: '40px'}} primary>
-                        <FiCopy size={18} color={myColor_100} />
-                        <ButtonText primary>Copiar</ButtonText>
-                    </Button>
+                    {!copied ? (
+                        <Button onClick={handleCopy} style={{ maxHeight: '40px' }} primary>
+                            <FiCopy size={18} color={myColor_100} />
+                            <ButtonText primary>Copiar</ButtonText>
+                        </Button>
+                    ) : (
+                        <Button style={{ maxHeight: '40px', backgroundColor: '#41862c' }} primary>
+                            <FiCheck size={18} color={myColor_100} />
+                            <ButtonText primary>Copiado</ButtonText>
+                        </Button>
+                    )}
                 </RoomUrlContainer>
             </Content>
             <Background onClick={() => modalIsOpen(false)} />
