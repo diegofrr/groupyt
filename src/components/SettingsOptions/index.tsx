@@ -21,7 +21,7 @@ export default function SettingsOptions({ isOpen, setIsOpen }: Props) {
     const router = useRouter();
 
     const { users, roomId, setRoomId } = useContext(RoomDetailsContext);
-    const [roomAdmin, setRoomAdmin] = useState(users.filter(u => u.admin === true)[0].id === user.id);
+    const [roomAdmin, setRoomAdmin] = useState(users.filter(u => u.admin === true)[0]?.id === user.id);
 
     const removeRoom = async () => {
         await firebase.firestore().collection('rooms')
