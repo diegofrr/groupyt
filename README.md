@@ -6,7 +6,7 @@ O <b>Groupyt</b> é uma plataforma para assistir vídeos do Youtube com os amigo
 
 Disponível em: https://groupyt.vercel.app/
 
-### A implementar
+### Checklist
 - [ ] Não permitir adicionar lives ou vídeos maiores que 10 minutos.
 - [ ] Admin pode fechar sala
 - [ ] Fechar automaticamente quando o admin sair
