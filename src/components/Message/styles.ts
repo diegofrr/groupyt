@@ -47,11 +47,12 @@ export const MessageContainer = styled.div<MessageProps>`
     background-color: ${blockHeaderColor};
     border-radius: 10px;
     padding: 10px;
-    ${p => !p.diferentUser && 
+    ${p => (!p.diferentUser && p.isOwner) && css`margin-right: 50px;`}
+    ${p => (!p.diferentUser && !p.isOwner) && css`margin-left: 50px;`}
+    ${p => !p.diferentUser && (
         p.isOwner
-        ? css`margin-right: 50px;`
-        : css`margin-left: 50px;`
-    }
+    ? css`margin-right: 50px;`
+    : css`margin-left: 50px;`)}
 `
 
 export const MessageText = styled.span`
