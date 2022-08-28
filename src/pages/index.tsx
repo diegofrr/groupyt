@@ -9,7 +9,6 @@ import {
   Button,
   ButtonText,
   BackImage,
-  BackImage2,
 
 } from '../styles/home';
 
@@ -22,7 +21,6 @@ import { ModalContext } from '../contexts/modal';
 const Home: NextPage = () => {
 
   const { modalIsOpen, setModalIsOpen, setModalType } = useContext(ModalContext);
-  const [loadingPage, setLoadingPage] = useState(true);
 
   const handleCreateNewRoom = () => {
     setModalType('CREATE_NEW_ROOM');
@@ -52,7 +50,7 @@ const Home: NextPage = () => {
             </Description>
 
             <ButtonsContainer>
-              <Button onClick={handleCreateNewRoom} primary>
+              <Button style={{minHeight: 50}} onClick={handleCreateNewRoom} primary>
                 <ButtonText primary>
                   Criar uma sala
                 </ButtonText>

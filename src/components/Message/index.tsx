@@ -33,13 +33,13 @@ export default function Message({ data, latestItem }: MessageProps) {
                         src={data?.user.avatarURL} />
                 </Avatar>
             )}
-            <UsernameAndMessage diferentUser>
+            <UsernameAndMessage>
                 {diferentUser && (
                     <Username diferentUser isOwner={isOwner} isAdmin={data?.user.admin}>
                         {isOwner ? 'Você' : data?.user.name}
                     </Username>
                 )}
-                <MessageContainer diferentUser={diferentUser}>
+                <MessageContainer isAdmin={data?.user.admin} isOwner={isOwner} diferentUser={diferentUser}>
                     <MessageText>
                         {data?.message}
                     </MessageText>

@@ -92,6 +92,10 @@ export const ModalHeader = styled.div`
     padding: 20px;
     border-radius: 10px;
     gap: 20px;
+
+    @media screen and (max-width: 500px){
+        height: 70px;
+    }
 `
 
 export const ModalTitleContainer = styled.div`

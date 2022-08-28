@@ -4,10 +4,6 @@ import { adminUsername, blockHeaderColor, myColor_200, myColor_300 } from "../..
 interface MessageProps {
     isOwner: boolean,
     isAdmin: boolean,
-    diferentUser: boolean | null
-}
-
-interface UserProps {
     diferentUser: boolean,
 }
 
@@ -30,7 +26,7 @@ export const Avatar = styled.div`
     height: 40px;
 `
 
-export const UsernameAndMessage = styled.div<UserProps>`
+export const UsernameAndMessage = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column; 
@@ -47,13 +43,15 @@ export const Username = styled.span<MessageProps>`
 
 `
 
-export const MessageContainer = styled.div<UserProps>`
+export const MessageContainer = styled.div<MessageProps>`
     background-color: ${blockHeaderColor};
     border-radius: 10px;
     padding: 10px;
-    ${p => !p.diferentUser && css`
-        margin-left: 50px;
-    `}
+    ${p => !p.diferentUser && 
+        p.isOwner
+        ? css`margin-right: 50px;`
+        : css`margin-left: 50px;`
+    }
 `
 
 export const MessageText = styled.span`
