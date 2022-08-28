@@ -6,12 +6,21 @@ O <b>Groupyt</b> é uma plataforma para assistir vídeos do Youtube com os amigo
 
 Disponível em: https://groupyt.vercel.app/
 
+### A implementar
+- [ ] Não permitir adicionar lives ou vídeos maiores que 10 minutos.
+- [ ] Admin pode fechar sala
+- [ ] Fechar automaticamente quando o admin sair
+- [ ] Sair de uma sala (atualizar também no armazenamento local)
+- [ ] Sincronizar tempo/estado atual do vídeo tocando
+- [ ] Admin pode remover vídeos da playlist
+- [ ] Mostrar quem foi que adicionou o vídeo à playlist
+
 ### Tecnologias relevantes utilizadas
-* @nextjs
-* @typescript
-* @firebase
-* @styled-components
-* @axios
+![image](https://user-images.githubusercontent.com/56923620/187099131-7cde5bf0-6e1f-4e36-b973-794dd9f7af72.png)
+![image](https://user-images.githubusercontent.com/56923620/187099147-d4beff2b-157c-44cd-a263-54b91257492b.png)
+![image](https://user-images.githubusercontent.com/56923620/187099152-b827cf48-770b-40e7-b995-a3c8682b145a.png)
+![image](https://user-images.githubusercontent.com/56923620/187099154-49ef70eb-6ce8-4da3-a43b-5be00413ff75.png)
+![image](https://user-images.githubusercontent.com/56923620/187099155-e30596c7-fd0a-45d9-ab10-a5ad24cbc37e.png)
 
 ### Screenshots
 #### Criando uma sala
