@@ -11,8 +11,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ModalProvider>
       <UserProvider>
         <RoomDetailsProvider>
-          <Toaster position='top-center' toastOptions={{
-            duration: 3000,
+          <Toaster  position='top-center' containerStyle={{marginTop: 80}} toastOptions={{
+            duration: 3000, 
           }} />
           <Component {...pageProps} />
         </RoomDetailsProvider>

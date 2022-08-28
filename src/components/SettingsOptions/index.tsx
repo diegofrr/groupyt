@@ -10,6 +10,7 @@ import {
     Option
 } from './styles';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 interface Props {
     isOpen: boolean,
@@ -24,12 +25,19 @@ export default function SettingsOptions({ isOpen, setIsOpen }: Props) {
     const [roomAdmin] = useState(users.filter(u => u.admin === true)[0]?.id === user.id);
 
     const removeRoom = async () => {
-        await firebase.firestore().collection('rooms')
-            .doc(roomId)
-            .delete()
-            .then(() => {
-                router.push('/')
-            })
+        // await firebase.firestore().collection('rooms')
+        //     .doc(roomId)
+        //     .delete()
+        //     .then(() => {
+        //         router.push('/')
+        //     })
+        toast('Em breve...', {icon: '🚧'})
+        setIsOpen(false);
+    }
+
+    const handleExit = async () => {
+        toast('Em breve...', {icon: '🚧'})
+        setIsOpen(false);
     }
 
     return (
@@ -43,7 +51,7 @@ export default function SettingsOptions({ isOpen, setIsOpen }: Props) {
                     </Option>
                 )}
 
-                <Option style={{ color: logoutColor }}>
+                <Option style={{ color: logoutColor }} onClick={handleExit} >
                     <FiLogOut size={14} color={logoutColor} />
                     Sair
                 </Option>
