@@ -231,6 +231,7 @@ const Modal: React.FC = () => {
                                 onChange={e => { setUsername(e.target.value) }}
                                 placeholder='Seu apelido...'
                                 maxLength={15}
+                                autoComplete='off'
                             />
                             <LetterCounter letters={username.length}>{username.length}/15</LetterCounter>
                         </NameContainer>
