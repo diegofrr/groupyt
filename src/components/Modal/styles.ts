@@ -314,6 +314,9 @@ export const Avatar = styled.div<AvatarProps>`
     outline: 3px solid ${p => p.selected ? purpleColor : 'transparent'};
     transition: all .3s ease;
     cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: ${blockHeaderColor};
 
     &:hover {
         opacity: 1;
