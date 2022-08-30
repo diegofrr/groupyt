@@ -80,6 +80,7 @@ export const RepositoryLink = styled.a`
     transition: all .3s ease;
     font-weight: bold;
     filter: brightness(.7);
+    z-index: 1000;
 
     position: absolute;
     right: 20px;
