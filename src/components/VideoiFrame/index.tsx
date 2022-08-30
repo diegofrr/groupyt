@@ -193,8 +193,8 @@ export default function VideoiFrame() {
                                 )} */}
 
                                 <VideoInfo>
-                                    <strong>{video.target?.getVideoData()?.author}</strong>
-                                    <span>{video.target?.getVideoData()?.title}</span>
+                                    <strong>{video.target?.getVideoData()?.title}</strong>
+                                    <span>{video.target?.getVideoData()?.author}</span>
                                 </VideoInfo>
                                 <ProgressTime>
                                     <span>
