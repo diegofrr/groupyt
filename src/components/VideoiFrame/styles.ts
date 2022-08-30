@@ -52,8 +52,8 @@ export const SkipVideo = styled.button`
     place-items: center;
     width: 30px;
     height: 30px;
-    position: absolute;
     left: 80px;
+    width: 60px;
     border-radius: 100px;
     transition: all .3s ease;
 
@@ -71,6 +71,7 @@ export const ActionButton = styled.button`
     background-color: ${purpleColor};
     transition: all .3s ease;
     z-index: 1000;
+    display: none;
     
     &:hover {
         filter: brightness(1.1)
