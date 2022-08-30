@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { bgColor, btnPriColor, btnSecColor, myColor_100, myColor_200, purpleColor } from "./variables";
+import { bgColor, btnPriColor, btnSecColor, myColor_100, myColor_200, myColor_300, purpleColor } from "./variables";
 
 interface ButtonProps {
     primary: boolean;
@@ -33,18 +33,22 @@ export const Content = styled.div`
 `
 
 export const LogoContainer = styled.div`
-    width: 100%;
     display: grid;
     place-items: center;
+    max-width: 250px;
 `
 
 export const Description = styled.span`
     display: block;
+    font-size: 4rem;
+    max-width: 600px;
     font-weight: bold;
-    font-size: 2em;
-    max-width: 400px;
     text-align: center;
     color: ${myColor_200};
+
+    @media screen and (max-width: 500px) {
+        font-size: 2rem;
+    }
 `
 
 export const ButtonsContainer = styled.div`
@@ -61,6 +65,32 @@ export const ButtonsContainer = styled.div`
         & > * {
             width: 100%;
         }
+    }
+`
+
+export const RepositoryLink = styled.a`
+    color: ${myColor_300};
+    display: flex;
+    font-size: .8rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: all .3s ease;
+    font-weight: bold;
+    filter: brightness(.7);
+
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+
+    :hover {
+       filter: brightness(1);
+    }
+
+    svg {
+        margin-right: 10px;
     }
 `
 

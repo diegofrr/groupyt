@@ -9,14 +9,17 @@ import {
   Button,
   ButtonText,
   BackImage,
+  RepositoryLink,
 
 } from '../styles/home';
 
 import Modal from '../components/Modal';
 import logo from '../../public/images/groupyt_logo.svg';
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { GoMarkGithub } from 'react-icons/go';
+import { useContext } from 'react';
 import { ModalContext } from '../contexts/modal';
+import { myColor_300 } from '../styles/variables';
 
 const Home: NextPage = () => {
 
@@ -46,11 +49,11 @@ const Home: NextPage = () => {
             </LogoContainer>
 
             <Description>
-              Assista vídeos do Youtube com seus amigos.
+              Assista vídeos do Youtube em grupo.
             </Description>
 
             <ButtonsContainer>
-              <Button style={{minHeight: 50}} onClick={handleCreateNewRoom} primary>
+              <Button style={{ minHeight: 50 }} onClick={handleCreateNewRoom} primary>
                 <ButtonText primary>
                   Criar uma sala
                 </ButtonText>
@@ -58,7 +61,10 @@ const Home: NextPage = () => {
             </ButtonsContainer>
 
           </Content>}
-
+        <RepositoryLink target='_blank' href='https://github.com/diegofrr/groupyt'>
+          <GoMarkGithub size={14} color={myColor_300} />
+          Repositório
+        </RepositoryLink>
       </Container>
 
       <BackImage src='/images/backvector.png' />
