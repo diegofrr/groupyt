@@ -29,8 +29,7 @@ export const NotClick = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 60vh;
-    height: 100%;
+    height: calc(100% - 50px);
     background-color: transparent;
 `
 
