@@ -121,23 +121,6 @@ export const VideoInfo = styled.div`
 
 `
 
-export const CurrentTimeContainer = styled.div`
-    width: 100%;
-    height: 30px;
-    position: relative;
-    overflow: hidden; 
-    background-color: ${bgColor};
-    border-radius: 40px;
-    z-index: 1;
-
-    /// SOMENTE PARA TROCAR DE VÍDEO
-    /// NÃO TERÁ ESTE RECURSO NO FINAL DO PROJETO
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: calc(100% - 20px);
-`
-
 export const BackgroundBar = styled.div<VideoProps>`
     position: absolute;
     left: 0;

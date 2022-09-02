@@ -36,7 +36,7 @@ export const RightContent = styled.div`
     gap: 20px;
     width: 100%;
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 600px) {
         flex-direction: column;
     }
 `

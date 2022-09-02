@@ -17,11 +17,11 @@ export const Container = styled.div`
     position: relative;
     height: 100px;
 
-    @media screen and (max-width: 800px) and (min-width: 501px) {
+    @media screen and (max-width: 800px) and (min-width: 601px) {
         height: 520px;
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 600px) {
         width: 100%;
     }
 
@@ -114,7 +114,7 @@ export const VideosContainer = styled.div`
     overflow-x: hidden;
     border-radius: 10px;
 
-    @media screen and (max-width: 800px)  and (min-width: 501px) {
+    @media screen and (max-width: 800px)  and (min-width: 601px) {
         overflow-y: scroll;
         height: 450px;
         z-index: 1000;
@@ -170,5 +170,4 @@ export const EmptyPlaylist = styled.span`
     color: ${myColor_300};
     font-size: .8rem;
     height: 80px;
-
 `
