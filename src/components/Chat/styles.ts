@@ -6,12 +6,13 @@ export const Container = styled.div`
     padding: 20px;
     border-radius: 10px;
     width: 100%;
-    height: 520px;
+    height: 80vh;
     min-width: 300px;
     position: relative;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    min-width: 20vw;
 `
 
 export const Header = styled.div`

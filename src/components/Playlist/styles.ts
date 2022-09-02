@@ -15,7 +15,7 @@ export const Container = styled.div`
     padding: 10px;
     min-width: 200px;
     position: relative;
-    height: 100px;
+    height: calc(20vh - 20px);
 
     @media screen and (max-width: 800px) and (min-width: 601px) {
         height: 520px;
@@ -169,5 +169,5 @@ export const EmptyPlaylist = styled.span`
     place-items: center;
     color: ${myColor_300};
     font-size: .8rem;
-    height: 80px;
+    height: 15vh;
 `

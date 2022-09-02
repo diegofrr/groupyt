@@ -21,6 +21,7 @@ export const VideoContainer = styled.div<VideoContainerProps>`
     overflow: hidden;
     position: relative; 
     margin: 0 auto;
+    min-height: 60vh;
 ` 
 
 export const NotClick = styled.div`
@@ -28,7 +29,8 @@ export const NotClick = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - 40px);
+    min-height: 60vh;
+    height: 100%;
     background-color: transparent;
 `
 
@@ -195,7 +197,7 @@ export const EmptyVideo = styled.div<VideoContainerProps>`
     display: grid;
     place-items: center;
     background-color: ${blockColor};
-    height: 400px;
+    height: 60vh;
     width: ${p => p.width < 800 ? p.width - 56 : p.width * 0.55};
     color: ${myColor_300};
 `
