@@ -168,7 +168,7 @@ export default function VideoiFrame() {
                                 {getVideo()}
                             </VideoContent>
                             <ControlsContainer>
-                                {!user.admin && (
+                                {user.admin && (
                                     <SkipVideo onClick={handleFinishedVideo}>
                                         <FiSkipForward size={16} color={myColor_100} />
                                     </SkipVideo>
