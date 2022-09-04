@@ -3,7 +3,8 @@ import { bgColor } from "../../styles/variables";
 
 export const Container = styled.div`
     position: relative;
-    top: 100px;
+    top: 80px;
+    padding: 20px 0;
     background-color: ${bgColor};
     margin: 0 auto;
     width: calc(100% - 40px);
@@ -39,7 +40,7 @@ export const RightContent = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: 20px;
+    gap: 2vh;
     height: calc(100vh - 120px);
 
     @media screen and (max-width: 600px) {
