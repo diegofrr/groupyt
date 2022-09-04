@@ -39,10 +39,8 @@ export const NotClick = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - 6vh);
-    background-color: black;
-    opacity: .6;
-    display: none;
+    height: calc(100% - 8px - 7vh);
+    user-select: none;
 `
 
 export const EmptyVideo = styled.div<VideoContainerProps>`
@@ -65,7 +63,7 @@ export const ControlsContainer = styled.div`
     padding: 0 10px;
     gap: 2vh;
     border-radius: 0 0 10px 10px;
-    height: calc(6vh + 8px);
+    height: calc(7vh + 8px);
     margin-top: -4px;
 `
 
@@ -114,22 +112,31 @@ export const ProgressTime = styled.div`
 
 export const VideoInfo = styled.div`
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 100%;
     flex-direction: column;
     max-width: 300px;
+    text-align: center;
 
     strong {
         color: ${myColor_200};
         font-weight: bold;
         font-size: .8rem;
+        color: ${myColor_200};
+        font-weight: bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: flexbox;
+        max-height: 32px;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        box-orient: vertical;
+        -webkit-box-orient: vertical;
     }
 
     span {
         color: ${myColor_300};
         font-size: .8rem;
-
         text-overflow: ellipsis;
         overflow: hidden;
         display: flexbox;

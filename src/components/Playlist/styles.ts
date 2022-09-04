@@ -109,10 +109,11 @@ export const CancelButton = styled.button`
 export const VideosContainer = styled.div`
     position: absolute;
     top: 10px;
-    width: calc(100% - 20px);
     overflow-x: hidden;
     border-radius: 10px;
     height: calc(100% - 20px);
+    overflow-y: hidden;
+    width: calc(100% - 20px);
 
     @media screen and (max-width: 800px)  and (min-width: 601px) {
         overflow-y: scroll;
@@ -134,10 +135,11 @@ export const VideosContent = styled.div<PlaylistProps>`
     display: flex;
     flex-direction: row;
     gap: 10px;
+    height: 100%;
     transition: all .3s ease;
     margin-left: ${p => `${p.margin}px`};
 
-    @media screen and (max-width: 800px) and (min-width: 501px) {
+    @media screen and (max-width: 800px) and (min-width: 601px) {
         flex-direction: column;
     }
 `

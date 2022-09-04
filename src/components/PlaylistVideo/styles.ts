@@ -8,13 +8,12 @@ interface VideoProps {
 export const Container = styled.div`
     border-radius: 10px;
     background-color: ${blockHeaderColor};
-    overflow: hidden;
     z-index: 0;
-    max-width: 300px;
+    max-width: 400px;
     min-width: 300px;
-    position: relative; 
+    position: relative;
 
-    @media screen and (max-width: 800px) and (min-width: 501px) {
+    @media screen and (max-width: 800px) and (min-width: 601px) {
         min-width: 100%;
     }
 `
@@ -22,6 +21,7 @@ export const Container = styled.div`
 export const Content = styled.div<VideoProps>`
     display: flex;
     flex-direction: row;
+    height: 100%;
 
     ${p => p.playing && css`
         ::after {
@@ -40,7 +40,7 @@ export const Content = styled.div<VideoProps>`
         }
     `} 
 
-    @media screen and (max-width: 800px) and (min-width: 501px) {
+    @media screen and (max-width: 800px) and (min-width: 601px) {
         flex-direction: column;
 
         ::after {
@@ -57,9 +57,10 @@ export const ThumbContainer = styled.div`
 
 export const Thumb = styled.img`
     max-width: 140px;
-    max-height: 70px;
+    max-height: 80px;
     display: grid;
     place-items: center;
+    position: absolute;
 `
 
 export const VideoInfo = styled.div`
