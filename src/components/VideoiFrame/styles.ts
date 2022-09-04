@@ -52,6 +52,7 @@ export const EmptyVideo = styled.div<VideoContainerProps>`
     height: 100%;
     width: ${p => p.width < 800 ? p.width - 56 : p.width * 0.55};
     color: ${myColor_300};
+    min-height: 30vh;
 `
 
 export const ControlsContainer = styled.div`
@@ -62,7 +63,7 @@ export const ControlsContainer = styled.div`
     justify-content: space-between;
     flex-direction: row;
     padding: 0 10px;
-    gap: 10px;
+    gap: 2vh;
     border-radius: 0 0 10px 10px;
     height: calc(6vh + 8px);
     margin-top: -4px;
