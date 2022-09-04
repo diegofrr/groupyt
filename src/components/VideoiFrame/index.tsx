@@ -13,6 +13,7 @@ import {
     ProgressTime,
     VideoInfo,
     SkipVideo,
+    VideoContent,
 
 } from './styles';
 import { myColor_100, } from "../../styles/variables";
@@ -98,7 +99,7 @@ export default function VideoiFrame() {
     const getVideo = useCallback(() => {
 
         const options = {
-            height: height / 2 + 16,
+            height: width < 400  ? 200 : height * 0.8 - 140,
             width: width <= 800 ? width - 56 : width * 0.55,
             playerVars: {
                 'autoplay': 1,
@@ -163,7 +164,9 @@ export default function VideoiFrame() {
                 )
                     : (
                         <>
-                            {getVideo()}
+                            <VideoContent>
+                                {getVideo()}
+                            </VideoContent>
                             <ControlsContainer>
                                 {user.admin && (
                                     <SkipVideo onClick={handleFinishedVideo}>

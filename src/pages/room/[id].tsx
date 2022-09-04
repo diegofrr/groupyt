@@ -9,6 +9,7 @@ import { UserType } from '../../contexts/user';
 import Modal from '../../components/Modal';
 import {
     Container,
+    Content,
     LeftContent,
     RightContent
 } from './styles';
@@ -110,15 +111,17 @@ export default function Room(props: RoomProps) {
                 : <>
                     <Header roomName={roomName} />
                     <Container>
-                        <LeftContent>
-                            <VideoiFrame />
-                            {width > 800 && <Playlist />}
-                        </LeftContent>
+                        <Content>
+                            <LeftContent>
+                                <VideoiFrame />
+                                {width > 800 && <Playlist />}
+                            </LeftContent>
 
-                        <RightContent>
-                            {width <= 800 && <Playlist />}
-                            <Chat />
-                        </RightContent>
+                            <RightContent>
+                                {width <= 800 && <Playlist />}
+                                <Chat />
+                            </RightContent>
+                        </Content>
                     </Container>
                 </>}
         </>
@@ -129,11 +132,13 @@ export default function Room(props: RoomProps) {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     const roomId = params?.id;
-    
-    if(roomId === undefined) return {redirect: {
-        destination: '/',
-        permanent: false,
-    }}
+
+    if (roomId === undefined) return {
+        redirect: {
+            destination: '/',
+            permanent: false,
+        }
+    }
 
     let roomDetails = {} as RoomType;
     roomDetails.roomId = String(roomId);

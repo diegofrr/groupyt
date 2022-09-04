@@ -4,15 +4,14 @@ import { blockColor, blockHeaderColor, myColor_100, myColor_200, myColor_300, pu
 export const Container = styled.div`
     background-color: ${blockColor};
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 2vh;
     width: 100%;
-    height: 80vh;
-    min-width: 300px;
+    height: 100%;
+    min-width: 25vw;
     position: relative;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    min-width: 20vw;
 `
 
 export const Header = styled.div`

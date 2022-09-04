@@ -10,7 +10,7 @@ export const Container = styled.div`
     background-color: ${blockHeaderColor};
     overflow: hidden;
     z-index: 0;
-    max-width: 400px;
+    max-width: 300px;
     min-width: 300px;
     position: relative; 
 
@@ -57,7 +57,7 @@ export const ThumbContainer = styled.div`
 
 export const Thumb = styled.img`
     max-width: 140px;
-    max-height: 80px;
+    max-height: 70px;
     display: grid;
     place-items: center;
 `

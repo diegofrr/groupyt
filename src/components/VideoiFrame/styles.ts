@@ -13,30 +13,49 @@ interface VideoContainerProps {
 
 export const Container = styled.div`
     border-radius: 10px;
-    overflow: hidden;
+    height: 100%;
+
+    @media screen and (max-width: 800px) {
+        height: auto;
+    }
 `
 
 export const VideoContainer = styled.div<VideoContainerProps>`
     width: ${p => p.width <= 800 ? `${p.width - 56}px` : `${p.width * 0.55}px`};
-    overflow: hidden;
     position: relative; 
     margin: 0 auto;
-    min-height: 60vh;
+    border-radius: 2vh;
+    height: 100%;
+    border-radius: 2vh;
+    overflow: hidden;
 ` 
+
+export const VideoContent = styled.div`
+    overflow: hidden;
+`
 
 export const NotClick = styled.div`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - 50px);
-    background-color: transparent;
+    height: calc(100% - 6vh);
+    background-color: black;
+    opacity: .6;
+    display: none;
+`
+
+export const EmptyVideo = styled.div<VideoContainerProps>`
+    display: grid;
+    place-items: center;
+    background-color: ${blockColor};
+    height: 100%;
+    width: ${p => p.width < 800 ? p.width - 56 : p.width * 0.55};
+    color: ${myColor_300};
 `
 
 export const ControlsContainer = styled.div`
     background-color: ${blockColor};
-    height: 50px;
-    margin-top: -4px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -45,6 +64,8 @@ export const ControlsContainer = styled.div`
     padding: 0 10px;
     gap: 10px;
     border-radius: 0 0 10px 10px;
+    height: calc(6vh + 8px);
+    margin-top: -4px;
 `
 
 export const SkipVideo = styled.button`
@@ -190,13 +211,4 @@ export const CurrentTimeBar = styled.input`
         border: none;
         opacity: 0;
     }
-`
-
-export const EmptyVideo = styled.div<VideoContainerProps>`
-    display: grid;
-    place-items: center;
-    background-color: ${blockColor};
-    height: 60vh;
-    width: ${p => p.width < 800 ? p.width - 56 : p.width * 0.55};
-    color: ${myColor_300};
 `

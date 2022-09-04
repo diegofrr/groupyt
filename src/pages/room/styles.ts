@@ -2,17 +2,18 @@ import styled from "styled-components";
 import { bgColor } from "../../styles/variables";
 
 export const Container = styled.div`
-    padding-top: 100px;
+    position: relative;
+    top: 100px;
     background-color: ${bgColor};
+    margin: 0 auto;
+    width: calc(100% - 40px);
+`
+
+export const Content = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: row;
-    gap: 20px;
-    margin: 0 auto;
-    max-width: 1080px;
-    min-height: 100vh;
-    width: calc(100% - 40px);
-    padding-bottom: 20px;
+    gap: 2vh;
 
     @media screen and (max-width: 800px) {
         flex-direction: column;
@@ -24,7 +25,12 @@ export const LeftContent = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 2vh;
+    height: calc(100vh - 120px);
+
+    @media screen and (max-width: 800px) {
+        height: auto;
+    }
 `
 
 export const RightContent = styled.div`
@@ -34,7 +40,7 @@ export const RightContent = styled.div`
     justify-content: center;
     flex-direction: row;
     gap: 20px;
-    width: 100%;
+    height: calc(100vh - 120px);
 
     @media screen and (max-width: 600px) {
         flex-direction: column;

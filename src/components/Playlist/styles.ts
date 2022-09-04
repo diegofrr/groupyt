@@ -11,14 +11,14 @@ interface PlaylistProps {
 
 export const Container = styled.div`
     background-color: ${blockColor};
-    border-radius: 10px;
+    border-radius: 2vh;
     padding: 10px;
     min-width: 200px;
     position: relative;
-    height: calc(20vh - 20px);
+    height: 20%;
 
     @media screen and (max-width: 800px) and (min-width: 601px) {
-        height: 520px;
+        height: 100%;
     }
 
     @media screen and (max-width: 600px) {
@@ -29,12 +29,11 @@ export const Container = styled.div`
 
 export const PlaylistHeader = styled.div`
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     align-items: flex-end;
-    height: calc(100% - 20px);
     width: calc(100% - 20px);
-    right: 10px;
-    gap: 10px;
+    height: calc(100% - 20px);
     position: absolute;
     z-index: 1000;
     
@@ -113,6 +112,7 @@ export const VideosContainer = styled.div`
     width: calc(100% - 20px);
     overflow-x: hidden;
     border-radius: 10px;
+    height: calc(100% - 20px);
 
     @media screen and (max-width: 800px)  and (min-width: 601px) {
         overflow-y: scroll;
@@ -169,5 +169,5 @@ export const EmptyPlaylist = styled.span`
     place-items: center;
     color: ${myColor_300};
     font-size: .8rem;
-    height: 15vh;
+    height: 100%;
 `
