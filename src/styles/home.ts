@@ -83,7 +83,7 @@ export const RepositoryLink = styled.a`
     z-index: 1000;
 
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
 
     :hover {
        filter: brightness(1);
