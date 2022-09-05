@@ -17,8 +17,8 @@ export default function PlaylistVideo({ video, playing }: PlaylistProps) {
 
     return (
         <Container>
-            <Content playing={playing}>
-                <ThumbContainer>
+            <Content>
+                <ThumbContainer playing={playing}>
                     <Thumb src={video.thumb} alt='Video thumb' />
                 </ThumbContainer>
                 <VideoInfo>

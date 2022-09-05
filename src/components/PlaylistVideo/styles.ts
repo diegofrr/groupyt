@@ -6,39 +6,23 @@ interface VideoProps {
 }
 
 export const Container = styled.div`
-    border-radius: 10px;
+    border-radius: 1.2vh;
     background-color: ${blockHeaderColor};
     z-index: 0;
     max-width: 400px;
     min-width: 300px;
     position: relative;
+    overflow: hidden;
 
     @media screen and (max-width: 800px) and (min-width: 601px) {
         min-width: 100%;
     }
 `
 
-export const Content = styled.div<VideoProps>`
+export const Content = styled.div`
     display: flex;
     flex-direction: row;
-    height: 100%;
-
-    ${p => p.playing && css`
-        ::after {
-            content: 'Tocando agora';
-            color: ${myColor_200};
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: .7rem;
-            display: grid;
-            place-items: center;
-            background-color: rgba(0,0,0,.7);
-            min-width: 140px;
-            height: 80px;
-
-        }
-    `} 
+    height: 100%; 
 
     @media screen and (max-width: 800px) and (min-width: 601px) {
         flex-direction: column;
@@ -48,11 +32,29 @@ export const Content = styled.div<VideoProps>`
         }
     }
 `
-export const ThumbContainer = styled.div`
+export const ThumbContainer = styled.div<VideoProps>`
     display: grid;
     place-items: center;
     background-color: #000;
     min-width: 140px;
+    position: relative;
+
+    ${p => p.playing && css`
+        ::after {
+            content: 'Tocando agora';
+            font-weight: bold;
+            color: ${myColor_200};
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: .7rem;
+            display: grid;
+            place-items: center;
+            background-color: rgba(0,0,0,.7);
+            width: 100%;
+            height: 100%;
+        }
+    `}
 `
 
 export const Thumb = styled.img`
@@ -60,7 +62,6 @@ export const Thumb = styled.img`
     max-height: 80px;
     display: grid;
     place-items: center;
-    position: absolute;
 `
 
 export const VideoInfo = styled.div`

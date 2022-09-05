@@ -99,7 +99,7 @@ export default function VideoiFrame() {
     const getVideo = useCallback(() => {
 
         const options = {
-            height: width < 400  ? 200 : height * 0.8 - 140,
+            height: width < 500 ? 240 : width < 600 ? 360 : height * 0.8 - 140,
             width: width <= 800 ? width - 56 : width * 0.55,
             playerVars: {
                 'autoplay': 1,

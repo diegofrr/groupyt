@@ -12,6 +12,14 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+
+    @media screen and (max-width: 1300px) {
+        min-width: 30vw;
+    }
+
+    @media screen and (max-width: 1100px) {
+        min-width: 40vw;
+    }
 `
 
 export const Header = styled.div`

@@ -110,7 +110,6 @@ export const VideosContainer = styled.div`
     position: absolute;
     top: 10px;
     overflow-x: hidden;
-    border-radius: 10px;
     height: calc(100% - 20px);
     overflow-y: hidden;
     width: calc(100% - 20px);
