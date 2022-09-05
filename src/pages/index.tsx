@@ -61,10 +61,12 @@ const Home: NextPage = () => {
             </ButtonsContainer>
 
           </Content>}
-        <RepositoryLink target='_blank' href='https://github.com/diegofrr/groupyt'>
-          <GoMarkGithub size={14} color={myColor_300} />
-          Repositório
-        </RepositoryLink>
+        {!modalIsOpen && (
+          <RepositoryLink target='_blank' href='https://github.com/diegofrr/groupyt'>
+            <GoMarkGithub size={14} color={myColor_300} />
+            Repositório
+          </RepositoryLink>
+        )}
       </Container>
 
       <BackImage src='/images/backvector.png' />
