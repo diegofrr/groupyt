@@ -18,7 +18,7 @@ export const Container = styled.div`
 `
 
 export const Content = styled.div`
-    width: calc(100% - 40px);
+    width: calc(100% - 80px);
     display: flex;
     align-items: center;
     max-width: 1080;
@@ -83,7 +83,6 @@ export const RepositoryLink = styled.a`
     z-index: 1000;
 
     position: absolute;
-    right: 20px;
     bottom: 20px;
 
     :hover {
