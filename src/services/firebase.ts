@@ -2,9 +2,9 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD0X7DiWKaZhdfIU5pb2OmzvFfx96GhzBY",
-  authDomain: "groupyt-ffc60.firebaseapp.com",
-  projectId: "groupyt-ffc60",
+  apiKey: "AIzaSyCK5q_KxYikG2NUBCYbDb5d-vdUSTyLQ1U",
+  authDomain: "groupyt-89b32.firebaseapp.com",
+  projectId: "groupyt-89b32",
 }
 
 if(!firebase.apps.length) {
