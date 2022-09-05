@@ -22,7 +22,7 @@ export type MessageType = {
     message: string,
     id: string,
     created: string,
-    createdFormat: string
+    createdFormat: string,
 }
 
 export default function Chat() {
@@ -44,7 +44,7 @@ export default function Chat() {
             await firebase.firestore().collection('rooms')
                 .doc(roomId)
                 .collection('messages')
-                .orderBy('created')
+                .orderBy('messagePos', 'asc')
                 .onSnapshot(snapshot => {
                     let list = [] as MessageType[];
                     snapshot.forEach(e => {
@@ -76,6 +76,7 @@ export default function Chat() {
                     created: new Date(),
                     user: user,
                     message: message,
+                    messagePos: messages.length + 1
                 })
 
         } else {
