@@ -13,20 +13,15 @@ Disponível em: https://groupyt.vercel.app/
 <a href='https://axios-http.com/ptbr/docs/intro'><img src='https://user-images.githubusercontent.com/56923620/187099154-49ef70eb-6ce8-4da3-a43b-5be00413ff75.png' /></a>
 <a href='https://styled-components.com/'><img src='https://user-images.githubusercontent.com/56923620/187099155-e30596c7-fd0a-45d9-ab10-a5ad24cbc37e.png' /></a>
 
-### Checklist
-- [x] Consertar a ordem das mensagens do chat
-- [x] Salvar sala e seu usuário no <i>local storage</i> para entrar automaticamente caso atualize a página
-- [ ] Permitir somente uma sessão de usuário aberta na sala
-- [ ] Não permitir adicionar lives ou vídeos maiores que 10 minutos
-- [ ] Mostrar usuários online na sala no modal para entrar
-- [ ] Admin pode fechar sala
-- [ ] Fechar automaticamente quando o admin sair
-- [ ] Sair de uma sala (atualizar também no armazenamento local)
-- [ ] Sincronizar tempo/estado atual do vídeo tocando
-- [ ] Admin pode remover vídeos da playlist
-- [ ] Mostrar quem foi que adicionou o vídeo à playlist
-- [ ] Recomendar vídeos caso a playlist fique vazia (vídeos mais vistos na plataforma)
-- [ ] Detalhamento da plataforma na Home - INCERTO
+### Checklist - à implementar
+
+| Funcionalidades | Regras | Fix e mais |
+|:---------------------------------------------------------------------------------------------------------|:---------------|:-------|
+| ✔️ Salvar sala e seu usuário no <i>local storage</i> para entrar automaticamente caso atualize a página | Permitir somente uma sessão de usuário aberta na sala | ✔️  Consertar a ordem das mensagens do chat |
+| Admin pode fechar sala | Não permitir adicionar lives ou vídeos maiores que 10 minutos | Sincronizar tempo/estado atual do vídeo tocando |
+| Fechar automaticamente quando o admin sair | Mostrar usuários online na sala no modal de entrada | Detalhamento da plataforma na Home - INCERTO |
+| Sair de uma sala (atualizar também no armazenamento local) | Mostrar quem foi que adicionou o vídeo à playlist | Recomendar vídeos caso a playlist fique vazia (vídeos mais vistos na plataforma) |
+| Admin pode remover vídeos da playlist | | |
 
 ### Screenshots
 #### Criando uma sala
