@@ -78,7 +78,7 @@ export default function Room(props: RoomProps) {
             } else {
                 const userId = oldData.filter(item => item.roomId === query?.id)[0]?.userId;
                 (async () => {
-                    firebase.firestore().collection('rooms')
+                    await firebase.firestore().collection('rooms')
                         .doc(String(query?.id)).collection('users')
                         .get().then(snapshot => {
                             snapshot.forEach(item => {
