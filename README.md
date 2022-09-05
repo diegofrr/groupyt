@@ -22,6 +22,7 @@ Disponível em: https://groupyt.vercel.app/
 - [ ] Sincronizar tempo/estado atual do vídeo tocando
 - [ ] Admin pode remover vídeos da playlist
 - [ ] Mostrar quem foi que adicionou o vídeo à playlist
+- [ ] Salvar sala e seu usuário no <i>local storage<i/> para entrar automaticamente caso atualize a página
 
 ### Screenshots
 #### Criando uma sala
