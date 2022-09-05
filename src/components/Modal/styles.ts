@@ -333,7 +333,7 @@ export const ButtonsContainer = styled.div`
     justify-content: space-between;
 `
 
-export const AvatarsCredits = styled.span`
+export const AvatarsCredits = styled.cite`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -350,4 +350,5 @@ export const AvatarsCredits = styled.span`
     user-select: none;
     cursor: default;
     text-align: center;
+    font-style: normal;
 `
