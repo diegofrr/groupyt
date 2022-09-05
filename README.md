@@ -17,11 +17,12 @@ Disponível em: https://groupyt.vercel.app/
 
 | Funcionalidades | Regras | Fix e mais |
 |:---------------------------------------------------------------------------------------------------------|:---------------|:-------|
-| ✔️ Salvar sala e seu usuário no <i>local storage</i> para entrar automaticamente caso atualize a página | Permitir somente uma sessão de usuário aberta na sala | ✔️  Consertar a ordem das mensagens do chat |
+| ✔️ Salvar sala e seu usuário no <i>local storage</i> para entrar automaticamente caso atualize a página | Permitir somente uma sessão de usuário aberta na sala | ✔️ Consertar a ordem das mensagens do chat |
 | Admin pode fechar sala | Não permitir adicionar lives ou vídeos maiores que 10 minutos | Sincronizar tempo/estado atual do vídeo tocando |
 | Fechar automaticamente quando o admin sair | Mostrar usuários online na sala no modal de entrada | Detalhamento da plataforma na Home - INCERTO |
 | Sair de uma sala (atualizar também no armazenamento local) | Mostrar quem foi que adicionou o vídeo à playlist | Recomendar vídeos caso a playlist fique vazia (vídeos mais vistos na plataforma) |
-| Admin pode remover vídeos da playlist | | |
+| Admin pode remover vídeos da playlist |  | Responsividade em modo paisagem no mobile |
+| Janela de emojis no chat - INCERTO |  |  |
 
 ### Screenshots
 #### Criando uma sala
