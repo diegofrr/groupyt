@@ -94,8 +94,6 @@ export default function VideoiFrame() {
 
     }
 
-    console.log(height)
-
     const getVideo = useCallback(() => {
 
         const options = {
