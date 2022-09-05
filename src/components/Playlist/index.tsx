@@ -18,7 +18,6 @@ import { FiPlus, FiXCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi
 import { bgColor, myColor_100 } from '../../styles/variables';
 import api from '../../services/api';
 import PlaylistVideo from '../PlaylistVideo';
-import { useRouter } from 'next/router';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
 
 export type VideoType = {
@@ -30,7 +29,6 @@ export type VideoType = {
 
 export default function Playlist() {
     const { videos, setVideos, roomId, roomName } = useContext(RoomDetailsContext);
-    const { query } = useRouter();
 
     const [margin, setMargin] = useState(0);
 
