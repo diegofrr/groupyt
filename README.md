@@ -16,6 +16,7 @@ Disponível em: https://groupyt.vercel.app/
 ### Checklist
 - [x] Consertar a ordem das mensagens do chat
 - [x] Salvar sala e seu usuário no <i>local storage</i> para entrar automaticamente caso atualize a página
+- [ ] Permitir somente uma sessão de usuário aberta na sala
 - [ ] Não permitir adicionar lives ou vídeos maiores que 10 minutos
 - [ ] Mostrar usuários online na sala no modal para entrar
 - [ ] Admin pode fechar sala
