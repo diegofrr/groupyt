@@ -113,6 +113,7 @@ export const VideosContainer = styled.div`
     height: calc(100% - 20px);
     overflow-y: hidden;
     width: calc(100% - 20px);
+    touch-action: manipulation;
 
     @media screen and (max-width: 800px)  and (min-width: 601px) {
         overflow-y: scroll;
