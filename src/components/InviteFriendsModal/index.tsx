@@ -36,7 +36,7 @@ export default function InviteFriendsModal({ modalIsOpen }: ModalProps) {
             <Background />
             <Content>
                 <InviteMessage>
-                    Copie o link abaixo e envie para seus amigos.
+                    Copie o link abaixo, <br/> envie para seus amigos <br/> e faça a festa! 😜
                 </InviteMessage>
                 <CloseButton onClick={() => modalIsOpen(false)}>
                     <FiX size={16} color={myColor_300} />
