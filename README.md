@@ -14,7 +14,8 @@ Disponível em: https://groupyt.vercel.app/
 <a href='https://styled-components.com/'><img src='https://user-images.githubusercontent.com/56923620/187099155-e30596c7-fd0a-45d9-ab10-a5ad24cbc37e.png' /></a>
 
 ### Checklist
-- [ ] Não permitir adicionar lives ou vídeos maiores que 10 minutos.
+- [x] Consertar a ordem das mensagens do chat
+- [ ] Não permitir adicionar lives ou vídeos maiores que 10 minutos
 - [ ] Admin pode fechar sala
 - [ ] Fechar automaticamente quando o admin sair
 - [ ] Sair de uma sala (atualizar também no armazenamento local)
