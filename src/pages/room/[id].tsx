@@ -29,7 +29,7 @@ type RoomType = {
 
 type LocalCredentials = {
     roomId: string,
-    user: UserType
+    userId: string,
 }
 
 interface RoomProps {
@@ -68,12 +68,32 @@ export default function Room(props: RoomProps) {
 
         const checkRoomsCredentials = () => {
             const oldData = JSON.parse(localStorage.getItem('@rooms_credentials') || '[]') as LocalCredentials[];
+
             if (!oldData.some(item => item.roomId === query?.id)) {
-                localStorage.setItem('@rooms_credentials', JSON.stringify(
-                    [...oldData, { roomId: query?.id, user: user }]
-                ));
+                if (user.name !== undefined) {
+                    localStorage.setItem('@rooms_credentials', JSON.stringify(
+                        [...oldData, { roomId: query?.id, userId: user.id }]
+                    ));
+                }
             } else {
-                setUser(oldData.filter(item => item.roomId === query.id)[0].user);
+                const userId = oldData.filter(item => item.roomId === query?.id)[0]?.userId;
+                (async () => {
+                    firebase.firestore().collection('rooms')
+                        .doc(String(query?.id)).collection('users')
+                        .get().then(snapshot => {
+                            snapshot.forEach(item => {
+                                if (item.id === userId) {
+                                    setUser({
+                                        id: item.id,
+                                        admin: item.data().admin,
+                                        avatarURL: item.data().avatarURL,
+                                        name: item.data().name,
+                                    } as UserType);
+                                }
+                            })
+                        })
+                })();
+
             }
         }
 
@@ -88,7 +108,7 @@ export default function Room(props: RoomProps) {
         })()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.roomDetails.roomId, query.id, setUser, setVideos])
+    }, [props.roomDetails.roomId, query.id, setUser, setVideos, user])
 
     useEffect(() => {
         function updateDimensions() {
