@@ -22,6 +22,7 @@ Disponível em: https://groupyt.vercel.app/
 | Fechar automaticamente quando o admin sair | Mostrar usuários online na sala no modal de entrada | Detalhamento da plataforma na Home - INCERTO |
 | Sair de uma sala (atualizar também no armazenamento local) | Mostrar quem foi que adicionou o vídeo à playlist | Recomendar vídeos caso a playlist fique vazia (vídeos mais vistos na plataforma) |
 | Admin pode remover vídeos da playlist |  | Responsividade em modo paisagem no mobile |
+| Admin pode alterar o nome da sala |  |  |
 | Janela de emojis no chat - INCERTO |  |  |
 
 ### Screenshots
