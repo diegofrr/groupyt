@@ -87,7 +87,7 @@ export default function VideoiFrame() {
             setVideo({} as YouTubeEvent)
             setVideos([] as VideoType[])
             toast('Playlist vazia', {
-                style: { marginTop: '80px' },
+                style: { marginTop: '0px' },
                 icon: '😢'
             })
         }
