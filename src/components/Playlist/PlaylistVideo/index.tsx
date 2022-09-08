@@ -1,4 +1,4 @@
-import { VideoType } from "../Playlist";
+import { PlaylistVideoType } from "../../utils/types";
 import {
     Container,
     Content,
@@ -9,7 +9,7 @@ import {
 } from "./styles";
 
 interface PlaylistProps {
-    video: VideoType
+    video: PlaylistVideoType
     playing: boolean
 }
 

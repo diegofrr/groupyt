@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { blockHeaderColor, myColor_100, myColor_200, myColor_300 } from "../../styles/variables";
+import { blockHeaderColor, myColor_100, myColor_200, myColor_300 } from "../../../styles/variables";
 
 interface VideoProps {
     playing: boolean
