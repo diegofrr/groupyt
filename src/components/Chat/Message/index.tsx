@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import Image from 'next/image';
-import { MessageType } from '../Chat';
+
+import { UserContext } from '../../../contexts/user';
+import { MessageType } from '../../utils/types';
 import {
     Container,
     Avatar,
@@ -9,7 +11,6 @@ import {
     MessageContainer,
     MessageText
 } from './styles';
-import { UserContext } from '../../contexts/user';
 
 interface MessageProps {
     data: MessageType,
