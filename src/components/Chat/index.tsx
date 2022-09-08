@@ -1,6 +1,9 @@
 import React, { useContext, useRef, FormEvent, useEffect, useState, useCallback } from 'react';
 import firebase from '../../services/firebase';
-import { UserContext, UserType } from '../../contexts/user';
+
+import Message from './Message';
+
+import { UserContext } from '../../contexts/user';
 import {
     Container,
     Header,
@@ -10,23 +13,13 @@ import {
     SendMessageButton
 
 } from './styles';
-import Message from '../Message';
+import { MessageType } from '../utils/types';
 import { format } from 'date-fns';
 import { BiSend } from 'react-icons/bi';
 import { myColor_100 } from '../../styles/variables';
-import { useRouter } from 'next/router';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
 
-export type MessageType = {
-    user: UserType,
-    message: string,
-    id: string,
-    created: string,
-    createdFormat: string,
-}
-
 export default function Chat() {
-    const { query } = useRouter();
     const { roomId } = useContext(RoomDetailsContext);
     const { user } = useContext(UserContext);
 

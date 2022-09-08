@@ -1,26 +1,15 @@
 import React, { createContext, ReactNode, useState } from "react";
-import { VideoType } from "../components/Playlist";
-import { UserType } from "./user";
 
-type ContextProps = {
+import {  RoomContextType, PlaylistVideoType, UserType } from "../components/utils/types";
+
+interface ContextProps {
     children: ReactNode
 }
 
-type ContextType = {
-    roomName: string,
-    setRoomName: (newName: string) => void,
-    roomId: string,
-    setRoomId: (newId: string) => void,
-    users: UserType[],
-    setUsers: (newUsers: UserType[]) => void,
-    videos: VideoType[],
-    setVideos: (newState: VideoType[]) => void
-}
-
-export const RoomDetailsContext = createContext({} as ContextType);
+export const RoomDetailsContext = createContext({} as RoomContextType);
 
 export default function RoomDetailsProvider({ children }: ContextProps) {
-    const [videos, setVideos] = useState<VideoType[]>([]);
+    const [videos, setVideos] = useState<PlaylistVideoType[]>([]);
     const [users, setUsers] = useState<UserType[]>([]);
     const [roomName, setRoomName] = useState('');
     const [roomId, setRoomId] = useState('');

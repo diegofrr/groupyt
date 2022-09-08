@@ -1,6 +1,8 @@
 import React, { useContext, useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import firebase from '../../services/firebase';
+import Loading from '../Loading';
+
 import {
     ModalContainer,
     ModalContent,
@@ -33,11 +35,11 @@ import { Button, ButtonText } from '../../styles/home';
 import { FiEdit, FiCheck } from 'react-icons/fi';
 import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
 import { myColor_100 } from '../../styles/variables';
-import { maleAvatars, femaleAvatars } from '../AvatarsList';
+import { maleAvatars, femaleAvatars } from '../utils/avatarsList';
 import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';
-import Loading from '../Loading';
-import { UserContext, UserType } from '../../contexts/user';
+import { UserContext } from '../../contexts/user';
+import { UserType } from '../utils/types';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
 import { toast } from 'react-hot-toast';
 

@@ -1,36 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
+
 import firebase from '../../services/firebase';
-import { UserContext } from '../../contexts/user';
 import Header from '../../components/Header';
 import Head from 'next/head';
-import { UserType } from '../../contexts/user';
 import Modal from '../../components/Modal';
+import VideoiFrame from '../../components/VideoiFrame';
+import Chat from '../../components/Chat';
+import Playlist from '../../components/Playlist';
+
 import {
     Container,
     Content,
     LeftContent,
     RightContent
 } from './styles';
-
-import VideoiFrame from '../../components/VideoiFrame';
-import Chat from '../../components/Chat';
-import Playlist, { VideoType } from '../../components/Playlist';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { UserContext } from '../../contexts/user';
 import { ModalContext } from '../../contexts/modal';
+import { RoomType, LocalCredentials, UserType } from '../../components/utils/types';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
-
-type RoomType = {
-    roomName: string,
-    roomId: string,
-    users: UserType[],
-    playlist: VideoType[],
-}
-
-type LocalCredentials = {
-    roomId: string,
-    userId: string,
-}
 
 interface RoomProps {
     roomDetails: RoomType

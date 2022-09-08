@@ -1,22 +1,12 @@
 import React, { createContext, ReactNode, useState } from "react";
 
-type ContextProps = {
+import { UserType, UserContextType } from "../components/utils/types";
+
+interface ContextProps {
     children: ReactNode
 }
 
-export type UserType = {
-    id: string,
-    name: string,
-    avatarURL: string,
-    admin: boolean,
-}
-
-type ContextType = {
-    user: UserType,
-    setUser: (newUser: UserType) => void,
-}
-
-export const UserContext = createContext({} as ContextType);
+export const UserContext = createContext({} as UserContextType);
 
 export default function UserProvider({ children }: ContextProps) {
     const [user, setUser] = useState<UserType>({} as UserType);

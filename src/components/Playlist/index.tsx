@@ -1,7 +1,8 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
-import { Button } from '../Header/styles';
 import firebase from '../../services/firebase';
-import { toast } from 'react-hot-toast';
+import api from '../../services/api';
+import PlaylistVideo from './PlaylistVideo';
+
 import {
     Container,
     PlaylistHeader,
@@ -14,24 +15,17 @@ import {
     EmptyPlaylist,
 
 } from './styles';
+import { Button } from '../Header/styles';
+import { toast } from 'react-hot-toast';
 import { FiPlus, FiXCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { bgColor, myColor_100 } from '../../styles/variables';
-import api from '../../services/api';
-import PlaylistVideo from '../PlaylistVideo';
+import { PlaylistVideoType } from '../utils/types';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
-
-export type VideoType = {
-    id: string,
-    title: string,
-    creator: string,
-    thumb: string,
-}
 
 export default function Playlist() {
     const { videos, setVideos, roomId, roomName } = useContext(RoomDetailsContext);
 
     const [margin, setMargin] = useState(0);
-
     const [searching, setSearching] = useState<boolean>(false);
     const [videoUrl, setVideoUrl] = useState('');
     const [exists, setExists] = useState<boolean>(true);
@@ -78,7 +72,7 @@ export default function Playlist() {
                         title: response.data.title,
                         creator: response.data.creator,
                         thumb: response.data.thumb,
-                    } as VideoType;
+                    } as PlaylistVideoType;
                     setVideos([...videos, newVideo]);
 
                 } else {

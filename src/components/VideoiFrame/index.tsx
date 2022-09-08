@@ -1,7 +1,8 @@
-import { useCallback, useContext, useRef, useEffect, useState } from "react";
+import React, { useCallback, useContext, useRef, useEffect, useState } from "react";
+
 import Youtube, { YouTubeEvent } from 'react-youtube';
+
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
-import { VideoType } from "../Playlist";
 import { toast } from 'react-hot-toast';
 import {
     Container,
@@ -19,14 +20,8 @@ import {
 import { myColor_100, } from "../../styles/variables";
 import { RoomDetailsContext } from "../../contexts/roomDetails";
 import { UserContext } from "../../contexts/user";
+import { DataType, PlaylistVideoType } from "../utils/types";
 import { FiSkipForward } from "react-icons/fi";
-
-type DataType = {
-    progress: number,
-    videoId: string,
-    videos: VideoType[],
-    time: Date,
-}
 
 export default function VideoiFrame() {
     const { videos, setVideos } = useContext(RoomDetailsContext);
@@ -42,7 +37,7 @@ export default function VideoiFrame() {
     const [videoDuration, setVideoDuration] = useState<number>(0);
     const [videoState, setVideoState] = useState<number>(0);
     const [counter, setCounter] = useState(0);
-    const [playlist, setPlaylist] = useState<VideoType[]>([])
+    const [playlist, setPlaylist] = useState<PlaylistVideoType[]>([])
 
     useEffect(() => {
         setVideo({} as YouTubeEvent)
@@ -85,7 +80,7 @@ export default function VideoiFrame() {
             setProgress(0);
         } else {
             setVideo({} as YouTubeEvent)
-            setVideos([] as VideoType[])
+            setVideos([] as PlaylistVideoType[])
             toast('Playlist vazia', {
                 style: { marginTop: '0px' },
                 icon: '😢'
