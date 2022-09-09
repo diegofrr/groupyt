@@ -10,6 +10,7 @@ export type PlaylistVideoType = {
     title: string,
     creator: string,
     thumb: string,
+    addedBy: UserType
 }
 
 export type DataType = {

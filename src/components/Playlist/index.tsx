@@ -21,9 +21,11 @@ import { FiPlus, FiXCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi
 import { bgColor, myColor_100 } from '../../styles/variables';
 import { PlaylistVideoType } from '../utils/types';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
+import { UserContext } from '../../contexts/user';
 
 export default function Playlist() {
     const { videos, setVideos, roomId, roomName } = useContext(RoomDetailsContext);
+    const { user } = useContext(UserContext)
 
     const [margin, setMargin] = useState(0);
     const [searching, setSearching] = useState<boolean>(false);
@@ -72,6 +74,7 @@ export default function Playlist() {
                         title: response.data.title,
                         creator: response.data.creator,
                         thumb: response.data.thumb,
+                        addedBy: user,
                     } as PlaylistVideoType;
                     setVideos([...videos, newVideo]);
 
@@ -126,7 +129,7 @@ export default function Playlist() {
                     ? <EmptyPlaylist>Lista de reprodução vazia...</EmptyPlaylist>
                     : (
                         <VideosContent margin={margin}>
-                            {videos?.length > 0 && videos.map(video => <PlaylistVideo key={video.id} video={video} playing={videos[0]?.id === video.id} />)}
+                            {videos?.length > 0 && videos.map((video: PlaylistVideoType) => <PlaylistVideo key={video.id} video={video} playing={videos[0]?.id === video.id} />)}
                         </VideosContent>
                     )}
             </VideosContainer>
