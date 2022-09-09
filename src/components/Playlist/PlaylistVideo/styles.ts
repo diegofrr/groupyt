@@ -105,7 +105,7 @@ export const User = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 0px;
+  top: 4px;
   width: 140px;
 
   div {
@@ -113,7 +113,7 @@ export const User = styled.div`
     align-items: center;
     justify-content: center;
     background-color: ${blockColor};
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px;
     gap: 3px;
     background-color: #000;
 
@@ -122,7 +122,7 @@ export const User = styled.div`
       height: 18px;
       border-radius: 50%;
       border: 2px solid black;
-    }
+    } 
 
     strong {
       color: ${myColor_200};
