@@ -6,6 +6,8 @@ O <b>Groupyt</b> é uma plataforma para assistir vídeos do Youtube com os amigo
 
 Disponível em: https://groupyt.vercel.app/
 
+ℹ️ Este projeto foi criado como estudo em desenvolvimento front-end, assim, optei por utilizar o Firebase como alternativa ao back-end, o que significa brecha para acesso aos dados trafegados nas mensagens, nome de usuário e nome de sala, visto também que a aplicação não exije autenticação, sendo assim, caso utilize a plataforma, se atente às informações que for fornecer, principalmente no bate-bapo.
+
 ### Tecnologias relevantes utilizadas
 <a href='https://nextjs.org/'><img src='https://user-images.githubusercontent.com/56923620/187099131-7cde5bf0-6e1f-4e36-b973-794dd9f7af72.png' /></a>
 <a href='https://firebase.google.com/'><img src='https://user-images.githubusercontent.com/56923620/187099147-d4beff2b-157c-44cd-a263-54b91257492b.png' /></a>
@@ -19,7 +21,7 @@ Disponível em: https://groupyt.vercel.app/
 |:---------------------------------------------------------------------------------------------------------|:---------------|:-------|
 | ✔️ Salvar sala e seu usuário no <i>local storage</i> para entrar automaticamente caso atualize a página | ✔️ Mostrar quem foi que adicionou o vídeo à playlist | ✔️ Consertar a ordem das mensagens do chat |
 | Admin pode fechar sala | Não permitir adicionar lives ou vídeos maiores que 10 minutos | Sincronizar tempo/estado atual do vídeo tocando |
-| Fechar automaticamente quando o admin sair | Mostrar usuários online na sala no modal de entrada | Detalhamento da plataforma na Home - INCERTO |
+| Fechar sala automaticamente quando não houver usuários online | Mostrar usuários online na sala no modal de entrada | Detalhamento da plataforma na Home - INCERTO |
 | Sair de uma sala (atualizar também no armazenamento local) | Permitir somente uma sessão de usuário aberta na sala | Recomendar vídeos caso a playlist fique vazia (vídeos mais vistos na plataforma) |
 | Admin pode remover vídeos da playlist |  | Responsividade em modo paisagem no mobile |
 | Admin pode alterar o nome da sala |  |  |
