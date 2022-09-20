@@ -1,5 +1,5 @@
-<img width='300px' src='https://i.imgur.com/EOXaMKs.png' />
-🚧 Em desenvolvimento...
+<p align='center'><img width='300px' src='https://i.imgur.com/EOXaMKs.png' /></p>
+<p align='center'>🚧 <i>Em desenvolvimento...</i> 🚧</p>
 
 ### O que é?
 O <b>Groupyt</b> é uma plataforma para assistir vídeos do Youtube com os amigos com bate-papo integrado. Após criar uma sala e compartilhar o link com os amigos, todos podem adicionar vídeos à playlist e interagir no chat.
