@@ -112,7 +112,8 @@ export default function VideoiFrame() {
             onPlay={handleStartedVideo}
             onReady={e => handleOnReady(e)}
         />
-    }, [width, videoId, handleFinishedVideo]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [width, height, videoId, handleFinishedVideo]);
 
     const handleOnReady = (e: YouTubeEvent) => {
         setVideo(e);

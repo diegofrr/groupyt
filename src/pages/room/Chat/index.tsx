@@ -76,7 +76,7 @@ export default function Chat() {
         } else {
 
         }
-    }, [message, roomId, user])
+    }, [message, roomId, user, messages])
 
     return (
         <Container>

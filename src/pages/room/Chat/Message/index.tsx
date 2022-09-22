@@ -20,7 +20,7 @@ interface MessageProps {
 
 export default function Message({ data, latestItem }: MessageProps) {
 
-    const { user } = useContext(UserContext);
+    const { user } = useContext(UserContext)
     const [isOwner, setIsOwner] = useState<boolean>(user.id === data?.user.id)
     const [diferentUser, setDiferentUser] = useState(latestItem?.user?.id !== data.user.id);
 

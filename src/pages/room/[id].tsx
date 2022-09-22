@@ -50,8 +50,8 @@ export default function Room(props: RoomProps) {
 
     }, [
         user, props.roomDetails.playlist, props.roomDetails.roomId,
-        props.roomDetails.roomName, setModalIsOpen, setModalType,
-        setRoomId, setRoomName, setVideos,
+        props.roomDetails.roomName, props.roomDetails.users,
+        setUsers, setModalIsOpen, setModalType, setRoomId, setRoomName, setVideos,
     ]);
 
     useEffect(() => {
