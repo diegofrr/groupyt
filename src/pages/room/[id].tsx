@@ -4,10 +4,9 @@ import firebase from '../../services/firebase';
 import Header from '../../components/Header';
 import Head from 'next/head';
 import Modal from '../../components/Modal';
-
-import VideoiFrame from './VideoiFrame';
-import Chat from './Chat';
-import Playlist from './Playlist';
+import VideoiFrame from '../../components/VideoiFrame';
+import Chat from '../../components/Chat';
+import Playlist from '../../components/Playlist';
 
 import {
     Container,
@@ -19,7 +18,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { UserContext } from '../../contexts/user';
 import { ModalContext } from '../../contexts/modal';
-import { RoomType, LocalCredentials, UserType } from '../../utils/types';
+import { RoomType, LocalCredentials, UserType } from '../../components/utils/types';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
 
 interface RoomProps {

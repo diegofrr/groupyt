@@ -1,11 +1,5 @@
 import styled, { css } from "styled-components";
-import { 
-    blockColor,
-    blockHeaderColor,
-    myColor_200,
-    myColor_300,
-    purpleColor
-} from "../../../styles/variables";
+import { blockColor, blockHeaderColor, myColor_200, myColor_300, purpleColor } from "../../styles/variables";
 
 interface FormProps {
     activeInput: boolean

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blockColor, blockHeaderColor, myColor_100, myColor_200, myColor_300, purpleColor } from "../../../styles/variables";
+import { blockColor, blockHeaderColor, myColor_100, myColor_200, myColor_300, purpleColor } from "../../styles/variables";
 
 export const Container = styled.div`
     background-color: ${blockColor};

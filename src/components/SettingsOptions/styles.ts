@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { blockColor, blockHeaderColor, invalidOutlineColor, myColor_200 } from "../../../styles/variables";
+import { blockColor, blockHeaderColor, invalidOutlineColor, myColor_200 } from "../../styles/variables";
 
 interface SettingsProps {
     isOpen: boolean,

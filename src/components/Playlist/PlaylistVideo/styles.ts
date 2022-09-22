@@ -7,7 +7,7 @@ import {
   myColor_200,
   myColor_300,
   purpleColor,
-} from "../../../../styles/variables";
+} from "../../../styles/variables";
 
 interface VideoProps {
   playing: boolean;

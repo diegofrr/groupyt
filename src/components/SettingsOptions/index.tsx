@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 
-import firebase from '../../../services/firebase';
+import firebase from '../../services/firebase';
 import toast from 'react-hot-toast';
 
 import { FiLogOut, FiDelete } from 'react-icons/fi';
-import { RoomDetailsContext } from '../../../contexts/roomDetails';
-import { UserContext } from '../../../contexts/user';
-import { logoutColor, myColor_200 } from '../../../styles/variables';
+import { RoomDetailsContext } from '../../contexts/roomDetails';
+import { UserContext } from '../../contexts/user';
+import { logoutColor, myColor_200 } from '../../styles/variables';
 import {
     Container,
     OptionsContainer,
