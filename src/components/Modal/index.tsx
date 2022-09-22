@@ -32,9 +32,9 @@ import {
 } from './styles';
 
 import { Button, ButtonText } from '../../styles/home';
-import { FiEdit, FiCheck } from 'react-icons/fi';
+import { FiEdit, FiCheck, FiUser } from 'react-icons/fi';
 import { BiFemaleSign, BiMaleSign } from 'react-icons/bi'
-import { myColor_100 } from '../../styles/variables';
+import { myColor_100, myColor_200 } from '../../styles/variables';
 import { maleAvatars, femaleAvatars } from '../../utils/avatarsList';
 import { ModalContext } from '../../contexts/modal';
 import { useRouter } from 'next/router';
@@ -215,7 +215,10 @@ const Modal: React.FC = () => {
                                 : <SaveButton onClick={handleSaveTitle}>
                                     <FiCheck size={20} color={myColor_100} />
                                 </SaveButton>
-                        ) : <></>
+                        ) : <OnlineMembers>
+                            <FiUser size={20} color={myColor_200}/>
+                            {users.length}
+                        </OnlineMembers>
                     )
                     }
 
