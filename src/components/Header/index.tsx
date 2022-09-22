@@ -16,7 +16,7 @@ import Image from 'next/image';
 import { myColor_100, myColor_200 } from '../../styles/variables';
 import { FiSettings, FiUserPlus } from 'react-icons/fi';
 import InviteFriendsModal from '../InviteFriendsModal';
-import SettingsOptions from '../SettingsOptions';
+import SettingsOptions from './SettingsOptions';
 
 interface HeaderProps {
     roomName: string;

@@ -1,4 +1,4 @@
-import { PlaylistVideoType } from "../../utils/types";
+import { PlaylistVideoType } from "../../../../utils/types";
 import {
   Container,
   Content,

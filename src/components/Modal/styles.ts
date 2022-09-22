@@ -193,7 +193,7 @@ export const OnlineMembers = styled.span`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
     color: ${myColor_200};
     flex-direction: row;
     font-size: .8rem;

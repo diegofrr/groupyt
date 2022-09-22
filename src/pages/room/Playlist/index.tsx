@@ -1,6 +1,6 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
-import firebase from '../../services/firebase';
-import api from '../../services/api';
+import firebase from '../../../services/firebase';
+import api from '../../../services/api';
 import PlaylistVideo from './PlaylistVideo';
 
 import {
@@ -15,13 +15,14 @@ import {
     EmptyPlaylist,
 
 } from './styles';
-import { Button } from '../Header/styles';
+import { Button } from '../../../components/Header/styles';
 import { toast } from 'react-hot-toast';
 import { FiPlus, FiXCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import { bgColor, myColor_100 } from '../../styles/variables';
-import { PlaylistVideoType } from '../utils/types';
-import { RoomDetailsContext } from '../../contexts/roomDetails';
-import { UserContext } from '../../contexts/user';
+
+import { bgColor, myColor_100 } from '../../../styles/variables';
+import { PlaylistVideoType } from '../../../utils/types';
+import { RoomDetailsContext } from '../../../contexts/roomDetails';
+import { UserContext } from '../../../contexts/user';
 
 export default function Playlist() {
     const { videos, setVideos, roomId, roomName } = useContext(RoomDetailsContext);

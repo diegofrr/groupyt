@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { bgColor, blockColor, blockHeaderColor, myColor_200, myColor_300, purpleColor } from "../../styles/variables";
+import { 
+    bgColor,
+    blockColor,
+    blockHeaderColor,
+    myColor_200,
+    myColor_300,
+    purpleColor
+} from "../../../styles/variables";
 
 interface VideoProps {
     duration: number;

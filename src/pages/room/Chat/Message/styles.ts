@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { adminUsername, blockHeaderColor, myColor_200, myColor_300 } from "../../../styles/variables";
+import { adminUsername, blockHeaderColor, myColor_200, myColor_300 } from "../../../../styles/variables";
 
 interface MessageProps {
     isOwner: boolean,
