@@ -17,10 +17,10 @@ import {
     VideoContent,
 
 } from './styles';
-import { myColor_100, } from "../../styles/variables";
-import { RoomDetailsContext } from "../../contexts/roomDetails";
-import { UserContext } from "../../contexts/user";
-import { DataType, PlaylistVideoType } from "../utils/types";
+import { myColor_100, } from "../../../styles/variables";
+import { RoomDetailsContext } from "../../../contexts/roomDetails";
+import { UserContext } from "../../../contexts/user";
+import { DataType, PlaylistVideoType } from "../../../utils/types";
 import { FiSkipForward } from "react-icons/fi";
 
 export default function VideoiFrame() {

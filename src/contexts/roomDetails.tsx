@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useState } from "react";
 
-import {  RoomContextType, PlaylistVideoType, UserType } from "../components/utils/types";
+import { RoomContextType, PlaylistVideoType, UserType } from "../utils/types";
 
 interface ContextProps {
     children: ReactNode

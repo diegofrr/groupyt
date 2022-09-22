@@ -13,7 +13,7 @@ import {
     SendMessageButton
 
 } from './styles';
-import { MessageType } from '../utils/types';
+import { MessageType } from '../../utils/types';
 import { format } from 'date-fns';
 import { BiSend } from 'react-icons/bi';
 import { myColor_100 } from '../../styles/variables';

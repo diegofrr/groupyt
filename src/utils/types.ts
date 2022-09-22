@@ -1,11 +1,11 @@
-export type UserType = {
+export interface UserType {
     id: string,
     name: string,
     avatarURL: string,
     admin: boolean,
 }
 
-export type PlaylistVideoType = {
+export interface PlaylistVideoType {
     id: string,
     title: string,
     creator: string,
@@ -13,21 +13,21 @@ export type PlaylistVideoType = {
     addedBy: UserType
 }
 
-export type DataType = {
+export interface DataType {
     progress: number,
     videoId: string,
     videos: PlaylistVideoType[],
     time: Date,
 }
 
-export type RoomType = {
+export interface RoomType {
     roomName: string,
     roomId: string,
     users: UserType[],
     playlist: PlaylistVideoType[],
 }
 
-export type RoomContextType = {
+export interface RoomContextType {
     roomName: string,
     setRoomName: (newName: string) => void,
     roomId: string,
@@ -38,24 +38,24 @@ export type RoomContextType = {
     setVideos: (newState: PlaylistVideoType[]) => void
 }
 
-export type UserContextType = {
+export interface UserContextType {
     user: UserType,
     setUser: (newUser: UserType) => void,
 }
 
-export type ModalContextType = {
+export interface ModalContextType {
     modalIsOpen: boolean,
     setModalIsOpen: (newState: boolean) => void,
     modalType: string,
     setModalType: (newState: string) => void,
 }
 
-export type LocalCredentials = {
+export interface LocalCredentials {
     roomId: string,
     userId: string,
 }
 
-export type MessageType = {
+export interface MessageType {
     user: UserType,
     message: string,
     id: string,

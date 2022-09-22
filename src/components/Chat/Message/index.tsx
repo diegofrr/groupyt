@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Image from 'next/image';
 
 import { UserContext } from '../../../contexts/user';
-import { MessageType } from '../../utils/types';
+import { MessageType } from '../../../utils/types';
 import {
     Container,
     Avatar,

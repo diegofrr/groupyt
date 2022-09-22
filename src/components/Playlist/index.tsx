@@ -19,7 +19,7 @@ import { Button } from '../Header/styles';
 import { toast } from 'react-hot-toast';
 import { FiPlus, FiXCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { bgColor, myColor_100 } from '../../styles/variables';
-import { PlaylistVideoType } from '../utils/types';
+import { PlaylistVideoType } from '../../utils/types';
 import { RoomDetailsContext } from '../../contexts/roomDetails';
 import { UserContext } from '../../contexts/user';
 
