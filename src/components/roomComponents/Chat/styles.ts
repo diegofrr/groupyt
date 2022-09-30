@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { blockColor, blockHeaderColor, myColor_100, myColor_200, myColor_300, purpleColor } from "../../styles/variables";
+import { 
+    blockColor,
+    blockHeaderColor,
+    myColor_100,
+    myColor_200,
+    myColor_300,
+    purpleColor
+} from "../../../styles/variables";
 
 export const Container = styled.div`
     background-color: ${blockColor};
@@ -12,6 +19,10 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+
+    @media screen and (min-width: 1100px) {
+        max-width: 30vw;
+    }
 
     @media screen and (max-width: 1300px) {
         min-width: 30vw;

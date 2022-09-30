@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+
+import groupytIcon from '/public/icon.svg';
+import Image from 'next/image';
+
 import {
     Container,
     RoomName,
@@ -11,9 +15,7 @@ import {
 
 } from './styles';
 import { useRouter } from 'next/router';
-import groupytIcon from '../../../public/icon.svg';
-import Image from 'next/image';
-import { myColor_100, myColor_200 } from '../../styles/variables';
+import { myColor_100, myColor_200 } from '../../../styles/variables';
 import { FiSettings, FiUserPlus } from 'react-icons/fi';
 import InviteFriendsModal from '../InviteFriendsModal';
 import SettingsOptions from '../SettingsOptions';

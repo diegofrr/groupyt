@@ -1,5 +1,11 @@
 import styled from "styled-components";
-import { blockColor, btnPriColor, btnSecColor, myColor_100, myColor_200 } from "../../styles/variables";
+import {
+    blockColor,
+    btnPriColor,
+    btnSecColor,
+    myColor_100,
+    myColor_200
+} from "../../../styles/variables";
 
 interface ButtonProps {
     primary: boolean;

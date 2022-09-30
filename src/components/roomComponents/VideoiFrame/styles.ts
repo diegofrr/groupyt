@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { bgColor, blockColor, blockHeaderColor, myColor_200, myColor_300, purpleColor } from "../../../styles/variables";
+import {
+    bgColor,
+    blockColor,
+    blockHeaderColor,
+    myColor_200,
+    myColor_300,
+    purpleColor
+} from "../../../styles/variables";
 
 interface VideoProps {
     duration: number;
@@ -65,6 +72,10 @@ export const ControlsContainer = styled.div`
     border-radius: 0 0 10px 10px;
     height: calc(7vh + 8px);
     margin-top: -4px;
+
+    @media screen and (max-width: 600px) {
+        margin-bottom: 46px;
+    }
 `
 
 export const SkipVideo = styled.button`

@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Head from 'next/head';
 
 import firebase from '../../services/firebase';
-import Header from '../../components/Header';
-import Head from 'next/head';
+
+import Header from '../../components/roomComponents/Header';
 import Modal from '../../components/Modal';
-import VideoiFrame from './VideoiFrame';
-import Chat from '../../components/Chat';
-import Playlist from '../../components/Playlist';
+import VideoiFrame from '../../components/roomComponents/VideoiFrame';
+import Chat from '../../components/roomComponents/Chat';
+import Playlist from '../../components/roomComponents/Playlist';
 
 import {
     Container,

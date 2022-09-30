@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
-
 import Head from 'next/head';
-import Modal from '../components/Modal';
-import logo from '../../public/images/groupyt_logo.svg';
 import Image from 'next/image';
+
+import logo from '../../public/images/groupyt_logo.svg';
+
+import Modal from '../components/Modal';
 
 import {
   Container,

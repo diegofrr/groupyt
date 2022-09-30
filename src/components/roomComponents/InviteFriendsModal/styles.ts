@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { blockColor, myColor_200, myColor_300 } from "../../styles/variables";
+import {
+    blockColor,
+    myColor_200,
+    myColor_300
+} from "../../../styles/variables";
 
 export const Container = styled.div`
     position: fixed;
