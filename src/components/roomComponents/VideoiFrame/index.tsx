@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useRef, useEffect, useState } from "react";
 
 import Youtube, { YouTubeEvent } from 'react-youtube';
+import EmptyPlaylist from "./EmptyPlaylist";
 
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import { toast } from 'react-hot-toast';
@@ -10,7 +11,6 @@ import {
     NotClick,
     ControlsContainer,
     ActionButton,
-    EmptyVideo,
     ProgressTime,
     VideoInfo,
     SkipVideo,
@@ -73,7 +73,7 @@ export default function VideoiFrame() {
         }
     });
 
-    const handleFinishedVideo = () => {
+    const handleFinishedVideo = useCallback(() => {
         if (videos?.length > 1) {
             let newList = videos.filter(video => video.id !== videoId);
             setVideos(newList);
@@ -87,7 +87,7 @@ export default function VideoiFrame() {
             })
         }
 
-    }
+    }, [setVideos, videoId, videos])
 
     const getVideo = useCallback(() => {
 
@@ -154,7 +154,7 @@ export default function VideoiFrame() {
         <Container>
             <VideoContainer width={width} height={height}>
                 {videos?.length === 0 ? (
-                    <EmptyVideo height={height} width={width}>Adicione vídeos à sua playlist.</EmptyVideo>
+                    <EmptyPlaylist heigth={height} width={width} />
                 )
                     : (
                         <>

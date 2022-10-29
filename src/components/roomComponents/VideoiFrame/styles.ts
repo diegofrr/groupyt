@@ -50,9 +50,12 @@ export const NotClick = styled.div`
     user-select: none;
 `
 
-export const EmptyVideo = styled.div<VideoContainerProps>`
-    display: grid;
-    place-items: center;
+export const EmptyPlaylistContainer = styled.div<VideoContainerProps>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
     background-color: ${blockColor};
     height: 100%;
     width: ${p => p.width < 800 ? p.width - 56 : p.width * 0.55};
