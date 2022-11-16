@@ -10,7 +10,7 @@ O <b>Groupyt</b> é uma plataforma para assistir vídeos do Youtube com os amigo
 
 Disponível em: https://groupyt.vercel.app/
 
-ℹ️ Este projeto foi criado como estudo em desenvolvimento front-end, assim, optei por utilizar o Firebase como alternativa ao back-end, o que significa brecha para acesso aos dados trafegados nas mensagens, nome de usuário e nome de sala, visto também que a aplicação não exije autenticação, sendo assim, caso utilize a plataforma, se atente às informações que for fornecer, principalmente no bate-bapo.
+ℹ️ Este projeto foi criado como estudo em desenvolvimento front-end, assim, optei por utilizar o Firebase como alternativa ao back-end, o que significa brecha para acesso aos dados trafegados nas mensagens, nome de usuário e nome de sala, visto também que a aplicação não exige autenticação, sendo assim, caso utilize a plataforma, se atente às informações que for fornecer, principalmente no bate-bapo.
 
 ### Tecnologias relevantes utilizadas
 <a href='https://nextjs.org/'><img src='https://user-images.githubusercontent.com/56923620/187099131-7cde5bf0-6e1f-4e36-b973-794dd9f7af72.png' /></a>
