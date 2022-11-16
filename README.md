@@ -29,6 +29,8 @@ Disponível em: https://groupyt.vercel.app/
 | Sair de uma sala (atualizar também no armazenamento local) | Permitir somente uma sessão de usuário aberta na sala | Recomendar vídeos caso a playlist fique vazia (vídeos mais vistos na plataforma) |
 | Admin pode remover vídeos da playlist | Mostrar no chat os usuários que forem entrando | Responsividade em modo paisagem no mobile |
 | Admin pode alterar o nome da sala |  | Bloco com usuários online |
+| Controle de volume do vídeo |  |  |
+| Remover/mutar usuário da sala |  |  |
 | Janela de emojis no chat - INCERTO |  |  |
 
 ### Screenshots
